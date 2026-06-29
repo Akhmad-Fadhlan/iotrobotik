@@ -28,10 +28,10 @@ export default function LmsView() {
             </div>
             <div>
               <h3 className="font-heading text-[16px] font-bold text-slate-800">
-                Portal E-Learning IDN
+                Portal E-Learning CodesTechno
               </h3>
               <span className="text-[10px] text-blue-600 font-bold uppercase tracking-wider">
-                LMS.IDN.SCH.ID
+                LMS.CODESTECHNO.COM
               </span>
             </div>
           </div>

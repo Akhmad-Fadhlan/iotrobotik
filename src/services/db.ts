@@ -95,28 +95,19 @@ const INITIAL_TECHNICIANS: Technician[] = [
 ];
 
 const INITIAL_LESSONS: Lesson[] = [
-  // Kelas 7
-  { id: 'M_1', title: 'Pengenalan Python Basic', classLevel: '7', topic: 'Python Basic', duration: '2 JP', driveLink: 'https://drive.google.com/drive/folders/1a2b3c', creator: 'Ahmad Fauzi' },
-  { id: 'M_2', title: 'Variabel dan Tipe Data Python', classLevel: '7', topic: 'Python Basic', duration: '2 JP', driveLink: 'https://drive.google.com/drive/folders/1d2e3f', creator: 'Ahmad Fauzi' },
-  { id: 'M_3', title: 'Struktur Kontrol Percabangan (If-Else)', classLevel: '7', topic: 'Python Basic', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/1g2h3i', creator: 'Ahmad Fauzi' },
-  { id: 'M_4', title: 'Perulangan Python (For & While Loops)', classLevel: '7', topic: 'Python Basic', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/1j2k3l', creator: 'Ahmad Fauzi' },
-  { id: 'M_5', title: 'Dasar Pemrograman Robot Tinybit', classLevel: '7', topic: 'Tinybit', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/1m2n3o', creator: 'Zainal Abidin' },
-  { id: 'M_6', title: 'Tinybit Motor Control & Movement', classLevel: '7', topic: 'Tinybit', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/1p2q3r', creator: 'Zainal Abidin' },
-  { id: 'M_7', title: 'Sensor Ultrasonic Tinybit (Obstacle Avoidance)', classLevel: '7', topic: 'Tinybit', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/1s2t3u', creator: 'Zainal Abidin' },
-  { id: 'M_8', title: 'Tinybit Line Tracking Sensor', classLevel: '7', topic: 'Tinybit', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/1v2w3x', creator: 'Zainal Abidin' },
-  { id: 'M_9', title: 'Pengenalan Microbit & Pin Out', classLevel: '7', topic: 'Microbit', duration: '2 JP', driveLink: 'https://drive.google.com/drive/folders/1y2z3a', creator: 'Laila Fitriani' },
-  { id: 'M_10', title: 'Dasar IoT Basic & Pengenalan Sensor', classLevel: '7', topic: 'IoT Basic', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/1b2c3d', creator: 'Laila Fitriani' },
-
-  // Kelas 8
-  { id: 'M_11', title: 'Pengenalan ESP32 & Arduino IDE Setup', classLevel: '8', topic: 'ESP32', duration: '2 JP', driveLink: 'https://drive.google.com/drive/folders/2a2b3c', creator: 'Rizki Maulana' },
-  { id: 'M_12', title: 'Digital Input/Output & PWM pada ESP32', classLevel: '8', topic: 'ESP32', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/2d2e3f', creator: 'Rizki Maulana' },
-  { id: 'M_13', title: 'Membaca Sensor Suhu & Kelembaban (DHT11/DHT22)', classLevel: '8', topic: 'ESP32', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/2g2h3i', creator: 'Rizki Maulana' },
-  { id: 'M_14', title: 'Koneksi ESP32 ke WiFi Router', classLevel: '8', topic: 'IoT Cloud', duration: '2 JP', driveLink: 'https://drive.google.com/drive/folders/2j2k3l', creator: 'Rizki Maulana' },
-  { id: 'M_15', title: 'Kirim Data Sensor ke Blynk IoT Cloud', classLevel: '8', topic: 'IoT Cloud', duration: '6 JP', driveLink: 'https://drive.google.com/drive/folders/2m2n3o', creator: 'Rizki Maulana' },
-  { id: 'M_16', title: 'Protokol MQTT: Konfigurasi Broker MQTT', classLevel: '8', topic: 'IoT Cloud', duration: '6 JP', driveLink: 'https://drive.google.com/drive/folders/2p2q3r', creator: 'Fajar Nugraha' },
-  { id: 'M_17', title: 'Pengenalan Computer Vision & OpenCV Python', classLevel: '8', topic: 'Computer Vision', duration: '4 JP', driveLink: 'https://drive.google.com/drive/folders/2s2t3u', creator: 'Fajar Nugraha' },
-  { id: 'M_18', title: 'Deteksi Warna Menggunakan OpenCV', classLevel: '8', topic: 'Computer Vision', duration: '6 JP', driveLink: 'https://drive.google.com/drive/folders/2v2w3x', creator: 'Fajar Nugraha' },
-  { id: 'M_19', title: 'Pengenalan AI Robot & Jetson Nano', classLevel: '8', topic: 'AI Robot', duration: '6 JP', driveLink: 'https://drive.google.com/drive/folders/2y2z3a', creator: 'Fajar Nugraha' }
+  {id: 'M_1', title: 'Smart Trashbin', classLevel: '7', topic: 'Microbit', duration: '4 Jam', driveLink: 'https://docs.google.com/presentation/d/1yuJzz-Hh4nJzL0BtJeKIWrrAOzg9V2pG/edit?usp=drive_link', creator: 'Mr Fadhlan'},
+  {id: 'M_2', title: 'Tinybit Bluetooth Controller', classLevel: '7', topic: 'Tinybit', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p1_drive', creator: 'Mr Alfi'},
+  {id: 'M_3', title: 'Tinybit Hand Gesture', classLevel: '7', topic: 'Tinybit', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p2_drive', creator: 'Mr Alfi'},
+  {id: 'M_4', title: 'Smart Watering Plant', classLevel: '7', topic: 'IoT Basic', duration: '3 Jam', driveLink: 'https://drive.google.com/file/d/18GPMXi9-nlijGMKDGzuXay0cJu6ZIdCD/view', creator: 'Mr Fadhlan'},
+  {id: 'M_5', title: 'Tinybit Line Follower', classLevel: '7', topic: 'Tinybit', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p3_drive', creator: 'Mr Fadhlan'},
+  {id: 'M_6', title: 'Smart Parking', classLevel: '7', topic: 'IoT Basic', duration: '3 Jam', driveLink: 'https://drive.google.com/file/d/1hRZ1vqyA_ixJOPkkFh7Ab0oSh8rxUeX4/view', creator: 'Mr Alfi'},
+  {id: 'M_7', title: 'Robot Bluetooth Controller', classLevel: '8', topic: 'Python Robot', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p1_drive', creator: 'Mr. Rahmat Fadlan'},
+  {id: 'M_8', title: 'Robot Hand Gesture', classLevel: '8', topic: 'AI Robot', duration: '4 Jam', driveLink: 'https://teachablemachine.withgoogle.com/', creator: 'Mr. Rahmat Fadlan'},
+  {id: 'M_9', title: 'Smart Parking AI', classLevel: '8', topic: 'Computer Vision', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p6_drive', creator: 'Mr. Rahmat Fadlan'},
+  {id: 'M_10', title: 'Robot Line Follower', classLevel: '8', topic: 'Python Robot', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p3_drive', creator: 'Ms. Nadia'},
+  {id: 'M_11', title: 'Robot Transporter', classLevel: '8', topic: 'Python Robot', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p2_drive', creator: 'Ms. Nadia'},
+  {id: 'M_12', title: 'Smart home', classLevel: '8', topic: 'ESP32 IoT', duration: '5 Jam', driveLink: 'https://drive.google.com/drive/folders/p7_drive', creator: 'Mr. Rizal'},
+  {id: 'M_13', title: 'Smart greenhouse', classLevel: '8', topic: 'ESP32 IoT', duration: '5 Jam', driveLink: 'https://drive.google.com/drive/folders/p7_drive', creator: 'Mr. Rizal'},
 ];
 
 const INITIAL_PROJECTS: Project[] = [
@@ -307,7 +298,19 @@ export const mockDb = {
   },
 
   getLessons(): Lesson[] {
-    const data = localStorage.getItem('idn_lessons');
+    let data = localStorage.getItem('idn_lessons');
+    if (data) {
+      try {
+        const parsed = JSON.parse(data);
+        if (parsed.length > 0 && (parsed[0].title === 'Pengenalan Python Basic' || parsed[0].id === 'M_1' && parsed[0].title !== 'Smart Trashbin')) {
+          localStorage.removeItem('idn_lessons');
+          data = null;
+        }
+      } catch (e) {
+        localStorage.removeItem('idn_lessons');
+        data = null;
+      }
+    }
     if (!data) {
       localStorage.setItem('idn_lessons', JSON.stringify(INITIAL_LESSONS));
       this.addLog('System', 'Initialized default lessons data', 'Materi');
@@ -395,7 +398,17 @@ export const mockDb = {
   },
 
   getConfig(): SystemConfig {
-    const data = localStorage.getItem('idn_config');
+    let data = localStorage.getItem('idn_config');
+    if (data) {
+      try {
+        const parsed = JSON.parse(data);
+        if (parsed.lmsUrl === 'https://lms.idn.sch.id') {
+          parsed.lmsUrl = 'https://lms.codestechno.com';
+          localStorage.setItem('idn_config', JSON.stringify(parsed));
+          data = JSON.stringify(parsed);
+        }
+      } catch (e) {}
+    }
     if (!data) {
       const defaultConfig: SystemConfig = {
         spreadsheetId: '1IoT-Robotics-IDN-Spreadsheet-CMS-DemoID',
@@ -403,7 +416,7 @@ export const mockDb = {
         schoolName: 'IDN Boarding School',
         chatbotModel: 'gemini-3.5-flash',
         isInitialized: true,
-        lmsUrl: 'https://lms.idn.sch.id'
+        lmsUrl: 'https://lms.codestechno.com'
       };
       localStorage.setItem('idn_config', JSON.stringify(defaultConfig));
       return defaultConfig;
