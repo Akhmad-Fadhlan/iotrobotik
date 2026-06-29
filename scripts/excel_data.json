@@ -1,0 +1,958 @@
+{
+  "Semester 2": [
+    [
+      "Materi",
+      "Sub Materi",
+      "Referensi",
+      "Link Materi",
+      "Output",
+      "SKL",
+      "Ai",
+      "PIC"
+    ],
+    [
+      "Smart Trashbin",
+      "Fundamental Microbit",
+      "Doc microbit: https://makecode.microbit.org/docs",
+      "fundamental microbit",
+      "1. video demonstrasi dan tutorial\n2. Flyer project smart trashbin\n3. Website personal portofolio\n4. kumpulan deskripsi komponen (google lens) (pdf), dan fix problem yang dialami",
+      "project smart trashbin",
+      "Google Lens, chatgpt",
+      "Mr Fadhlan"
+    ],
+    [
+      "",
+      "Algoritma, konsep, dan komponen smart trashbin",
+      "",
+      "algoritma smart trashbin",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman basic Makecode (variable, percabangan, looping, pins)",
+      "Doc microbit: https://makecode.microbit.org/docs",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman Smart trashbin",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "K3 dalam bekerja",
+      "PEDOMAN K3 LAB.docx",
+      "https://docs.google.com/presentation/d/1yuJzz-Hh4nJzL0BtJeKIWrrAOzg9V2pG/edit?usp=drive_link&ouid=104394771420958359917&rtpof=true&sd=true",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi hardware dan program smart trashbin",
+      "",
+      "https://canva.link/fz5kuw9d8j9zdja",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Chatgpt / Google Lens Sebagai pembantu pengenalan awal komponen",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Tinybit Bluetooth Controller",
+      "Komunikasi Bluetooth",
+      "bluetooth: https://www.elecfreaks.com/learn-en",
+      "",
+      "1. video demonstrasi dan tutorial\n2. Flyer project tinybit bluetooth controller (pemanfaatan chatgpt untuk pengembangan ide di dunia industri) \n3. Website personal portofolio\n4. kumpulan deskripsi komponen (pdf), dan fix problem yang dialami\n5. Website interface controller tinybit (lovable dan vercel)",
+      "project tinybit bluetooth controller",
+      "ChatGPT / Claude, lovable",
+      "Mr Alfi"
+    ],
+    [
+      "",
+      "Fundamental Tinybit",
+      "tinybit: https://www.yahboom.net/study/Tinybit-Pro",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman basic untuk menggerakkan tinybit",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pengembangan kontroller pada tinybit bluetooth controller",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting lovable (chatgpt)",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller",
+      "",
+      "teknik prompting",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Tinybit Hand Gesture",
+      "Sejarah AI",
+      "Teachable Machine",
+      "Sejarah AI",
+      "1. video demonstrasi dan tutorial\n2. Flyer project tinybit hand gestures (pemanfaatan chatgpt untuk pengembangan ide di dunia industri) \n3. Website personal portofolio\n4. kumpulan deskripsi komponen (pdf), dan fix problem yang dialami\n5. Website interface AI controller tinybit (lovable dan vercel)",
+      "project tinybit hand gestures",
+      "Teachable Machine (Google), chatgpt/claude, lovable",
+      "Mr Alfi"
+    ],
+    [
+      "",
+      "Konsep AI dan cara kerja",
+      "Buku AI Kemendikbud",
+      "Konsep AI",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Faktor-faktor yang mempengaruhi pembuatan AI",
+      "",
+      "Faktor pengaruh AI",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teachable machine",
+      "Apa Itu Machine Learning?",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Faktor yang mempengaruhi kualitas model AI pada teachable machine",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi",
+      "Control Robot With Hand Gestures - CARDBOARD ROBOTS",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting lovable (chatgpt)",
+      "membuat web dengan ai",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller",
+      "6 Teknik Prompting ChatGPT Agar Hasilnya Setara Kerja Expert - Argia Academy",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Smart Watering Plant",
+      "Algoritma, konsep, dan komponen smart watering plant",
+      "",
+      "smart watering plant",
+      "1. video demonstrasi dan tutorial\n2. Flyer project smart watering plant\n3. Website personal portofolio\n4. kumpulan deskripsi komponen (google lens) (pdf), dan fix problem yang dialami",
+      "project smart watering plant",
+      "Google Lens, chatgpt",
+      "Mr Fadhlan"
+    ],
+    [
+      "",
+      "Pemrograman Smart watering plant",
+      "",
+      "smart watering plant",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "K3 dalam bekerja",
+      "",
+      "https://drive.google.com/file/d/18GPMXi9-nlijGMKDGzuXay0cJu6ZIdCD/view?usp=drive_link",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi hardware dan program smart watering plant",
+      "",
+      "smart watering plant",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller",
+      "",
+      "teknik prompting",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Tinybit Line Follower",
+      "Fundamental Line Follower",
+      "",
+      "",
+      "1. video demonstrasi dan tutorial\n2. Flyer project tinybit line follower\n3. Website personal portofolio\n4. kumpulan algoritma track advance line follower (pdf) (chatgpt) ",
+      "project tinybit line follower",
+      "ChatGPT / Claude /  deepseek",
+      "Mr Fadhlan"
+    ],
+    [
+      "",
+      "Algoritma Line Follower",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman basic dan lanjutan untuk menggerakkan line follower",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Praktek dengan track sederhana",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting (chatgpt / deepseek / claude)",
+      "",
+      "teknik prompting",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Tes dengan track advance (chatgpt / deepseek / claude)",
+      "",
+      "track advance dengan ai",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Smart Parking",
+      "Algoritma, konsep, dan komponen smart",
+      "",
+      "modul smart parking",
+      "1. video demonstrasi dan tutorial\n2. Flyer project smart parking (pemanfaatan chatgpt untuk pengembangan ide di dunia industri)\n3. Website personal portofolio\n4. kumpulan deskripsi komponen (pdf), dan fix problem yang dialami",
+      "project smart parking",
+      "ChatGPT / Claude, Teachable Machine ",
+      "Mr Alfi"
+    ],
+    [
+      "",
+      "Pemrograman Smart parking",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "K3 dalam bekerja",
+      "",
+      "https://drive.google.com/file/d/1hRZ1vqyA_ixJOPkkFh7Ab0oSh8rxUeX4/view?usp=sharing",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi hardware dan program smart parking",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teachable machine",
+      "Apa Itu Machine Learning?",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "Semester 3": [
+    [
+      "Materi",
+      "Sub Materi",
+      "Referensi",
+      "Link Materi",
+      "Output",
+      "SKL",
+      "Ai",
+      "PIC"
+    ],
+    [
+      "Robot Bluetooth Controller",
+      "Komunikasi Bluetooth",
+      "bluetooth: https://www.elecfreaks.com/learn-en",
+      "",
+      "1. video demonstrasi dan tutorial\n2. Flyer project tinybit bluetooth controller (pemanfaatan chatgpt untuk pengembangan ide di dunia industri) \n3. Website personal portofolio\n4. kumpulan deskripsi komponen (pdf), dan fix problem yang dialami\n5. Website interface controller robot (lovable dan vercel)",
+      "project robot bluetooth controller",
+      "ChatGPT / Claude, lovable",
+      "Mr. Rahmat Fadlan"
+    ],
+    [
+      "",
+      "Fundamental driver l298N",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman python untuk menggerakkan motor",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting lovable (chatgpt) untuk pembuatan app controller",
+      "membuat web dengan ai",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller",
+      "teknik prompting",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Robot Hand Gesture",
+      "Sejarah AI",
+      "Teachable Machine",
+      "",
+      "1. video demonstrasi dan tutorial\n2. Flyer project tinybit hand gestures (pemanfaatan chatgpt untuk pengembangan ide di dunia industri) \n3. Website personal portofolio\n4. kumpulan deskripsi komponen (pdf), dan fix problem yang dialami\n5. Website interface AI controller robot (lovable dan vercel)",
+      "project robot hand gestures",
+      "Teachable Machine (Google), chatgpt/claude, lovable",
+      "Mr. Rahmat Fadlan"
+    ],
+    [
+      "",
+      "Konsep AI dan cara kerja",
+      "Buku AI Kemendikbud",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Faktor-faktor yang mempengaruhi pembuatan AI",
+      "",
+      "rahasia permodelan ai",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teachable machine",
+      "Apa Itu Machine Learning?",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Faktor yang mempengaruhi kualitas model AI pada teachable machine",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman python untuk robot hand gestures",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting lovable (chatgpt) untuk pembuatan app AI",
+      "membuat web dengan ai",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller",
+      "",
+      "teknik prompting",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Smart Parking AI",
+      "Faktor-faktor yang mempengaruhi pembuatan AI",
+      "",
+      "rahasia permodelan ai",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman python untuk smart parking",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "database",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor",
+      "membuat web dengan ai",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman Smart parking",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "K3 dalam projek smart parking",
+      "",
+      "k3",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi hardware dan program smart parking AI",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan smart parking",
+      "",
+      "teknik prompting",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Robot Line Follower",
+      "Fundamental Line Follower",
+      "",
+      "",
+      "1. video demonstrasi dan tutorial\n2. Flyer project robot line follower\n3. Website personal portofolio\n4. kumpulan algoritma track advance line follower (pdf) (chatgpt) ",
+      "project robot line follower",
+      "ChatGPT / Claude /  deepseek",
+      "Ms. Nadia"
+    ],
+    [
+      "",
+      "Algoritma Line Follower",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman python basic dan lanjutan untuk menggerakkan line follower",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Praktek dengan track sederhana",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting (chatgpt / deepseek / claude)",
+      "",
+      "teknik prompting",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Tes dengan track advance (chatgpt / deepseek / claude)",
+      "",
+      "track advance dengan ai",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Robot Transporter",
+      "Algoritma, konsep, dan komponen robot transporter",
+      "",
+      "",
+      "1. video demonstrasi dan tutorial\n2. Flyer project robot transporter (pemanfaatan chatgpt untuk pengembangan ide di dunia industri)\n3. Website personal portofolio\n4. kumpulan deskripsi komponen (pdf), dan fix problem yang dialami\n5. Website interface AI controller robot (lovable dan vercel)",
+      "project robot transporter",
+      "ChatGPT / Claude, lovable",
+      "Ms. Nadia"
+    ],
+    [
+      "",
+      "Pemrograman python untuk robot transporter",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting lovable (chatgpt) untuk pembuatan app controller",
+      "membuat web dengan ai",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller",
+      "",
+      "teknik prompting",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "Semester 4": [
+    [
+      "Materi",
+      "Sub Materi",
+      "Referensi",
+      "Link Materi",
+      "Output",
+      "SKL",
+      "Ai",
+      "PIC"
+    ],
+    [
+      "Smart home",
+      "Algoritma, konsep, dan komponen smart parking",
+      "https://www.dicoding.com/blog/algoritma-pemrograman-pengertian-fungsi-dan-jenis/",
+      "Blueprint_Logika_Pemrograman",
+      "1. video demonstrasi dan tutorial\n2. Flyer project smart home (pemanfaatan chatgpt untuk pengembangan di dunia industri)\n3. Website personal portofolio\n4. kumpulan deskripsi komponen (pdf), dan fix problem yang dialami\n5. Website interface monitoring dan controlling (lovable dan vercel)",
+      "project smart home",
+      "ChatGPT / Claude, lovable",
+      "Mr. Rizal"
+    ],
+    [
+      "",
+      "Faktor-faktor yang mempengaruhi pembuatan AI",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Fundamental esp32",
+      "",
+      "The_ESP32_IoT_Blueprint",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman arduino ide",
+      "",
+      "Arduino_Code_Anatomy",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "database",
+      "https://www.youtube.com/watch?v=aO92B-K4TnQ",
+      "ESP32_Firebase_Bridge",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor",
+      "",
+      "membuat web dengan ai",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman Smart home",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "K3 dalam bekerja",
+      "",
+      "Strategic_Safety_Ecosystem",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi hardware dan program smart home",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan smart parking",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "Smart greenhouse",
+      "Algoritma, konsep, dan komponen smart parking",
+      "",
+      "Blueprint_Logika_Pemrograman",
+      "1. video demonstrasi dan tutorial\n2. Flyer project smart parking (pemanfaatan chatgpt untuk pengembangan di dunia industri)\n3. Website personal portofolio\n4. kumpulan deskripsi komponen (pdf), dan fix problem yang dialami\n5. Website interface monitoring dan controlling (lovable dan vercel)",
+      "project smart greenhouse",
+      "ChatGPT / Claude, lovable",
+      "Mr. Rizal"
+    ],
+    [
+      "",
+      "Faktor-faktor yang mempengaruhi pembuatan AI",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Fundamental esp32",
+      "",
+      "The_ESP32_IoT_Blueprint",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman arduino ide",
+      "",
+      "Arduino_Code_Anatomy",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "database",
+      "",
+      "ESP32_Firebase_Bridge",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor",
+      "membuat web dengan ai",
+      "membuat web dengan ai",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Pemrograman Smart greenhouse",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "K3 dalam bekerja",
+      "",
+      "Strategic_Safety_Ecosystem",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "Integrasi hardware dan program smart greenhouse",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "ChatGPT / Claude: brainstorming ide pengembangan smart greenhouse",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ]
+}
