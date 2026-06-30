@@ -1,11 +1,38 @@
+export interface LessonLink {
+  label: string;
+  url: string;
+}
+
 export interface Lesson {
   id: string;
   title: string;
   classLevel: '7' | '8';
   topic: string;
   duration: string;
-  driveLink: string;
+  driveLinks: LessonLink[];
   creator: string;
+}
+
+export interface CurriculumSubMateri {
+  name: string;
+  ref?: string;
+  link?: string;
+}
+
+export interface CurriculumSubject {
+  id: string;
+  title: string;
+  gradeLevel: '7' | '8';
+  semester: string;
+  icon: string;
+  desc: string;
+  duration: string;
+  level: string;
+  type: string;
+  status: 'Selesai' | 'Sedang Berjalan' | 'Belum Dimulai';
+  subMateri: CurriculumSubMateri[];
+  outputs: string[];
+  pic: string;
 }
 
 export interface Project {
@@ -24,6 +51,7 @@ export interface Project {
   author: string;
   year: string;
   screenshot?: string;
+  curriculumId?: string; // Menghubungkan ke Kurikulum
 }
 
 export interface Teacher {
@@ -74,10 +102,12 @@ export interface AuditLog {
 export interface SystemConfig {
   spreadsheetId: string;
   driveFolderId: string;
+  appsScriptUrl?: string; // Tautan Deploy Web App Apps Script
   schoolName: string;
   chatbotModel: string;
   isInitialized: boolean;
   lmsUrl: string;
+  totalStudents?: string; // Jumlah siswa
 }
 
 // Initial Seeds
@@ -95,19 +125,111 @@ const INITIAL_TECHNICIANS: Technician[] = [
 ];
 
 const INITIAL_LESSONS: Lesson[] = [
-  {id: 'M_1', title: 'Smart Trashbin', classLevel: '7', topic: 'Microbit', duration: '4 Jam', driveLink: 'https://docs.google.com/presentation/d/1yuJzz-Hh4nJzL0BtJeKIWrrAOzg9V2pG/edit?usp=drive_link', creator: 'Mr Fadhlan'},
-  {id: 'M_2', title: 'Tinybit Bluetooth Controller', classLevel: '7', topic: 'Tinybit', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p1_drive', creator: 'Mr Alfi'},
-  {id: 'M_3', title: 'Tinybit Hand Gesture', classLevel: '7', topic: 'Tinybit', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p2_drive', creator: 'Mr Alfi'},
-  {id: 'M_4', title: 'Smart Watering Plant', classLevel: '7', topic: 'IoT Basic', duration: '3 Jam', driveLink: 'https://drive.google.com/file/d/18GPMXi9-nlijGMKDGzuXay0cJu6ZIdCD/view', creator: 'Mr Fadhlan'},
-  {id: 'M_5', title: 'Tinybit Line Follower', classLevel: '7', topic: 'Tinybit', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p3_drive', creator: 'Mr Fadhlan'},
-  {id: 'M_6', title: 'Smart Parking', classLevel: '7', topic: 'IoT Basic', duration: '3 Jam', driveLink: 'https://drive.google.com/file/d/1hRZ1vqyA_ixJOPkkFh7Ab0oSh8rxUeX4/view', creator: 'Mr Alfi'},
-  {id: 'M_7', title: 'Robot Bluetooth Controller', classLevel: '8', topic: 'Python Robot', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p1_drive', creator: 'Mr. Rahmat Fadlan'},
-  {id: 'M_8', title: 'Robot Hand Gesture', classLevel: '8', topic: 'AI Robot', duration: '4 Jam', driveLink: 'https://teachablemachine.withgoogle.com/', creator: 'Mr. Rahmat Fadlan'},
-  {id: 'M_9', title: 'Smart Parking AI', classLevel: '8', topic: 'Computer Vision', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p6_drive', creator: 'Mr. Rahmat Fadlan'},
-  {id: 'M_10', title: 'Robot Line Follower', classLevel: '8', topic: 'Python Robot', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p3_drive', creator: 'Ms. Nadia'},
-  {id: 'M_11', title: 'Robot Transporter', classLevel: '8', topic: 'Python Robot', duration: '4 Jam', driveLink: 'https://drive.google.com/drive/folders/p2_drive', creator: 'Ms. Nadia'},
-  {id: 'M_12', title: 'Smart home', classLevel: '8', topic: 'ESP32 IoT', duration: '5 Jam', driveLink: 'https://drive.google.com/drive/folders/p7_drive', creator: 'Mr. Rizal'},
-  {id: 'M_13', title: 'Smart greenhouse', classLevel: '8', topic: 'ESP32 IoT', duration: '5 Jam', driveLink: 'https://drive.google.com/drive/folders/p7_drive', creator: 'Mr. Rizal'},
+  {
+    id: 'M_1', title: 'Smart Trashbin', classLevel: '7', topic: 'Microbit',
+    duration: '3 Minggu (4 JP)',
+    driveLinks: [
+      { label: 'Modul Presentasi', url: 'https://docs.google.com/presentation/d/1yuJzz-Hh4nJzL0BtJeKIWrrAOzg9V2pG/edit?usp=drive_link' },
+      { label: 'Canva Integrasi', url: 'https://canva.link/fz5kuw9d8j9zdja' }
+    ],
+    creator: 'Mr Fadhlan'
+  },
+  {
+    id: 'M_2', title: 'Tinybit Bluetooth Controller', classLevel: '7', topic: 'Tinybit',
+    duration: '3 Minggu (4 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p1_drive' }
+    ],
+    creator: 'Mr Alfi'
+  },
+  {
+    id: 'M_3', title: 'Tinybit Hand Gesture', classLevel: '7', topic: 'Tinybit',
+    duration: '3 Minggu (4 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p2_drive' }
+    ],
+    creator: 'Mr Alfi'
+  },
+  {
+    id: 'M_4', title: 'Smart Watering Plant', classLevel: '7', topic: 'IoT Basic',
+    duration: '4 Minggu (6 JP)',
+    driveLinks: [
+      { label: 'Modul K3', url: 'https://drive.google.com/file/d/18GPMXi9-nlijGMKDGzuXay0cJu6ZIdCD/view' }
+    ],
+    creator: 'Mr Fadhlan'
+  },
+  {
+    id: 'M_5', title: 'Tinybit Line Follower', classLevel: '7', topic: 'Tinybit',
+    duration: '4 Minggu (6 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p3_drive' }
+    ],
+    creator: 'Mr Fadhlan'
+  },
+  {
+    id: 'M_6', title: 'Smart Parking', classLevel: '7', topic: 'IoT Basic',
+    duration: '3 Minggu (4 JP)',
+    driveLinks: [
+      { label: 'Modul K3', url: 'https://drive.google.com/file/d/1hRZ1vqyA_ixJOPkkFh7Ab0oSh8rxUeX4/view' }
+    ],
+    creator: 'Mr Alfi'
+  },
+  {
+    id: 'M_7', title: 'Robot Bluetooth Controller', classLevel: '8', topic: 'Python Robot',
+    duration: '3 Minggu (4 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p1_drive' }
+    ],
+    creator: 'Mr. Rahmat Fadlan'
+  },
+  {
+    id: 'M_8', title: 'Robot Hand Gesture', classLevel: '8', topic: 'AI Robot',
+    duration: '3 Minggu (4 JP)',
+    driveLinks: [
+      { label: 'Teachable Machine', url: 'https://teachablemachine.withgoogle.com/' }
+    ],
+    creator: 'Mr. Rahmat Fadlan'
+  },
+  {
+    id: 'M_9', title: 'Smart Parking AI', classLevel: '8', topic: 'Computer Vision',
+    duration: '3 Minggu (4 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p6_drive' }
+    ],
+    creator: 'Mr. Rahmat Fadlan'
+  },
+  {
+    id: 'M_10', title: 'Robot Line Follower', classLevel: '8', topic: 'Python Robot',
+    duration: '4 Minggu (8 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p3_drive' }
+    ],
+    creator: 'Ms. Nadia'
+  },
+  {
+    id: 'M_11', title: 'Robot Transporter', classLevel: '8', topic: 'Python Robot',
+    duration: '4 Minggu (6 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p2_drive' }
+    ],
+    creator: 'Ms. Nadia'
+  },
+  {
+    id: 'M_12', title: 'Smart Home', classLevel: '8', topic: 'ESP32 IoT',
+    duration: '4 Minggu (8 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p7_drive' }
+    ],
+    creator: 'Mr. Rizal'
+  },
+  {
+    id: 'M_13', title: 'Smart Greenhouse', classLevel: '8', topic: 'ESP32 IoT',
+    duration: '4 Minggu (6 JP)',
+    driveLinks: [
+      { label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/p7_drive' }
+    ],
+    creator: 'Mr. Rizal'
+  },
 ];
 
 const INITIAL_PROJECTS: Project[] = [
@@ -117,95 +239,101 @@ const INITIAL_PROJECTS: Project[] = [
     category: 'Tinybit',
     difficulty: 'Mudah',
     description: 'Mengendalikan robot Tinybit via aplikasi handphone Android menggunakan koneksi Bluetooth.',
-    objectives: 'Siswa dapat memprogram modul bluetooth HC-05 pada microbit dan merespon trigger bluetooth di Tinybit.',
+    objectives: 'project tinybit bluetooth controller',
     competencies: 'Pemrograman Event-Driven, Konektivitas Bluetooth, Logika Driver Motor.',
     hardware: ['Robot Tinybit', 'Micro:bit V2', 'Smartphone Android'],
-    software: ['Makecode Editor', 'Tinybit App'],
+    software: ['ChatGPT', 'Claude', 'lovable'],
     duration: '4 JP',
     driveLink: 'https://drive.google.com/drive/folders/p1_drive',
     githubLink: 'https://github.com/idn-robotics/tinybit-bluetooth',
-    author: 'Ahmad Fauzi',
-    year: '2025'
+    author: 'Mr Alfi',
+    year: '2025',
+    curriculumId: 'tinybit-bluetooth'
   },
   {
     id: 'P_2',
-    name: 'Tinybit Hand Gesture Controller',
+    name: 'Tinybit Hand Gesture',
     category: 'Tinybit',
     difficulty: 'Sedang',
     description: 'Mengendalikan robot Tinybit kedua dengan gerakan tangan (accelerometer) dari microbit transmitter.',
-    objectives: 'Siswa dapat menggunakan sensor akselerometer bawaan microbit dan melakukan komunikasi radio wireless.',
+    objectives: 'project tinybit hand gestures',
     competencies: 'Komunikasi Radio Frekuensi, Analisis Sensor Kemiringan (Tilt), Robot Transmit-Receive.',
     hardware: ['2x Micro:bit V2', 'Robot Tinybit', 'Battery Pack'],
-    software: ['Makecode Editor'],
+    software: ['Teachable Machine (Google)', 'chatgpt/claude', 'lovable'],
     duration: '6 JP',
     driveLink: 'https://drive.google.com/drive/folders/p2_drive',
     githubLink: 'https://github.com/idn-robotics/tinybit-gesture',
-    author: 'Zainal Abidin',
-    year: '2025'
+    author: 'Mr Alfi',
+    year: '2025',
+    curriculumId: 'tinybit-gesture'
   },
   {
     id: 'P_3',
-    name: 'Tinybit Line Follower PID',
+    name: 'Tinybit Line Follower',
     category: 'Tinybit',
     difficulty: 'Sedang',
     description: 'Robot Tinybit mengikuti garis hitam dengan algoritma PID agar gerakan lebih presisi dan smooth.',
-    objectives: 'Mengenalkan siswa pada logika Kontrol Proporsional-Integral-Derivatif pada sensor line tracking.',
+    objectives: 'project tinybit line follower',
     competencies: 'Algoritma PID, Sensor Kalibrasi, Optimasi Kecepatan Motor.',
     hardware: ['Robot Tinybit', 'Micro:bit V2', 'Track Lomba Line Follower'],
-    software: ['Makecode Editor'],
+    software: ['ChatGPT', 'Claude', 'deepseek'],
     duration: '6 JP',
     driveLink: 'https://drive.google.com/drive/folders/p3_drive',
     githubLink: 'https://github.com/idn-robotics/tinybit-line-pid',
-    author: 'Zainal Abidin',
-    year: '2026'
+    author: 'Mr Fadhlan',
+    year: '2026',
+    curriculumId: 'tinybit-line'
   },
   {
     id: 'P_4',
-    name: 'Smart Trash Bin (ESP32)',
+    name: 'Smart Trashbin',
     category: 'IoT Smart Project',
     difficulty: 'Mudah',
     description: 'Tempat sampah pintar yang terbuka otomatis saat ada objek mendekat dan mengirim status kepenuhan ke Blynk.',
-    objectives: 'Siswa mampu merangkai sensor ultrasonic, servo motor, dan modul WiFi ESP32 menjadi satu sistem IoT terpadu.',
+    objectives: 'project smart trashbin',
     competencies: 'Servo Motor Control, WiFi Client, Sensor Ultrasonik, Integrasi Blynk Cloud.',
     hardware: ['ESP32 NodeMCU', 'Sensor Ultrasonik HC-SR04', 'Servo SG90', 'Tempat Sampah Mini'],
-    software: ['Arduino IDE', 'Blynk App'],
+    software: ['Google Lens', 'chatgpt'],
     duration: '4 JP',
     driveLink: 'https://drive.google.com/drive/folders/p4_drive',
     githubLink: 'https://github.com/idn-robotics/smart-trash-esp32',
-    author: 'Rizki Maulana',
-    year: '2025'
+    author: 'Mr Fadhlan',
+    year: '2025',
+    curriculumId: 'smart-trashbin'
   },
   {
     id: 'P_5',
-    name: 'Smart Watering Plant (ESP32)',
+    name: 'Smart Watering Plant',
     category: 'IoT Smart Project',
     difficulty: 'Sedang',
     description: 'Penyiram tanaman otomatis berbasis kelembaban tanah dengan notifikasi Telegram Bot.',
-    objectives: 'Membangun pemahaman tentang sensor analog (Soil Moisture) dan pengoperasian Bot API Telegram.',
+    objectives: 'project smart watering plant',
     competencies: 'ADC (Analog-to-Digital Conversion), Relay Board Switch, Bot Telegram Integration.',
     hardware: ['ESP32', 'Soil Moisture Sensor', 'Relay 5V', 'Pompa Air Mini 5V', 'Selang Air'],
-    software: ['Arduino IDE', 'Blynk Cloud'],
+    software: ['Google Lens', 'chatgpt'],
     duration: '6 JP',
     driveLink: 'https://drive.google.com/drive/folders/p5_drive',
     githubLink: 'https://github.com/idn-robotics/smart-watering',
-    author: 'Rizki Maulana',
-    year: '2025'
+    author: 'Mr Fadhlan',
+    year: '2025',
+    curriculumId: 'smart-watering-plant'
   },
   {
     id: 'P_6',
-    name: 'Smart Parking System',
+    name: 'Smart Parking',
     category: 'IoT Smart Project',
     difficulty: 'Sedang',
-    description: 'Sistem parkir otomatis menggunakan RFID Reader dan Servo Barrier Gate yang memantau slot parkir via Web Server.',
-    objectives: 'Menerapkan komunikasi RFID dan pembuatan local webserver ESP32.',
+    description: 'Sistem palang pintu parkir otomatis menggunakan RFID Reader dan Servo Barrier Gate yang memantau slot parkir via Web Server.',
+    objectives: 'project smart parking',
     competencies: 'RFID SPI Protocol, local HTML Web Server, LCD I2C Display.',
     hardware: ['ESP32', 'RFID RC522', 'Servo SG90', 'Sensor Infrared', 'LCD 16x2 I2C'],
-    software: ['Arduino IDE'],
+    software: ['ChatGPT', 'Claude', 'Teachable Machine'],
     duration: '8 JP',
     driveLink: 'https://drive.google.com/drive/folders/p6_drive',
     githubLink: 'https://github.com/idn-robotics/smart-parking',
-    author: 'Rizki Maulana',
-    year: '2026'
+    author: 'Mr Alfi',
+    year: '2026',
+    curriculumId: 'smart-parking'
   },
   {
     id: 'P_7',
@@ -213,15 +341,281 @@ const INITIAL_PROJECTS: Project[] = [
     category: 'IoT Smart Project',
     difficulty: 'Sulit',
     description: 'Kubah tanaman mandiri yang memantau kelembaban udara, suhu, intensitas cahaya, tanah, serta mengaktifkan kipas dan pompa secara otomatis dengan dashboard web real-time.',
-    objectives: 'Membuat project IoT kompleks dengan banyak sensor, aktuator, dan web UI visual.',
+    objectives: 'project smart greenhouse',
     competencies: 'Dashboard Multi-sensor, Logika Histeresis Aktuator, WebSockets ESP32.',
     hardware: ['ESP32 NodeMCU', 'DHT22 Sensor', 'LDR Sensor', 'Soil Moisture', 'Kipas DC 5V', 'Pompa Air', 'Relay 4 Channel'],
-    software: ['Arduino IDE', 'HTML/JS Dashboard', 'ThingSpeak API'],
+    software: ['ChatGPT', 'Claude', 'lovable'],
     duration: '10 JP',
     driveLink: 'https://drive.google.com/drive/folders/p7_drive',
     githubLink: 'https://github.com/idn-robotics/smart-greenhouse',
-    author: 'Fajar Nugraha',
-    year: '2026'
+    author: 'Mr. Rizal',
+    year: '2026',
+    curriculumId: 'smart-greenhouse'
+  }
+];
+
+const INITIAL_CURRICULUM: CurriculumSubject[] = [
+  {
+    id: 'smart-trashbin',
+    title: 'Smart Trashbin',
+    gradeLevel: '7',
+    semester: 'Semester 2',
+    icon: 'trash',
+    desc: 'Proyek tempat sampah pintar berbasis Microbit yang terbuka otomatis menggunakan servo saat mendeteksi objek.',
+    duration: '3 Minggu',
+    level: 'Pemula',
+    type: 'Praktik Mandiri',
+    status: 'Selesai',
+    pic: 'Mr Fadhlan',
+    subMateri: [
+      { name: 'Fundamental Microbit', ref: 'Doc microbit: https://makecode.microbit.org/docs', link: 'fundamental microbit' },
+      { name: 'Algoritma, konsep, dan komponen smart trashbin', link: 'algoritma smart trashbin' },
+      { name: 'Pemrograman basic Makecode (variable, percabangan, looping, pins)', ref: 'Doc microbit: https://makecode.microbit.org/docs' },
+      { name: 'Pemrograman Smart trashbin' },
+      { name: 'K3 dalam bekerja', ref: 'PEDOMAN K3 LAB.docx', link: 'https://docs.google.com/presentation/d/1yuJzz-Hh4nJzL0BtJeKIWrrAOzg9V2pG/edit?usp=drive_link&ouid=104394771420958359917&rtpof=true&sd=true' },
+      { name: 'Integrasi hardware dan program smart trashbin', link: 'https://canva.link/fz5kuw9d8j9zdja' },
+      { name: 'Chatgpt / Google Lens Sebagai pembantu pengenalan awal komponen' }
+    ],
+    outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio']
+  },
+  {
+    id: 'tinybit-bluetooth',
+    title: 'Tinybit BT',
+    gradeLevel: '7',
+    semester: 'Semester 2',
+    icon: 'bluetooth',
+    desc: 'Membuat aplikasi web controller dan memprogram Tinybit Robot agar bisa dikendalikan secara nirkabel via Bluetooth.',
+    duration: '3 Minggu',
+    level: 'Pemula',
+    type: 'Teori & Praktik',
+    status: 'Selesai',
+    pic: 'Mr Alfi',
+    subMateri: [
+      { name: 'Komunikasi Bluetooth', ref: 'bluetooth: https://www.elecfreaks.com/learn-en' },
+      { name: 'Fundamental Tinybit', ref: 'tinybit: https://www.yahboom.net/study/Tinybit-Pro' },
+      { name: 'Pemrograman basic untuk menggerakkan tinybit' },
+      { name: 'Integrasi' },
+      { name: 'Pengembangan kontroller pada tinybit bluetooth controller' },
+      { name: 'Teknik prompting lovable (chatgpt)' },
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' }
+    ],
+    outputs: ['Aplikasi Web Controller', 'Video Demo']
+  },
+  {
+    id: 'tinybit-gesture',
+    title: 'Tinybit Gesture',
+    gradeLevel: '7',
+    semester: 'Semester 2',
+    icon: 'hand',
+    desc: 'Mengendalikan robot Tinybit kedua dengan gerakan tangan (accelerometer) dari microbit transmitter.',
+    duration: '3 Minggu',
+    level: 'Pemula',
+    type: 'Teori & Praktik',
+    status: 'Belum Dimulai',
+    pic: 'Mr Alfi',
+    subMateri: [
+      { name: 'Sejarah AI', ref: 'Teachable Machine', link: 'Sejarah AI' },
+      { name: 'Konsep AI dan cara kerja', ref: 'Buku AI Kemendikbud', link: 'Konsep AI' },
+      { name: 'Faktor-faktor yang mempengaruhi pembuatan AI', link: 'Faktor pengaruh AI' },
+      { name: 'Teachable machine', ref: 'Apa Itu Machine Learning?' },
+      { name: 'Faktor yang mempengaruhi kualitas model AI pada teachable machine' },
+      { name: 'Integrasi', ref: 'Control Robot With Hand Gestures - CARDBOARD ROBOTS' },
+      { name: 'Teknik prompting lovable (chatgpt)', ref: 'membuat web dengan ai' },
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', ref: '6 Teknik Prompting ChatGPT Agar Hasilnya Setara Kerja Expert - Argia Academy' }
+    ],
+    outputs: ['Program Transmitter-Receiver', 'Video Demo']
+  },
+  {
+    id: 'tinybit-line',
+    title: 'Tinybit Line Follower',
+    gradeLevel: '7',
+    semester: 'Semester 2',
+    icon: 'route',
+    desc: 'Robot Tinybit mengikuti garis hitam dengan algoritma PID agar gerakan lebih presisi dan smooth.',
+    duration: '4 Minggu',
+    level: 'Pemula',
+    type: 'Praktik Mandiri',
+    status: 'Belum Dimulai',
+    pic: 'Mr Fadhlan',
+    subMateri: [
+      { name: 'Fundamental Line Follower' },
+      { name: 'Algoritma Line Follower' },
+      { name: 'Pemrograman basic dan lanjutan untuk menggerakkan line follower' },
+      { name: 'Praktek dengan track sederhana' },
+      { name: 'Teknik prompting (chatgpt / deepseek / claude)', link: 'teknik prompting' },
+      { name: 'Tes dengan track advance (chatgpt / deepseek / claude)', link: 'track advance dengan ai' }
+    ],
+    outputs: ['Robot Line Follower PID', 'Video Demo']
+  },
+  {
+    id: 'smart-watering-plant',
+    title: 'Smart Watering',
+    gradeLevel: '7',
+    semester: 'Semester 2',
+    icon: 'sprout',
+    desc: 'Membangun penyiram tanaman otomatis berbasis kelembaban tanah dengan notifikasi telegram.',
+    duration: '4 Minggu',
+    level: 'Pemula',
+    type: 'Deploy Project',
+    status: 'Selesai',
+    pic: 'Mr Fadhlan',
+    subMateri: [
+      { name: 'Algoritma, konsep, dan komponen smart watering plant', link: 'smart watering plant' },
+      { name: 'Pemrograman Smart watering plant', link: 'smart watering plant' },
+      { name: 'K3 dalam bekerja', ref: 'PEDOMAN K3 LAB.docx', link: 'https://drive.google.com/file/d/18GPMXi9-nlijGMKDGzuXay0cJu6ZIdCD/view?usp=drive_link' },
+      { name: 'Integrasi hardware dan program smart watering plant', link: 'smart watering plant' },
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' }
+    ],
+    outputs: ['Hardware Penyiram Tanaman', 'Video Demo']
+  },
+  {
+    id: 'smart-parking',
+    title: 'Smart Parking',
+    gradeLevel: '7',
+    semester: 'Semester 2',
+    icon: 'parking',
+    desc: 'Sistem palang pintu parkir otomatis menggunakan RFID reader dan sensor infra merah.',
+    duration: '3 Minggu',
+    level: 'Pemula',
+    type: 'Praktik Mandiri',
+    status: 'Selesai',
+    pic: 'Mr Alfi',
+    subMateri: [
+      { name: 'Algoritma, konsep, dan komponen smart', link: 'modul smart parking' },
+      { name: 'Pemrograman Smart parking' },
+      { name: 'K3 dalam bekerja', link: 'https://drive.google.com/file/d/1hRZ1vqyA_ixJOPkkFh7Ab0oSh8rxUeX4/view?usp=sharing' },
+      { name: 'Integrasi hardware dan program smart parking' },
+      { name: 'Teachable machine', ref: 'Apa Itu Machine Learning?' }
+    ],
+    outputs: ['Prototip Palang Parkir', 'Flyer Proyek']
+  },
+  // Kelas 8 Semester 3
+  {
+    id: 'robot-bluetooth',
+    title: 'Robot BT',
+    gradeLevel: '8',
+    semester: 'Semester 3',
+    icon: 'bluetooth',
+    desc: 'Mengendalikan robot beroda 4 berbasis python menggunakan modul Driver L298N dan koneksi Bluetooth.',
+    duration: '3 Minggu',
+    level: 'Menengah',
+    type: 'Teori & Praktik',
+    status: 'Belum Dimulai',
+    pic: 'Mr. Rahmat Fadlan',
+    subMateri: [
+      { name: 'Komunikasi Bluetooth & Serial Data' },
+      { name: 'Fundamental driver motor L298N' }
+    ],
+    outputs: ['Aplikasi Web Controller Vercel', 'Video Demo']
+  },
+  {
+    id: 'robot-gesture',
+    title: 'Robot Gesture',
+    gradeLevel: '8',
+    semester: 'Semester 3',
+    icon: 'hand',
+    desc: 'Pengembangan web AI Controller berbasis Teachable Machine untuk mengontrol robot beroda menggunakan isyarat kamera.',
+    duration: '3 Minggu',
+    level: 'Menengah',
+    type: 'Praktik AI',
+    status: 'Belum Dimulai',
+    pic: 'Mr. Rahmat Fadlan',
+    subMateri: [
+      { name: 'Teachable Machine & Sejarah AI' },
+      { name: 'Konsep AI dan cara kerja' }
+    ],
+    outputs: ['Model Teachable Machine', 'Video Demo']
+  },
+  {
+    id: 'parking-ai',
+    title: 'Parking AI',
+    gradeLevel: '8',
+    semester: 'Semester 3',
+    icon: 'parking',
+    desc: 'Otomatisasi palang parkir pintar menggunakan Computer Vision Python dan database.',
+    duration: '4 Minggu',
+    level: 'Menengah',
+    type: 'Praktik database',
+    status: 'Belum Dimulai',
+    pic: 'Mr. Rahmat Fadlan',
+    subMateri: [
+      { name: 'Pemrograman python computer vision' },
+      { name: 'Database setup & integration' }
+    ],
+    outputs: ['Sistem Smart Parking AI', 'Video Demo']
+  },
+  {
+    id: 'robot-line',
+    title: 'Line Follower',
+    gradeLevel: '8',
+    semester: 'Semester 3',
+    icon: 'route',
+    desc: 'Pemrograman Python tingkat lanjut pada robot untuk menyusuri track garis hitam dengan algoritma PID.',
+    duration: '4 Minggu',
+    level: 'Menengah',
+    type: 'Praktik Robotika',
+    status: 'Belum Dimulai',
+    pic: 'Ms. Nadia',
+    subMateri: [
+      { name: 'Fundamental Line Follower & Sensor reading' },
+      { name: 'Algoritma Line Follower PID di Python' }
+    ],
+    outputs: ['Robot Python Line Follower', 'Video Demo']
+  },
+  {
+    id: 'robot-transporter',
+    title: 'Transporter',
+    gradeLevel: '8',
+    semester: 'Semester 3',
+    icon: 'package',
+    desc: 'Proyek merakit dan memprogram robot pengangkut barang dengan capit servo yang dikendalikan via Web App.',
+    duration: '7 Minggu',
+    level: 'Menengah',
+    type: 'Integrasi Proyek',
+    status: 'Belum Dimulai',
+    pic: 'Ms. Nadia',
+    subMateri: [
+      { name: 'Mekanikal capit servo & sasis robot' },
+      { name: 'Web Controller integration' }
+    ],
+    outputs: ['Robot Transporter dengan Capit', 'Video Demo']
+  },
+  // Kelas 8 Semester 4
+  {
+    id: 'smart-home',
+    title: 'Smart Home',
+    gradeLevel: '8',
+    semester: 'Semester 4',
+    icon: 'home',
+    desc: 'Membangun rumah pintar berbasis ESP32 dengan kendali relay nirkabel dan Firebase database.',
+    duration: '8 Minggu',
+    level: 'Lanjut',
+    type: 'Deploy Project',
+    status: 'Belum Dimulai',
+    pic: 'Mr. Rizal',
+    subMateri: [
+      { name: 'Koneksi ESP32 WiFi' },
+      { name: 'Protokol Firebase Realtime Database' }
+    ],
+    outputs: ['Prototype Smart Home', 'Video Demo']
+  },
+  {
+    id: 'smart-greenhouse',
+    title: 'Smart Greenhouse',
+    gradeLevel: '8',
+    semester: 'Semester 4',
+    icon: 'sprout',
+    desc: 'Kubah tanaman mandiri dengan dashboard web real-time untuk memantau suhu dan kelembaban.',
+    duration: '8 Minggu',
+    level: 'Lanjut',
+    type: 'Integrasi IoT',
+    status: 'Belum Dimulai',
+    pic: 'Mr. Rizal',
+    subMateri: [
+      { name: 'Sensor DHT22 & LDR' },
+      { name: 'WebSockets untuk pengiriman data real-time' }
+    ],
+    outputs: ['Dashboard Web Monitoring', 'Video Demo']
   }
 ];
 
@@ -323,6 +717,20 @@ export const mockDb = {
     localStorage.setItem('idn_lessons', JSON.stringify(lessons));
   },
 
+  getCurriculum(): CurriculumSubject[] {
+    const data = localStorage.getItem('idn_curriculum');
+    if (!data) {
+      localStorage.setItem('idn_curriculum', JSON.stringify(INITIAL_CURRICULUM));
+      this.addLog('System', 'Initialized default curriculum data', 'Curriculum');
+      return INITIAL_CURRICULUM;
+    }
+    return JSON.parse(data);
+  },
+
+  saveCurriculum(curriculum: CurriculumSubject[]) {
+    localStorage.setItem('idn_curriculum', JSON.stringify(curriculum));
+  },
+
   getProjects(): Project[] {
     const data = localStorage.getItem('idn_projects');
     if (!data) {
@@ -402,8 +810,16 @@ export const mockDb = {
     if (data) {
       try {
         const parsed = JSON.parse(data);
+        let changed = false;
         if (parsed.lmsUrl === 'https://lms.idn.sch.id') {
           parsed.lmsUrl = 'https://lms.codestechno.com';
+          changed = true;
+        }
+        if (!parsed.appsScriptUrl || parsed.appsScriptUrl === '') {
+          parsed.appsScriptUrl = 'https://script.google.com/macros/s/AKfycbyhFl_jUh9LYX-aJrD_VaZvC1-H_dlH2sNjGlZdn8lHYd2AGsI1i-R_dTqgBRDo6XAO/exec';
+          changed = true;
+        }
+        if (changed) {
           localStorage.setItem('idn_config', JSON.stringify(parsed));
           data = JSON.stringify(parsed);
         }
@@ -413,10 +829,12 @@ export const mockDb = {
       const defaultConfig: SystemConfig = {
         spreadsheetId: '1IoT-Robotics-IDN-Spreadsheet-CMS-DemoID',
         driveFolderId: '1IoT-Robotics-IDN-Drive-Storage-DemoID',
+        appsScriptUrl: 'https://script.google.com/macros/s/AKfycbyhFl_jUh9LYX-aJrD_VaZvC1-H_dlH2sNjGlZdn8lHYd2AGsI1i-R_dTqgBRDo6XAO/exec',
         schoolName: 'IDN Boarding School',
         chatbotModel: 'gemini-3.5-flash',
         isInitialized: true,
-        lmsUrl: 'https://lms.codestechno.com'
+        lmsUrl: 'https://lms.codestechno.com',
+        totalStudents: '2.5K+'
       };
       localStorage.setItem('idn_config', JSON.stringify(defaultConfig));
       return defaultConfig;
@@ -485,7 +903,7 @@ export const mockDb = {
           classLevel,
           topic,
           duration: `${2 + Math.floor(Math.random() * 3) * 2} JP`,
-          driveLink: 'https://drive.google.com/drive/folders/seeded_link',
+          driveLinks: [{ label: 'Folder Drive', url: 'https://drive.google.com/drive/folders/seeded_link' }],
           creator
         });
       }
@@ -566,6 +984,7 @@ export const mockDb = {
     localStorage.removeItem('idn_teachers');
     localStorage.removeItem('idn_technicians');
     localStorage.removeItem('idn_lessons');
+    localStorage.removeItem('idn_curriculum');
     localStorage.removeItem('idn_projects');
     localStorage.removeItem('idn_sops');
     localStorage.removeItem('idn_inventory');
@@ -576,10 +995,73 @@ export const mockDb = {
     this.getTeachers();
     this.getTechnicians();
     this.getLessons();
+    this.getCurriculum();
     this.getProjects();
     this.getSops();
     this.getInventory();
     this.getConfig();
     this.addLog('Admin', 'Database has been reset to defaults', 'Settings');
+  },
+
+  async syncFromBackend(): Promise<boolean> {
+    const config = this.getConfig();
+    if (!config.appsScriptUrl) return false;
+    
+    try {
+      // 1. Fetch config settings
+      const configRes = await fetch(`${config.appsScriptUrl}?route=/api/config`);
+      const configData = await configRes.json();
+      if (configData.success && configData.data) {
+        // preserve the locally set appsScriptUrl since it is stored in localStorage
+        const mergedConfig = { ...configData.data, appsScriptUrl: config.appsScriptUrl };
+        localStorage.setItem('idn_config', JSON.stringify(mergedConfig));
+      }
+      
+      // 2. Fetch other tables
+      const routes = [
+        { route: '/api/teachers', key: 'idn_teachers' },
+        { route: '/api/technicians', key: 'idn_technicians' },
+        { route: '/api/materials', key: 'idn_lessons' },
+        { route: '/api/curriculum', key: 'idn_curriculum' },
+        { route: '/api/projects', key: 'idn_projects' },
+        { route: '/api/inventory', key: 'idn_inventory' },
+        { route: '/api/sops', key: 'idn_sops' },
+        { route: '/api/logs', key: 'idn_audit_logs' }
+      ];
+      
+      for (const item of routes) {
+        try {
+          const res = await fetch(`${config.appsScriptUrl}?route=${item.route}`);
+          const json = await res.json();
+          if (json.success && Array.isArray(json.data)) {
+            localStorage.setItem(item.key, JSON.stringify(json.data));
+          }
+        } catch (err) {
+          console.error(`Failed to fetch ${item.route}:`, err);
+        }
+      }
+      return true;
+    } catch (e) {
+      console.error('Error syncing from backend:', e);
+      return false;
+    }
+  },
+
+  async postToBackend(route: string, data: any): Promise<any> {
+    const config = this.getConfig();
+    if (!config.appsScriptUrl) return null;
+    try {
+      const res = await fetch(`${config.appsScriptUrl}?route=${route}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify(data)
+      });
+      return await res.json();
+    } catch (e) {
+      console.error(`Error posting to backend route ${route}:`, e);
+      return null;
+    }
   }
 };

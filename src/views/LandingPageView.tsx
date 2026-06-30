@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { mockDb } from '../services/db';
 import {
   BookOpen, Code2, FolderGit, GraduationCap,
-  Wrench, Users, FileText, MapPin, Search,
+  Package, Users, FileText, Compass, Search,
   Sparkles, ArrowRight,
   Bot, ChevronRight, Globe
 } from 'lucide-react';
@@ -11,35 +12,40 @@ interface LandingPageViewProps {
   onOpenAiChat: () => void;
 }
 
-/* ── Data ── */
-const quickItems = [
-  { id: 'materi',       title: 'Materi',         desc: '248 Materi',          Icon: BookOpen,      grad: 'linear-gradient(135deg,#3B82F6,#2563EB)', glow: 'rgba(37,99,235,0.28)' },
-  { id: 'projects',    title: 'Project Library', desc: '92 Project',           Icon: FolderGit,     grad: 'linear-gradient(135deg,#8B5CF6,#7C3AED)', glow: 'rgba(124,58,237,0.28)' },
-  { id: 'source-code', title: 'Source Code',     desc: '186 Repository',       Icon: Code2,         grad: 'linear-gradient(135deg,#10B981,#059669)', glow: 'rgba(16,185,129,0.28)' },
-  { id: 'lms',         title: 'LMS',             desc: 'Akses Pembelajaran',   Icon: GraduationCap, grad: 'linear-gradient(135deg,#F59E0B,#D97706)', glow: 'rgba(245,158,11,0.28)' },
-  { id: 'inventory',   title: 'Inventaris LAB',  desc: 'Kelola Inventaris',    Icon: Wrench,        grad: 'linear-gradient(135deg,#06B6D4,#0891B2)', glow: 'rgba(6,182,212,0.28)' },
-  { id: 'people',      title: 'Guru & Teknisi',  desc: 'Kelola Data',          Icon: Users,         grad: 'linear-gradient(135deg,#EC4899,#DB2777)', glow: 'rgba(236,72,153,0.28)' },
-  { id: 'sop',         title: 'SOP Robot',       desc: 'Dokumentasi',          Icon: FileText,      grad: 'linear-gradient(135deg,#A78BFA,#8B5CF6)', glow: 'rgba(167,139,250,0.28)' },
-  { id: 'kurikulum',   title: 'Kurikulum',       desc: 'Rencana Pembelajaran', Icon: MapPin,        grad: 'linear-gradient(135deg,#FB923C,#EF4444)', glow: 'rgba(251,146,60,0.28)' },
-];
-
 const galleryItems = [
-  { id:1, badge:'Project Unggulan', badgeColor:'#EF4444', title:'Line Follower Robot',  desc:'Sistem navigasi otomatis mengikuti garis dengan sensor IR.', img:'/galeri/kbm/7A/IMG_20260116_135517.jpg' },
-  { id:2, badge:'Kegiatan KBM',     badgeColor:'#10B981', title:'Workshop IoT & Robotik', desc:'Belajar membuat sistem IoT berbasis ESP32 dan Arduino.',          img:'/galeri/kbm/7A/IMG_20260116_135532.jpg' },
-  { id:3, badge:'Dokumentasi Lomba',badgeColor:'#3B82F6', title:'Smart Home System',     desc:'Kontrol perangkat rumah menggunakan IoT di Ajang Nasional.',  img:'/galeri/lomba/Jonggol/IMG_20251205_152613.jpg' },
-  { id:4, badge:'Robot Competition',badgeColor:'#10B981', title:'Lomba Robotik Sentul',  desc:'Kompetisi robotik antar sekolah tingkat nasional di Sentul.', img:'/galeri/lomba/Sentul/7-Grade-23_01_2026.jpg' },
-  { id:5, badge:'Project Siswa',    badgeColor:'#3B82F6', title:'Weather Monitoring',   desc:'Monitoring suhu & kelembaban secara real-time via Blynk.',    img:'/galeri/kbm/7A/IMG_20260116_135539.jpg' },
-];
-
-const statItems = [
-  { count:'248+', label:'Materi',      sub:'Modul belajar',   Icon:BookOpen,     c:'#2563EB', bg:'rgba(37,99,235,0.1)' },
-  { count:'92+',  label:'Project',     sub:'Alat & IoT',      Icon:FolderGit,    c:'#7C3AED', bg:'rgba(124,58,237,0.1)' },
-  { count:'186+', label:'Source Code', sub:'Repository Git',  Icon:Code2,        c:'#059669', bg:'rgba(16,185,129,0.1)' },
-  { count:'2.5K+',label:'Siswa Aktif', sub:'Belajar bersama', Icon:Users,        c:'#D97706', bg:'rgba(245,158,11,0.1)' },
+  { id:1, badge:'Dokumentasi KBM',   badgeColor:'#10B981', title:'', desc:'', img:'/galeri/kbm/7A/IMG_20260116_135517.jpg' },
+  { id:2, badge:'Dokumentasi KBM',   badgeColor:'#10B981', title:'', desc:'', img:'/galeri/kbm/7A/IMG_20260116_135532.jpg' },
+  { id:3, badge:'Dokumentasi Lomba', badgeColor:'#3B82F6', title:'', desc:'', img:'/galeri/lomba/Jonggol/IMG_20251205_152613.jpg' },
+  { id:4, badge:'Dokumentasi Lomba', badgeColor:'#3B82F6', title:'', desc:'', img:'/galeri/lomba/Sentul/7-Grade-23_01_2026.jpg' },
+  { id:5, badge:'Dokumentasi KBM',   badgeColor:'#10B981', title:'', desc:'', img:'/galeri/kbm/7A/IMG_20260116_135539.jpg' },
 ];
 
 export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPageViewProps) {
   const [searchVal,   setSearchVal]   = useState('');
+
+  // Hitung jumlah materi, proyek, source code, dan siswa dinamis dari database
+  const lessonsCount = mockDb.getLessons().length;
+  const projectsCount = mockDb.getProjects().length;
+  const reposCount = mockDb.getProjects().filter(p => p.githubLink).length;
+  const totalSiswa = mockDb.getConfig().totalStudents || '2.5K+';
+
+  const quickItems = [
+    { id: 'materi',       title: 'Materi',         desc: `${lessonsCount} Materi`,       Icon: BookOpen,      grad: 'linear-gradient(135deg,#3B82F6,#2563EB)', glow: 'rgba(37,99,235,0.28)' },
+    { id: 'projects',    title: 'Project Library', desc: `${projectsCount} Project`,     Icon: FolderGit,     grad: 'linear-gradient(135deg,#8B5CF6,#7C3AED)', glow: 'rgba(124,58,237,0.28)' },
+    { id: 'source-code', title: 'Source Code',     desc: `${reposCount} Repository`,     Icon: Code2,         grad: 'linear-gradient(135deg,#10B981,#059669)', glow: 'rgba(16,185,129,0.28)' },
+    { id: 'lms',         title: 'LMS',             desc: 'Akses Pembelajaran',   Icon: GraduationCap, grad: 'linear-gradient(135deg,#F59E0B,#D97706)', glow: 'rgba(245,158,11,0.28)' },
+    { id: 'inventory',   title: 'Inventaris LAB',  desc: 'Kelola Inventaris',    Icon: Package,       grad: 'linear-gradient(135deg,#06B6D4,#0891B2)', glow: 'rgba(6,182,212,0.28)' },
+    { id: 'people',      title: 'Guru & Teknisi',  desc: 'Kelola Data',          Icon: Users,         grad: 'linear-gradient(135deg,#EC4899,#DB2777)', glow: 'rgba(236,72,153,0.28)' },
+    { id: 'sop',         title: 'SOP Robot',       desc: 'Dokumentasi',          Icon: FileText,      grad: 'linear-gradient(135deg,#A78BFA,#8B5CF6)', glow: 'rgba(167,139,250,0.28)' },
+    { id: 'kurikulum',   title: 'Kurikulum',       desc: 'Rencana Pembelajaran', Icon: Compass,       grad: 'linear-gradient(135deg,#FB923C,#EF4444)', glow: 'rgba(251,146,60,0.28)' },
+  ];
+
+  const statItems = [
+    { count: `${lessonsCount}+`, label: 'Materi',      sub: 'Modul belajar',   Icon: BookOpen,     c: '#2563EB', bg: 'rgba(37,99,235,0.1)' },
+    { count: `${projectsCount}+`, label: 'Project',     sub: 'Alat & IoT',      Icon: FolderGit,    c: '#7C3AED', bg: 'rgba(124,58,237,0.1)' },
+    { count: `${reposCount}+`, label: 'Source Code', sub: 'Repository Git',  Icon: Code2,        c: '#059669', bg: 'rgba(16,185,129,0.1)' },
+    { count: totalSiswa,       label: 'Siswa Aktif', sub: 'Belajar bersama', Icon: Users,        c: '#D97706', bg: 'rgba(245,158,11,0.1)' },
+  ];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -863,21 +869,21 @@ export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPag
           <div className="lp-bento">
             <div className="lp-gal lp-bento-featured" onClick={() => onNavigate('tentang')}>
               <img src={galleryItems[0].img} alt={galleryItems[0].title}
-                onError={e => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x440/1E3A8A/white?text=Line+Follower+Robot'; }} />
+                onError={e => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x440/1E3A8A/white?text=Foto'; }} />
               <div className="lp-gal-ov">
                 <span className="lp-gal-badge" style={{ background: galleryItems[0].badgeColor }}>{galleryItems[0].badge}</span>
-                <div className="lp-gal-title-lg">{galleryItems[0].title}</div>
-                <div className="lp-gal-desc">{galleryItems[0].desc}</div>
+                {galleryItems[0].title && <div className="lp-gal-title-lg">{galleryItems[0].title}</div>}
+                {galleryItems[0].desc && <div className="lp-gal-desc">{galleryItems[0].desc}</div>}
               </div>
             </div>
             {galleryItems.slice(1).map(item => (
               <div key={item.id} className="lp-gal" onClick={() => onNavigate('tentang')}>
                 <img src={item.img} alt={item.title}
-                  onError={e => { (e.target as HTMLImageElement).src = `https://placehold.co/400x210/1E3A8A/white?text=${encodeURIComponent(item.title)}`; }} />
+                  onError={e => { (e.target as HTMLImageElement).src = `https://placehold.co/400x210/1E3A8A/white?text=Foto`; }} />
                 <div className="lp-gal-ov">
                   <span className="lp-gal-badge" style={{ background: item.badgeColor }}>{item.badge}</span>
-                  <div className="lp-gal-title-sm">{item.title}</div>
-                  <div className="lp-gal-desc-sm">{item.desc}</div>
+                  {item.title && <div className="lp-gal-title-sm">{item.title}</div>}
+                  {item.desc && <div className="lp-gal-desc-sm">{item.desc}</div>}
                 </div>
               </div>
             ))}
@@ -891,8 +897,8 @@ export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPag
                   onError={e => { (e.target as HTMLImageElement).src = `https://placehold.co/90x90/1E3A8A/white?text=Foto`; }} />
                 <div className="lp-gal-list-info">
                   <span className="lp-gal-list-badge" style={{ background: item.badgeColor }}>{item.badge}</span>
-                  <div className="lp-gal-list-title">{item.title}</div>
-                  <div className="lp-gal-list-desc">{item.desc}</div>
+                  {item.title && <div className="lp-gal-list-title">{item.title}</div>}
+                  {item.desc && <div className="lp-gal-list-desc">{item.desc}</div>}
                 </div>
                 <div className="lp-gal-list-arr">
                   <ChevronRight size={15} color="#2563EB" />

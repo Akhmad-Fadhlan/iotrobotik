@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { mockDb } from '../services/db';
 import { 
   Cpu, 
   GitFork, 
@@ -37,7 +38,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Send,
-  Bookmark
+  Bookmark,
+  X
 } from 'lucide-react';
 
 const TrainIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -110,356 +112,52 @@ const iconMap: Record<string, any> = {
   'hand': Hand
 };
 
-const timelineData: GradeTrack[] = [
-  {
-    grade: 'Kelas 7',
-    gradeNum: '7',
-    semester: 'Semester 2',
-    subjects: [
-      {
-        id: 'smart-trashbin',
-        title: 'Smart Trashbin',
-        semester: 'Semester 2',
-        icon: 'trash',
-        desc: 'Proyek pembuatan tempat sampah pintar berbasis Microbit yang membuka otomatis menggunakan servo ketika mendeteksi objek di dekatnya.',
-        duration: '4 Jam',
-        level: 'Pemula',
-        type: 'Praktik Mandiri',
-        status: 'Selesai',
-        pic: 'Mr Fadhlan',
-        subMateri: [
-          { name: 'Fundamental Microbit', ref: 'Doc microbit: makecode.microbit.org/docs' },
-          { name: 'Algoritma, konsep, dan komponen smart trashbin', link: 'algoritma smart trashbin' },
-          { name: 'Pemrograman basic Makecode (variable, percabangan, looping, pins)' },
-          { name: 'Pemrograman Smart trashbin' },
-          { name: 'K3 dalam bekerja', ref: 'PEDOMAN K3 LAB.docx', link: 'https://docs.google.com/presentation/d/1yuJzz-Hh4nJzL0BtJeKIWrrAOzg9V2pG/edit?usp=drive_link' },
-          { name: 'Integrasi hardware dan program smart trashbin', link: 'https://canva.link/fz5kuw9d8j9zdja' },
-          { name: 'Chatgpt / Google Lens Sebagai pembantu pengenalan awal komponen' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio', 'Kumpulan Deskripsi Komponen']
-      },
-      {
-        id: 'tinybit-bluetooth',
-        title: 'Tinybit BT',
-        semester: 'Semester 2',
-        icon: 'bluetooth',
-        desc: 'Membuat aplikasi web controller dan memprogram Tinybit Robot agar bisa dikendalikan secara nirkabel via Bluetooth.',
-        duration: '4 Jam',
-        level: 'Pemula',
-        type: 'Teori & Praktik',
-        status: 'Selesai',
-        pic: 'Mr Alfi',
-        subMateri: [
-          { name: 'Komunikasi Bluetooth & Serial Data', ref: 'bluetooth: https://www.elecfreaks.com/learn-en' },
-          { name: 'Fundamental Tinybit', ref: 'tinybit: https://www.yahboom.net/study/Tinybit-Pro' },
-          { name: 'Pemrograman basic untuk menggerakkan tinybit' },
-          { name: 'Integrasi hardware dan modul bluetooth' },
-          { name: 'Pengembangan kontroller pada tinybit bluetooth controller' },
-          { name: 'Teknik prompting lovable (chatgpt)' },
-          { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio', 'Aplikasi Web Controller']
-      },
-      {
-        id: 'tinybit-gesture',
-        title: 'Tinybit Gesture',
-        semester: 'Semester 2',
-        icon: 'hand',
-        desc: 'Mengintegrasikan model kecerdasan buatan Teachable Machine dengan robot Tinybit untuk menggerakkan robot lewat isyarat tangan.',
-        duration: '4 Jam',
-        level: 'Pemula',
-        type: 'Praktik AI',
-        status: 'Selesai',
-        pic: 'Mr Alfi',
-        subMateri: [
-          { name: 'Sejarah AI & Teachable Machine' },
-          { name: 'Konsep AI dan cara kerja (Buku AI Kemendikbud)' },
-          { name: 'Faktor-faktor yang mempengaruhi pembuatan AI' },
-          { name: 'Teachable machine (Apa Itu Machine Learning?)' },
-          { name: 'Faktor yang mempengaruhi kualitas model AI' },
-          { name: 'Integrasi AI Model dengan Web Controller' },
-          { name: 'Teknik prompting lovable (chatgpt)' },
-          { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio', 'Model Teachable Machine']
-      },
-      {
-        id: 'smart-watering',
-        title: 'Smart Watering',
-        semester: 'Semester 2',
-        icon: 'watering',
-        desc: 'Sistem penyiraman tanaman otomatis berbasis kelembaban tanah dengan pompa air DC mini.',
-        duration: '3 Jam',
-        level: 'Pemula',
-        type: 'Praktik Mandiri',
-        status: 'Sedang Berjalan',
-        pic: 'Mr Fadhlan',
-        subMateri: [
-          { name: 'Algoritma, konsep, dan komponen smart watering plant', link: 'smart watering plant' },
-          { name: 'Pemrograman Smart watering plant' },
-          { name: 'K3 dalam bekerja', link: 'https://drive.google.com/file/d/18GPMXi9-nlijGMKDGzuXay0cJu6ZIdCD/view' },
-          { name: 'Integrasi hardware dan program smart watering' },
-          { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio']
-      },
-      {
-        id: 'tinybit-line',
-        title: 'Line Follower',
-        semester: 'Semester 2',
-        icon: 'route',
-        desc: 'Pemrograman sensor infra merah pada Tinybit untuk menelusuri garis hitam pada track secara presisi.',
-        duration: '4 Jam',
-        level: 'Pemula',
-        type: 'Praktik Robotika',
-        status: 'Belum Dimulai',
-        pic: 'Mr Fadhlan',
-        subMateri: [
-          { name: 'Fundamental Line Follower & Pembacaan Sensor' },
-          { name: 'Algoritma Belok Kanan-Kiri & Perempatan' },
-          { name: 'Pemrograman basic dan lanjutan untuk menggerakkan line follower' },
-          { name: 'Praktek dengan track sederhana' },
-          { name: 'Teknik prompting (chatgpt / deepseek / claude) untuk algoritma track advance' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio', 'Kumpulan Algoritma Track (PDF)']
-      },
-      {
-        id: 'smart-parking',
-        title: 'Smart Parking',
-        semester: 'Semester 2',
-        icon: 'parking',
-        desc: 'Proyek palang parkir otomatis menggunakan sensor infra merah dan motor servo sebagai penghalang.',
-        duration: '3 Jam',
-        level: 'Pemula',
-        type: 'Praktik Mandiri',
-        status: 'Belum Dimulai',
-        pic: 'Mr Alfi',
-        subMateri: [
-          { name: 'Algoritma, konsep, dan komponen smart parking', link: 'modul smart parking' },
-          { name: 'Pemrograman Smart parking & Servo Angle Calibration' },
-          { name: 'K3 dalam bekerja', link: 'https://drive.google.com/file/d/1hRZ1vqyA_ixJOPkkFh7Ab0oSh8rxUeX4/view' },
-          { name: 'Integrasi hardware dan program smart parking' },
-          { name: 'Penerapan Teachable Machine untuk deteksi plat nomor / kendaraan' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio']
-      },
-      {
-        id: 'graduation-7',
-        title: 'Graduation',
-        semester: 'Semester 2',
-        icon: 'graduation',
-        desc: 'Mencapai kelulusan modul Kelas 7 SMP, siap melangkah ke kurikulum Kelas 8 (Python & AI Robot).',
-        duration: '1 Jam',
-        level: 'Evaluasi',
-        type: 'Kelulusan',
-        status: 'Belum Dimulai',
-        pic: 'System',
-        subMateri: [
-          { name: 'Presentasi Portofolio Proyek Terpilih Kelas 7' },
-          { name: 'Penilaian Akhir & Penerbitan Sertifikat Kelulusan' }
-        ],
-        outputs: ['Sertifikat Kompetensi']
-      }
-    ]
-  },
-  {
-    grade: 'Kelas 8',
-    gradeNum: '8',
-    semester: 'Semester 3',
-    subjects: [
-      {
-        id: 'robot-bluetooth',
-        title: 'Robot BT',
-        semester: 'Semester 3',
-        icon: 'bluetooth',
-        desc: 'Mengendalikan robot beroda 4 berbasis python menggunakan modul Driver L298N dan koneksi Bluetooth.',
-        duration: '4 Jam',
-        level: 'Menengah',
-        type: 'Teori & Praktik',
-        status: 'Belum Dimulai',
-        pic: 'Mr. Rahmat Fadlan',
-        subMateri: [
-          { name: 'Komunikasi Bluetooth & Serial Data', ref: 'bluetooth: https://www.elecfreaks.com/learn-en' },
-          { name: 'Fundamental driver motor L298N' },
-          { name: 'Pemrograman python untuk menggerakkan motor' },
-          { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app controller', link: 'membuat web dengan ai' },
-          { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' },
-          { name: 'Integrasi hardware, driver motor, dan bluetooth' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio', 'Aplikasi Web Controller Vercel']
-      },
-      {
-        id: 'robot-gesture',
-        title: 'Robot Gesture',
-        semester: 'Semester 3',
-        icon: 'hand',
-        desc: 'Pengembangan web AI Controller berbasis Teachable Machine untuk mengontrol robot beroda menggunakan isyarat kamera.',
-        duration: '4 Jam',
-        level: 'Menengah',
-        type: 'Praktik AI',
-        status: 'Belum Dimulai',
-        pic: 'Mr. Rahmat Fadlan',
-        subMateri: [
-          { name: 'Teachable Machine & Sejarah AI' },
-          { name: 'Konsep AI dan cara kerja (Buku AI Kemendikbud)' },
-          { name: 'Faktor-faktor yang mempengaruhi pembuatan AI' },
-          { name: 'Teachable machine & Faktor kualitas model AI' },
-          { name: 'Pemrograman python untuk robot hand gestures' },
-          { name: 'Integrasi Web AI dengan program Python Robot' },
-          { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app AI', link: 'membuat web dengan ai' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio', 'Model Teachable Machine']
-      },
-      {
-        id: 'parking-ai',
-        title: 'Parking AI',
-        semester: 'Semester 3',
-        icon: 'parking',
-        desc: 'Otomatisasi palang parkir pintar menggunakan Computer Vision Python dan database.',
-        duration: '4 Jam',
-        level: 'Menengah',
-        type: 'Praktik database',
-        status: 'Belum Dimulai',
-        pic: 'Mr. Rahmat Fadlan',
-        subMateri: [
-          { name: 'Faktor-faktor yang mempengaruhi pembuatan AI', link: 'rahasia permodelan ai' },
-          { name: 'Pemrograman python untuk smart parking' },
-          { name: 'Database setup & integration' },
-          { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control and monitor', link: 'membuat web dengan ai' },
-          { name: 'K3 dalam projek smart parking', link: 'k3' },
-          { name: 'Integrasi hardware dan program smart parking AI' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio']
-      },
-      {
-        id: 'robot-line',
-        title: 'Line Follower',
-        semester: 'Semester 3',
-        icon: 'route',
-        desc: 'Pemrograman Python tingkat lanjut pada robot untuk menyusuri track garis hitam dengan algoritma PID.',
-        duration: '4 Jam',
-        level: 'Menengah',
-        type: 'Praktik Robotika',
-        status: 'Belum Dimulai',
-        pic: 'Ms. Nadia',
-        subMateri: [
-          { name: 'Fundamental Line Follower & Sensor reading' },
-          { name: 'Algoritma Line Follower' },
-          { name: 'Pemrograman python basic dan lanjutan untuk menggerakkan line follower' },
-          { name: 'Praktek dengan track sederhana' },
-          { name: 'Teknik prompting (chatgpt / deepseek / claude)' },
-          { name: 'Tes dengan track advance (chatgpt / deepseek / claude)', link: 'track advance dengan ai' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio']
-      },
-      {
-        id: 'robot-transporter',
-        title: 'Transporter',
-        semester: 'Semester 3',
-        icon: 'package',
-        desc: 'Proyek merakit dan memprogram robot pengangkut barang dengan capit servo yang dikendalikan via Web App.',
-        duration: '4 Jam',
-        level: 'Menengah',
-        type: 'Integrasi Proyek',
-        status: 'Belum Dimulai',
-        pic: 'Ms. Nadia',
-        subMateri: [
-          { name: 'Algoritma, konsep, dan komponen robot transporter' },
-          { name: 'Pemrograman python untuk robot transporter & capit servo' },
-          { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app controller', link: 'membuat web dengan ai' },
-          { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' },
-          { name: 'Integrasi mekanikal capit, sasis, dan modul nirkabel' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio']
-      },
-      {
-        id: 'graduation-8',
-        title: 'Graduation',
-        semester: 'Semester 3',
-        icon: 'graduation',
-        desc: 'Kelulusan modul Kelas 8 SMP, siap melangkah ke tingkat mahir Kelas 8 (ESP32 IoT & Firebase Cloud).',
-        duration: '1 Jam',
-        level: 'Evaluasi',
-        type: 'Kelulusan',
-        status: 'Belum Dimulai',
-        pic: 'System',
-        subMateri: [
-          { name: 'Demo & Presentasi Robot Transporter' },
-          { name: 'Sertifikasi Modul Kelas 8' }
-        ],
-        outputs: ['Sertifikat Kelas 8']
-      }
-    ]
-  },
-  {
-    grade: 'Kelas 8',
-    gradeNum: '8',
-    semester: 'Semester 4',
-    subjects: [
-      {
-        id: 'smart-home',
-        title: 'Smart Home',
-        semester: 'Semester 4',
-        icon: 'home',
-        desc: 'Membangun rumah pintar berbasis ESP32, dengan kendali relay nirkabel, sensor DHT22, dan Firebase database.',
-        duration: '5 Jam',
-        level: 'Lanjut',
-        type: 'Deploy Project',
-        status: 'Belum Dimulai',
-        pic: 'Mr. Rizal',
-        subMateri: [
-          { name: 'Algoritma, konsep, dan komponen smart home', ref: 'https://www.dicoding.com/blog/algoritma-pemrograman-pengertian-fungsi-dan-jenis/', link: 'Blueprint_Logika_Pemrograman' },
-          { name: 'Fundamental esp32 & Arduino IDE setup', link: 'The_ESP32_IoT_Blueprint' },
-          { name: 'Pemrograman pinout, sensor DHT22, & relay' },
-          { name: 'Database integration (Realtime Database)', ref: 'https://www.youtube.com/watch?v=aO92B-K4TnQ', link: 'ESP32_Firebase_Bridge' },
-          { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control and monitor', link: 'membuat web dengan ai' },
-          { name: 'K3 dalam bekerja', link: 'Strategic_Safety_Ecosystem' },
-          { name: 'Integrasi hardware dan program smart home' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio', 'Dashboard Monitoring Vercel']
-      },
-      {
-        id: 'smart-greenhouse',
-        title: 'Greenhouse',
-        semester: 'Semester 4',
-        icon: 'sprout',
-        desc: 'Membangun sistem rumah kaca pintar otomatis berbasis ESP32 yang mendeteksi suhu kelembaban tanah dan mengontrol kipas/pompa.',
-        duration: '5 Jam',
-        level: 'Lanjut',
-        type: 'Deploy Project',
-        status: 'Belum Dimulai',
-        pic: 'Mr. Rizal',
-        subMateri: [
-          { name: 'Algoritma, konsep, dan komponen smart greenhouse', link: 'Blueprint_Logika_Pemrograman' },
-          { name: 'Fundamental esp32 & Soil Moisture sensor read', link: 'The_ESP32_IoT_Blueprint' },
-          { name: 'Pemrograman arduino ide & motor servo ventilasi', link: 'Arduino_Code_Anatomy' },
-          { name: 'Database integration (Realtime Database)', link: 'ESP32_Firebase_Bridge' },
-          { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control and monitor', link: 'membuat web dengan ai' },
-          { name: 'K3 dalam bekerja', link: 'Strategic_Safety_Ecosystem' },
-          { name: 'Integrasi hardware dan program smart greenhouse' }
-        ],
-        outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio', 'Dashboard Greenhouse Vercel']
-      },
-      {
-        id: 'graduation-9',
-        title: 'Graduation',
-        semester: 'Semester 4',
-        icon: 'graduation',
-        desc: 'Kelulusan tertinggi dari seluruh program kurikulum Robotik & IoT IDN. Anda siap menghadapi kompetisi & industri!',
-        duration: '2 Jam',
-        level: 'Evaluasi Lanjut',
-        type: 'Ujian Kelulusan',
-        status: 'Belum Dimulai',
-        pic: 'System',
-        subMateri: [
-          { name: 'Presentasi Akhir Proyek Smart Home / Greenhouse' },
-          { name: 'Kelulusan Kurikulum Robotik & IoT' }
-        ],
-        outputs: ['Sertifikat Kelulusan Utama']
-      }
-    ]
-  }
-];
+const getGroupedTimelineData = (): GradeTrack[] => {
+  const flatData = mockDb.getCurriculum();
+  const grouped: Record<string, Subject[]> = {};
+  
+  flatData.forEach(sub => {
+    const viewSubject: Subject = {
+      id: sub.id,
+      title: sub.title,
+      semester: sub.semester,
+      icon: sub.icon,
+      desc: sub.desc,
+      duration: sub.duration,
+      level: sub.level,
+      type: sub.type,
+      status: sub.status,
+      pic: sub.pic,
+      subMateri: sub.subMateri || [],
+      outputs: sub.outputs || []
+    };
+    
+    const key = `${sub.gradeLevel}-${sub.semester}`;
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(viewSubject);
+  });
+
+  return [
+    {
+      grade: 'Kelas 7',
+      gradeNum: '7',
+      semester: 'Semester 2',
+      subjects: grouped['7-Semester 2'] || []
+    },
+    {
+      grade: 'Kelas 8',
+      gradeNum: '8',
+      semester: 'Semester 3',
+      subjects: grouped['8-Semester 3'] || []
+    },
+    {
+      grade: 'Kelas 8',
+      gradeNum: '8',
+      semester: 'Semester 4',
+      subjects: grouped['8-Semester 4'] || []
+    }
+  ];
+};
 
 interface Cohort {
   id: string;
@@ -546,12 +244,15 @@ const getSubjectMeta = (cohortId: string, subjectId: string) => {
 // };
 
 export default function CurriculumView() {
+  const timelineData = getGroupedTimelineData();
   const [activeTab, setActiveTab] = useState<'roadmap' | 'timeline' | 'docs' | 'revisions'>('roadmap');
-  const [selectedSubject, setSelectedSubject] = useState<Subject>(timelineData[0].subjects[0]);
+  const [selectedSubject, setSelectedSubject] = useState<Subject>(() => timelineData[0]?.subjects[0] || {} as Subject);
   const [showSidebar, setShowSidebar] = useState(false);
 
   // Timeline calendar state
   const [selectedCalSubject, setSelectedCalSubject] = useState<{ subject: Subject; cohortId: string } | null>(null);
+  const [selectedDetailProject, setSelectedDetailProject] = useState<any | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   // Digital Book state
   const [bookSpread, setBookSpread] = useState(2);
@@ -1382,9 +1083,16 @@ export default function CurriculumView() {
           }
 
           // Regular subject
-          const imagePath = sub.id.includes('trashbin') || sub.id.includes('watering') || sub.id.includes('parking')
-            ? '/smart_trashbin.png'
-            : (sub.id.includes('tinybit') || sub.id.includes('robot') ? '/robot_character.png' : '/microbit_board.png');
+          let imagePath = '/microbit_board.png';
+          if (sub.id === 'smart-trashbin') {
+            imagePath = '/smart_trashbin.png';
+          } else if (sub.id === 'smart-watering') {
+            imagePath = '/smart_watering_plant.png';
+          } else if (sub.id.includes('parking')) {
+            imagePath = '/smart_trashbin.png';
+          } else if (sub.id.includes('tinybit') || sub.id.includes('robot')) {
+            imagePath = '/robot_character.png';
+          }
 
           // Dynamically generate indicator checklist items based on sub-materials!
           // "dan untuk indikator menyesuaikan jumlah sub materinya"
@@ -1446,7 +1154,9 @@ export default function CurriculumView() {
                   project: {
                     title: sub.title,
                     desc: subContent.descRight,
-                    image: imagePath
+                    image: imagePath,
+                    flyerImage: sub.id === 'smart-trashbin' ? '/ketentuan_flyer_smart_trashbin.png' : null,
+                    demoImage: sub.id === 'smart-trashbin' ? '/video_smart_trashbin.png' : null
                   }
                 }
               ]
@@ -1887,7 +1597,12 @@ export default function CurriculumView() {
                           {activeSpreadData.left.image && (
                             <div style={{ display:'flex', justifyContent:'center', padding:'8px 0' }}>
                               <div style={{ position:'relative', background:'linear-gradient(135deg,rgba(37,99,235,0.03),rgba(124,58,237,0.03))', border:'1px solid rgba(226,232,240,0.8)', borderRadius:'16px', padding:'10px', display:'flex', alignItems:'center', justifyContent:'center', width:'100%', maxWidth:'260px', height:'130px', boxShadow:'0 4px 12px rgba(0,0,0,0.03)' }}>
-                                <img src={activeSpreadData.left.image} alt="board image" style={{ maxHeight:'100%', maxWidth:'100%', objectFit:'contain' }} />
+                                <img 
+                                  src={activeSpreadData.left.image} 
+                                  alt="board image" 
+                                  style={{ maxHeight:'100%', maxWidth:'100%', objectFit:'contain', cursor:'pointer' }} 
+                                  onClick={() => setLightboxImage(activeSpreadData.left.image)}
+                                />
                               </div>
                             </div>
                           )}
@@ -2005,14 +1720,19 @@ export default function CurriculumView() {
                               {sec.project && (
                                 <div style={{ display:'flex', gap:'10px', background:'rgba(255,255,255,0.55)', backdropFilter:'blur(4px)', border:'1px solid rgba(37,99,235,0.12)', borderRadius:'12px', padding:'10px', alignItems:'center', marginTop:'4px', boxShadow:'0 2px 8px rgba(0,0,0,0.02)' }}>
                                   <div style={{ width:'44px', height:'44px', borderRadius:'8px', background:'white', border:'1px solid rgba(226,232,240,0.8)', padding:'3px', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-                                    <img src={sec.project.image} alt={sec.project.title} style={{ maxHeight:'100%', maxWidth:'100%', objectFit:'contain' }} />
+                                    <img 
+                                      src={sec.project.image} 
+                                      alt={sec.project.title} 
+                                      style={{ maxHeight:'100%', maxWidth:'100%', objectFit:'contain', cursor:'pointer' }} 
+                                      onClick={() => setLightboxImage(sec.project.image)}
+                                    />
                                   </div>
                                   <div style={{ flex:1, minWidth:0 }}>
                                     <span style={{ fontSize:'11px', fontWeight:800, color:'#1e293b', display:'block' }}>{sec.project.title}</span>
                                     <p style={{ fontSize:'9.5px', color:'#64748b', margin:0, lineHeight:1.3, display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden' }}>{sec.project.desc}</p>
                                   </div>
                                   <button
-                                    onClick={() => alert(`Detail Proyek: ${sec.project?.title}`)}
+                                    onClick={() => setSelectedDetailProject(sec.project)}
                                     style={{ border:'none', background:'#2563eb', color:'white', borderRadius:'8px', fontSize:'9px', fontWeight:700, padding:'6px 10px', cursor:'pointer', flexShrink:0, transition:'opacity 0.2s' }}
                                   >
                                     Detail
@@ -2251,6 +1971,181 @@ export default function CurriculumView() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Premium Project Detail Modal */}
+      {selectedDetailProject && (
+        <div 
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 300,
+            background: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}
+          onClick={() => setSelectedDetailProject(null)}
+        >
+          <div 
+            style={{
+              background: '#ffffff',
+              borderRadius: '24px',
+              width: '100%',
+              maxWidth: '680px',
+              maxHeight: '90vh',
+              overflow: 'hidden',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div style={{ padding: '20px 24px', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
+              <h3 style={{ fontFamily: "'Poppins',sans-serif", fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                Detail Proyek: {selectedDetailProject.title}
+              </h3>
+              <button 
+                onClick={() => setSelectedDetailProject(null)}
+                style={{ background: '#f1f5f9', border: 'none', cursor: 'pointer', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b' }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px', overflowY: 'auto', flex: 1 }}>
+              {/* Image & Description */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}>
+                <div style={{ width: '120px', height: '120px', borderRadius: '16px', background: '#f8fafc', border: '1px solid #e2e8f0', padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <img 
+                    src={selectedDetailProject.image} 
+                    alt={selectedDetailProject.title} 
+                    style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', cursor: 'pointer' }} 
+                    onClick={() => setLightboxImage(selectedDetailProject.image)}
+                  />
+                </div>
+                <div style={{ flex: 1, minWidth: '240px' }}>
+                  <p style={{ fontSize: '13.5px', color: '#334155', lineHeight: 1.6, margin: 0 }}>
+                    {selectedDetailProject.desc}
+                  </p>
+                </div>
+              </div>
+
+              {/* Flyer Requirements if available */}
+              {selectedDetailProject.flyerImage && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', borderTop: '1px solid #f1f5f9', paddingTop: '16px' }}>
+                  <h4 style={{ fontFamily: "'Poppins',sans-serif", fontSize: '14px', fontWeight: 700, color: '#0f172a', margin: 0 }}>
+                    Ketentuan Flyer Proyek
+                  </h4>
+                  <div style={{ borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', background: '#f8fafc', padding: '10px', display: 'flex', justifyContent: 'center' }}>
+                    <img 
+                      src={selectedDetailProject.flyerImage} 
+                      alt="Ketentuan Flyer" 
+                      style={{ width: '100%', maxHeight: '400px', objectFit: 'contain', display: 'block', cursor: 'pointer' }} 
+                      onClick={() => setLightboxImage(selectedDetailProject.flyerImage)}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Demo Requirements if available */}
+              {selectedDetailProject.demoImage && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', borderTop: '1px solid #f1f5f9', paddingTop: '16px' }}>
+                  <h4 style={{ fontFamily: "'Poppins',sans-serif", fontSize: '14px', fontWeight: 700, color: '#0f172a', margin: 0 }}>
+                    Ketentuan Demo Proyek
+                  </h4>
+                  <div style={{ borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', background: '#f8fafc', padding: '10px', display: 'flex', justifyContent: 'center' }}>
+                    <img 
+                      src={selectedDetailProject.demoImage} 
+                      alt="Ketentuan Demo Proyek" 
+                      style={{ width: '100%', maxHeight: '400px', objectFit: 'contain', display: 'block', cursor: 'pointer' }} 
+                      onClick={() => setLightboxImage(selectedDetailProject.demoImage)}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fullscreen Lightbox Overlay */}
+      {lightboxImage && (
+        <div 
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 400,
+            background: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}
+          onClick={() => setLightboxImage(null)}
+        >
+          {/* Card Container */}
+          <div 
+            style={{
+              background: '#ffffff',
+              borderRadius: '24px',
+              padding: '44px 16px 16px 16px',
+              position: 'relative',
+              width: '100%',
+              maxWidth: '900px',
+              maxHeight: '85vh',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.3)',
+              overflow: 'hidden'
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Close Button on Card */}
+            <button 
+              onClick={() => setLightboxImage(null)}
+              style={{
+                position: 'absolute',
+                top: '12px',
+                right: '12px',
+                background: '#f1f5f9',
+                cursor: 'pointer',
+                borderRadius: '50%',
+                width: '32px',
+                height: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1e293b',
+                border: 'none',
+                zIndex: 410
+              }}
+            >
+              <X size={16} />
+            </button>
+            
+            {/* Image Wrapper */}
+            <div style={{ width: '100%', height: '100%', overflowY: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '16px' }}>
+              <img 
+                src={lightboxImage} 
+                alt="Fullscreen preview" 
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '75vh',
+                  objectFit: 'contain',
+                  display: 'block',
+                  borderRadius: '12px'
+                }}
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>

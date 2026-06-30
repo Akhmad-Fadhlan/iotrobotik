@@ -25,6 +25,7 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [dbVersion, setDbVersion] = useState(0);
 
   // Global Chatbot States
   const [showAiChat, setShowAiChat] = useState(false);
@@ -52,6 +53,21 @@ export default function App() {
     mockDb.getSops();
     mockDb.getInventory();
     mockDb.getConfig();
+
+    const doSync = async () => {
+      const success = await mockDb.syncFromBackend();
+      if (success) {
+        setDbVersion(v => v + 1);
+      }
+    };
+    doSync();
+
+    const handleForceSync = async () => {
+      await mockDb.syncFromBackend();
+      setDbVersion(v => v + 1);
+    };
+    window.addEventListener('forceSyncBackend', handleForceSync);
+    return () => window.removeEventListener('forceSyncBackend', handleForceSync);
   }, []);
 
   useEffect(() => {
@@ -76,29 +92,32 @@ export default function App() {
   };
 
   const renderView = (currentTab: string) => {
+    const key = `${currentTab}_${dbVersion}`;
     switch (currentTab) {
       case 'beranda': 
         return (
           <LandingPageView 
+            key={key}
             onNavigate={setTab} 
             onOpenAiChat={() => setShowAiChat(true)}
           />
         );
-      case 'dashboard': return <DashboardView setTab={setTab} searchQuery={searchQuery} />;
-      case 'materi': return <MateriView />;
-      case 'lms': return <LmsView />;
-      case 'source-code': return <SourceCodeView />;
-      case 'projects': return <ProjectsView />;
-      case 'kurikulum': return <CurriculumView />;
-      case 'people': return <PeopleView />;
-      case 'sop': return <SopView />;
-      case 'inventory': return <InventoryView />;
-      case 'chatbot': return <ChatbotView />;
-      case 'tentang': return <GalleryView />;
-      case 'admin': return isAdmin ? <AdminView /> : null;
+      case 'dashboard': return <DashboardView key={key} setTab={setTab} searchQuery={searchQuery} />;
+      case 'materi': return <MateriView key={key} />;
+      case 'lms': return <LmsView key={key} />;
+      case 'source-code': return <SourceCodeView key={key} />;
+      case 'projects': return <ProjectsView key={key} />;
+      case 'kurikulum': return <CurriculumView key={key} />;
+      case 'people': return <PeopleView key={key} />;
+      case 'sop': return <SopView key={key} />;
+      case 'inventory': return <InventoryView key={key} />;
+      case 'chatbot': return <ChatbotView key={key} />;
+      case 'tentang': return <GalleryView key={key} />;
+      case 'admin': return isAdmin ? <AdminView key={key} /> : null;
       default: 
         return (
           <LandingPageView 
+            key={key}
             onNavigate={setTab} 
             onOpenAiChat={() => setShowAiChat(true)}
           />

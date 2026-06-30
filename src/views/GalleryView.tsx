@@ -89,29 +89,8 @@ export default function GalleryView() {
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
       
-      {/* Tentang Section */}
-      <div className="glass-card p-8 rounded-[30px] border border-white/50 bg-white/70 shadow-lg flex flex-col md:flex-row justify-between gap-6 relative overflow-hidden">
-        <div className="absolute -right-8 -top-8 h-20 w-20 rounded-full bg-blue-500/5 blur-lg" />
-        
-        <div className="space-y-3 flex-1">
-          <h3 className="font-heading text-[16px] font-bold text-slate-800 flex items-center gap-2">
-            Tentang IDN Robotics Hub
-          </h3>
-          <p className="text-[12.5px] text-slate-600 leading-relaxed max-w-[650px]">
-            **IDN Robotics Knowledge Hub** adalah platform *Knowledge Management System* (KMS) terintegrasi yang dirancang khusus sebagai ruang kerja kolaboratif digital bagi Guru Robotik dan Teknisi Laboratorium di seluruh cabang IDN. Hub ini menyatukan draft perencanaan kurikulum aktif, silabus mingguan, repositori source code siap pakai, SOP operasional robotik, serta manajemen inventaris komponen fisik lab di bawah satu sistem manajemen yang transparan.
-          </p>
-        </div>
-
-        <div className="md:w-[200px] shrink-0 bg-slate-50 border border-slate-200/50 rounded-2xl p-4 flex flex-col justify-center text-[11.5px] text-slate-500 font-semibold gap-1.5">
-          <div>Versi Aplikasi: <span className="text-slate-800 font-bold">2.0</span></div>
-          <div>Basis Backend: <span className="text-slate-800 font-bold">Spreadsheet CMS</span></div>
-          <div>Developer: <span className="text-slate-800 font-bold">Senior Front End</span></div>
-          <div>Lisensi: <span className="text-slate-800 font-bold">Internal IDN</span></div>
-        </div>
-      </div>
-
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-t border-slate-200/50 pt-6 mt-2">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h3 className="font-heading text-[15px] font-bold text-slate-800">
             Galeri Dokumentasi & Media
@@ -121,57 +100,100 @@ export default function GalleryView() {
           </p>
         </div>
 
-        {/* Category filters */}
-        <div className="flex bg-slate-200/50 p-1 rounded-2xl border border-slate-200/30 self-start md:self-auto shrink-0">
-          <button
-            onClick={() => handleCategoryChange('all')}
-            className={`rounded-xl px-4 py-2 text-[12px] font-semibold transition-all ${
-              selectedCategory === 'all'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Semua Aset
-          </button>
-          <button
-            onClick={() => handleCategoryChange('kbm')}
-            className={`rounded-xl px-4 py-2 text-[12px] font-semibold transition-all ${
-              selectedCategory === 'kbm'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Galeri KBM
-          </button>
-          <button
-            onClick={() => handleCategoryChange('lomba')}
-            className={`rounded-xl px-4 py-2 text-[12px] font-semibold transition-all ${
-              selectedCategory === 'lomba'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Galeri Lomba
-          </button>
+        {/* Category filters (Styled like Curriculum Tab Bar) */}
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            padding: '4px',
+            borderRadius: '16px',
+            background: 'rgba(255,255,255,0.6)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(226,232,240,0.85)',
+            boxShadow: '0 2px 16px -4px rgba(37,99,235,0.08), inset 0 1px 0 rgba(255,255,255,0.95)',
+            gap: '2px',
+            flexWrap: 'wrap'
+          }}
+          className="shrink-0"
+        >
+          {((['all', 'kbm', 'lomba'] as const).map((cat) => {
+            const isActive = selectedCategory === cat;
+            const label = cat === 'all' ? 'Semua Aset' : cat === 'kbm' ? 'Galeri KBM' : 'Galeri Lomba';
+            return (
+              <button
+                key={cat}
+                onClick={() => handleCategoryChange(cat)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  padding: '7px 13px',
+                  borderRadius: '12px',
+                  fontSize: '12px',
+                  fontWeight: isActive ? 700 : 500,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.22s cubic-bezier(0.4,0,0.2,1)',
+                  background: isActive
+                    ? 'linear-gradient(135deg, #2563eb, #7c3aed)'
+                    : 'transparent',
+                  color: isActive ? 'white' : '#64748b',
+                  boxShadow: isActive
+                    ? '0 4px 12px -4px rgba(37,99,235,0.45), inset 0 1px 0 rgba(255,255,255,0.18)'
+                    : 'none',
+                  transform: isActive ? 'translateY(-1px)' : 'none',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {label}
+              </button>
+            );
+          }))}
         </div>
       </div>
 
-      {/* Subfolder tag filters */}
+      {/* Subfolder tag filters (Styled similarly like Curriculum Tab Bar but smaller/subtle) */}
       {tags.length > 2 && (
-        <div className="flex flex-wrap gap-1.5 bg-slate-200/40 p-1.5 rounded-2xl border border-slate-200/20 self-start">
-          {tags.map(tag => (
-            <button
-              key={tag}
-              onClick={() => setSelectedTag(tag)}
-              className={`rounded-xl px-3 py-1 text-[11px] font-bold transition-all ${
-                selectedTag === tag
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              {tag === 'All' ? 'Semua Sub-Kategori' : tag}
-            </button>
-          ))}
+        <div 
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            padding: '4px',
+            borderRadius: '14px',
+            background: 'rgba(255,255,255,0.4)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(226,232,240,0.6)',
+            gap: '2px',
+            flexWrap: 'wrap',
+            alignSelf: 'flex-start'
+          }}
+        >
+          {tags.map(tag => {
+            const isActive = selectedTag === tag;
+            return (
+              <button
+                key={tag}
+                onClick={() => setSelectedTag(tag)}
+                style={{
+                  padding: '5px 10px',
+                  borderRadius: '10px',
+                  fontSize: '11px',
+                  fontWeight: isActive ? 700 : 500,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  background: isActive
+                    ? 'linear-gradient(135deg, #2563eb, #7c3aed)'
+                    : 'transparent',
+                  color: isActive ? 'white' : '#64748b',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {tag === 'All' ? 'Semua Sub-Kategori' : tag}
+              </button>
+            );
+          })}
         </div>
       )}
 
