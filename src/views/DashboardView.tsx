@@ -1,6 +1,6 @@
 import { 
   BookOpen, Code2, FolderGit, Users, Wrench,
-  ArrowRight, Clock, Sparkles, TrendingUp
+  ArrowRight, Clock, Sparkles, TrendingUp, UserRound
 } from 'lucide-react';
 import { mockDb } from '../services/db';
 
@@ -18,15 +18,6 @@ const S = {
     padding: '24px',
   } as React.CSSProperties,
 };
-
-const statItems = [
-  { name: 'Materi', value: '248', growth: '+12 minggu ini', Icon: BookOpen, tab: 'materi', bg: '#EEF5FF', iconBg: 'linear-gradient(135deg,#2563EB,#3B82F6)', color: '#2563EB' },
-  { name: 'Source Code', value: '186', growth: '+8 minggu ini', Icon: Code2, tab: 'source-code', bg: '#F5F3FF', iconBg: 'linear-gradient(135deg,#7C3AED,#A78BFA)', color: '#7C3AED' },
-  { name: 'Project', value: '92', growth: '+6 minggu ini', Icon: FolderGit, tab: 'projects', bg: '#ECFDF5', iconBg: 'linear-gradient(135deg,#059669,#34D399)', color: '#059669' },
-  { name: 'Guru', value: '28', growth: '+2 minggu ini', Icon: Users, tab: 'people', bg: '#FFFBEB', iconBg: 'linear-gradient(135deg,#D97706,#FCD34D)', color: '#D97706' },
-  { name: 'Teknisi', value: '8', growth: '+1 minggu ini', Icon: Wrench, tab: 'people', bg: '#FDF2F8', iconBg: 'linear-gradient(135deg,#DB2777,#F472B6)', color: '#DB2777' },
-  { name: 'Inventaris LAB', value: '156', growth: '+5 minggu ini', Icon: Wrench, tab: 'inventory', bg: '#ECFEFF', iconBg: 'linear-gradient(135deg,#0891B2,#67E8F9)', color: '#0891B2' },
-];
 
 const latestMateri = [
   { title: 'Python Function', category: 'Pemrograman • Kelas 7' },
@@ -50,6 +41,21 @@ const activityLogs = [
 export default function DashboardView({ setTab, searchQuery }: DashboardViewProps) {
   const lessons = mockDb.getLessons();
   const projects = mockDb.getProjects();
+  const teachersCount = mockDb.getTeachers().length;
+  const techniciansCount = mockDb.getTechnicians().length;
+  const inventoryCount = mockDb.getInventory().length;
+  const studentsCount = mockDb.getStudents().length || 143;
+  const reposCount = projects.filter(p => p.githubLink).length;
+
+  const statItems = [
+    { name: 'Materi', value: lessons.length.toString(), growth: '+12 minggu ini', Icon: BookOpen, tab: 'materi', bg: '#EEF5FF', iconBg: 'linear-gradient(135deg,#2563EB,#3B82F6)', color: '#2563EB' },
+    { name: 'Source Code', value: reposCount.toString(), growth: '+8 minggu ini', Icon: Code2, tab: 'source-code', bg: '#F5F3FF', iconBg: 'linear-gradient(135deg,#7C3AED,#A78BFA)', color: '#7C3AED' },
+    { name: 'Project', value: projects.length.toString(), growth: '+6 minggu ini', Icon: FolderGit, tab: 'projects', bg: '#ECFDF5', iconBg: 'linear-gradient(135deg,#059669,#34D399)', color: '#059669' },
+    { name: 'Guru', value: teachersCount.toString(), growth: '+2 minggu ini', Icon: Users, tab: 'people', bg: '#FFFBEB', iconBg: 'linear-gradient(135deg,#D97706,#FCD34D)', color: '#D97706' },
+    { name: 'Teknisi', value: techniciansCount.toString(), growth: '+1 minggu ini', Icon: Wrench, tab: 'people', bg: '#FDF2F8', iconBg: 'linear-gradient(135deg,#DB2777,#F472B6)', color: '#DB2777' },
+    { name: 'Siswa', value: studentsCount.toString(), growth: '+15 minggu ini', Icon: UserRound, tab: 'students', bg: '#EFF6FF', iconBg: 'linear-gradient(135deg,#0EA5E9,#0284C7)', color: '#0EA5E9' },
+    { name: 'Inventaris LAB', value: inventoryCount.toString(), growth: '+5 minggu ini', Icon: Wrench, tab: 'inventory', bg: '#ECFEFF', iconBg: 'linear-gradient(135deg,#0891B2,#67E8F9)', color: '#0891B2' },
+  ];
 
   const filteredLessons = lessons.filter(l =>
     l.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

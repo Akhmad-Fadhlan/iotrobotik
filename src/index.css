@@ -983,7 +983,7 @@ img { max-width: 100%; display: block; }
   .dash-progress-col { display: none; }
 }
 
-.dash-stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.dash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
 @media (max-width: 767px) {
   .dash-stats { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
 }

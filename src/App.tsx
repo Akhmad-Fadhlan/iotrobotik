@@ -16,6 +16,7 @@ import InventoryView from './views/InventoryView';
 import ChatbotView from './views/ChatbotView';
 import GalleryView from './views/GalleryView';
 import AdminView from './views/AdminView';
+import StudentsView from './views/StudentsView';
 
 import { mockDb } from './services/db';
 
@@ -113,6 +114,7 @@ export default function App() {
       case 'inventory': return <InventoryView key={key} />;
       case 'chatbot': return <ChatbotView key={key} />;
       case 'tentang': return <GalleryView key={key} />;
+      case 'students': return <StudentsView key={key} />;
       case 'admin': return isAdmin ? <AdminView key={key} /> : null;
       default: 
         return (

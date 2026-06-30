@@ -69,6 +69,7 @@ export default function Header({
     { id: 'kurikulum', label: 'Kurikulum' },
     { id: 'projects', label: 'Project' },
     { id: 'source-code', label: 'Repository' },
+    { id: 'students', label: 'Siswa' },
     { id: 'inventory', label: 'SOP & Inventaris' },
   ];
 

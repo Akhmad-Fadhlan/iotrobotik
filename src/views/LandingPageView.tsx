@@ -4,7 +4,7 @@ import {
   BookOpen, Code2, FolderGit, GraduationCap,
   Package, Users, FileText, Compass, Search,
   Sparkles, ArrowRight,
-  Bot, ChevronRight, Globe
+  Bot, ChevronRight, Globe, UserRound
 } from 'lucide-react';
 
 interface LandingPageViewProps {
@@ -36,6 +36,7 @@ export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPag
     { id: 'lms',         title: 'LMS',             desc: 'Akses Pembelajaran',   Icon: GraduationCap, grad: 'linear-gradient(135deg,#F59E0B,#D97706)', glow: 'rgba(245,158,11,0.28)' },
     { id: 'inventory',   title: 'Inventaris LAB',  desc: 'Kelola Inventaris',    Icon: Package,       grad: 'linear-gradient(135deg,#06B6D4,#0891B2)', glow: 'rgba(6,182,212,0.28)' },
     { id: 'people',      title: 'Guru & Teknisi',  desc: 'Kelola Data',          Icon: Users,         grad: 'linear-gradient(135deg,#EC4899,#DB2777)', glow: 'rgba(236,72,153,0.28)' },
+    { id: 'students',    title: 'Data Siswa',      desc: 'Database Siswa',       Icon: UserRound,     grad: 'linear-gradient(135deg,#0EA5E9,#0284C7)', glow: 'rgba(14,165,233,0.28)' },
     { id: 'sop',         title: 'SOP Robot',       desc: 'Dokumentasi',          Icon: FileText,      grad: 'linear-gradient(135deg,#A78BFA,#8B5CF6)', glow: 'rgba(167,139,250,0.28)' },
     { id: 'kurikulum',   title: 'Kurikulum',       desc: 'Rencana Pembelajaran', Icon: Compass,       grad: 'linear-gradient(135deg,#FB923C,#EF4444)', glow: 'rgba(251,146,60,0.28)' },
   ];

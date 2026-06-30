@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { mockDb } from '../services/db';
+import type { TeacherProgress } from '../services/db';
 import { 
   Cpu, 
   GitFork, 
@@ -39,7 +40,11 @@ import {
   ChevronRight,
   Send,
   Bookmark,
-  X
+  X,
+  Users,
+  Search,
+  RefreshCw,
+  AlertCircle
 } from 'lucide-react';
 
 const TrainIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -111,6 +116,101 @@ const iconMap: Record<string, any> = {
   'sprout': Sprout,
   'hand': Hand
 };
+
+const TRACKER_CSV_URL = `https://docs.google.com/spreadsheets/d/1ADPE80vo52nKNCEZsadxyCX_vPl3q7pQQ7dvVhue6_o/export?format=csv&gid=0`;
+
+function parseTrackerCSV(raw: string): TeacherProgress[] {
+  const lines = raw.trim().split('\n');
+  if (lines.length < 2) return [];
+  
+  let headerIndex = -1;
+  let headers: string[] = [];
+
+  // Find the header row containing teacher_name, subject_title, and sub_materi_name
+  for (let i = 0; i < lines.length; i++) {
+    const cols = lines[i].split(',').map(h => h.trim().replace(/\r/g, '').toLowerCase());
+    if (cols.includes('teacher_name') && cols.includes('subject_title') && cols.includes('sub_materi_name')) {
+      headerIndex = i;
+      headers = cols;
+      break;
+    }
+  }
+
+  if (headerIndex === -1) {
+    console.error('Invalid tracker spreadsheet headers. Could not find header row.');
+    return [];
+  }
+  
+  const idxTeacher = headers.indexOf('teacher_name');
+  const idxBranch = headers.indexOf('branch');
+  const idxClass = headers.indexOf('class_level');
+  const idxSem = headers.indexOf('semester');
+  const idxSubject = headers.indexOf('subject_title');
+  const idxSubMateri = headers.indexOf('sub_materi_name');
+  const idxCompleted = headers.indexOf('completed');
+  const idxDate = headers.indexOf('completed_date');
+
+  const map: Record<string, TeacherProgress> = {};
+
+  for (let i = headerIndex + 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line) continue;
+    
+    const cols: string[] = [];
+    let insideQuote = false;
+    let entry = '';
+    for (let j = 0; j < line.length; j++) {
+      const char = line[j];
+      if (char === '"') {
+        insideQuote = !insideQuote;
+      } else if (char === ',' && !insideQuote) {
+        cols.push(entry.trim().replace(/^"|"$/g, ''));
+        entry = '';
+      } else {
+        entry += char;
+      }
+    }
+    cols.push(entry.trim().replace(/^"|"$/g, ''));
+
+    // Skip entirely empty rows
+    if (cols.length === 0 || cols.every(c => !c)) continue;
+
+    const teacher = cols[idxTeacher] || '';
+    const branch = cols[idxBranch] || '';
+    const grade = (cols[idxClass] || '7') as '7' | '8';
+    const semester = cols[idxSem] || '';
+    const subject = cols[idxSubject] || '';
+    const subMateri = cols[idxSubMateri] || '';
+    const completedVal = cols[idxCompleted] || '';
+    const completed = completedVal.toUpperCase() === 'TRUE' || completedVal === '1' || completedVal.toUpperCase() === 'Y' || completedVal.toUpperCase() === 'YES';
+    const date = cols[idxDate] || '';
+
+    if (!teacher || !subject || !subMateri) continue;
+
+    const groupKey = `${teacher}_${subject}_${branch}`;
+    if (!map[groupKey]) {
+      map[groupKey] = {
+        id: `progress_${teacher.replace(/\s+/g, '_')}_${subject.replace(/\s+/g, '_')}_${branch}`,
+        teacherId: teacher.replace(/\s+/g, '_'),
+        teacherName: teacher,
+        branch: branch,
+        subjectId: subject.toLowerCase().replace(/\s+/g, '-'),
+        subjectTitle: subject,
+        gradeLevel: grade,
+        semester: semester,
+        subMateriProgress: []
+      };
+    }
+
+    map[groupKey].subMateriProgress.push({
+      name: subMateri,
+      completed,
+      completedAt: completed ? date : undefined
+    });
+  }
+
+  return Object.values(map);
+}
 
 const getGroupedTimelineData = (): GradeTrack[] => {
   const flatData = mockDb.getCurriculum();
@@ -245,7 +345,8 @@ const getSubjectMeta = (cohortId: string, subjectId: string) => {
 
 export default function CurriculumView() {
   const timelineData = getGroupedTimelineData();
-  const [activeTab, setActiveTab] = useState<'roadmap' | 'timeline' | 'docs' | 'revisions'>('roadmap');
+  const [activeTab, setActiveTab] = useState<'roadmap' | 'timeline' | 'tracker' | 'docs' | 'revisions'>('roadmap');
+  const [trackerData, setTrackerData] = useState(() => mockDb.getTeacherProgress());
   const [selectedSubject, setSelectedSubject] = useState<Subject>(() => timelineData[0]?.subjects[0] || {} as Subject);
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -262,6 +363,41 @@ export default function CurriculumView() {
   const [bookChatHistory, setBookChatHistory] = useState([
     { sender: 'ai', text: 'Hai Fadhlan! 👋\nMau tahu lebih banyak tentang kurikulum dan materi pembelajaran kita?' }
   ]);
+
+  const [trackerSearch, setTrackerSearch] = useState('');
+  const [trackerBranch, setTrackerBranch] = useState('');
+  const [trackerGrade, setTrackerGrade] = useState('');
+  const [trackerLoading, setTrackerLoading] = useState(false);
+  const [trackerError, setTrackerError] = useState('');
+
+  const fetchTrackerData = async () => {
+    setTrackerLoading(true);
+    setTrackerError('');
+    try {
+      const res = await fetch(TRACKER_CSV_URL);
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const text = await res.text();
+      const parsed = parseTrackerCSV(text);
+      if (parsed.length > 0) {
+        setTrackerData(parsed);
+        mockDb.saveTeacherProgress(parsed);
+      } else {
+        setTrackerError('Spreadsheet kosong atau kolom tidak sesuai. Silakan isi data kurikulum.');
+      }
+    } catch (e) {
+      console.error('Failed to fetch tracker data from sheet:', e);
+      setTrackerError('Gagal memuat data tracker dari spreadsheet. Menampilkan data cadangan offline.');
+    } finally {
+      setTrackerLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'tracker') {
+      fetchTrackerData();
+    }
+  }, [activeTab]);
+
 
   const handleSelectSubject = (sub: Subject) => {
     setSelectedSubject(sub);
@@ -349,9 +485,10 @@ export default function CurriculumView() {
           {(([
             { id: 'roadmap',   label: 'Roadmap',       Icon: Map      },
             { id: 'timeline',  label: 'Timeline',      Icon: Calendar },
+            { id: 'tracker',   label: 'Delivery Tracker', Icon: TrendingUp },
             { id: 'docs',      label: 'Kurikulum',     Icon: FileText },
             { id: 'revisions', label: 'Revisi',        Icon: History  },
-          ]) as { id: 'roadmap'|'timeline'|'docs'|'revisions'; label: string; Icon: React.ElementType }[]).map(({ id, label, Icon }) => {
+          ]) as { id: 'roadmap'|'timeline'|'tracker'|'docs'|'revisions'; label: string; Icon: React.ElementType }[]).map(({ id, label, Icon }) => {
             const isActive = activeTab === id;
             return (
               <button
@@ -1924,6 +2061,357 @@ export default function CurriculumView() {
           </div>
         );
       })()}
+
+      {/* ====== TAB CONTENT: MATERIAL DELIVERY TRACKER ====== */}
+      {activeTab === 'tracker' && (() => {
+        const filteredTracker = trackerData.filter(item => {
+          const matchesSearch = item.teacherName.toLowerCase().includes(trackerSearch.toLowerCase()) ||
+                                item.subjectTitle.toLowerCase().includes(trackerSearch.toLowerCase());
+          const matchesBranch = !trackerBranch || item.branch === trackerBranch;
+          const matchesGrade = !trackerGrade || item.gradeLevel === trackerGrade;
+          return matchesSearch && matchesBranch && matchesGrade;
+        });
+
+        let totalSubMateri = 0;
+        let totalCompleted = 0;
+        filteredTracker.forEach(item => {
+          item.subMateriProgress.forEach(sm => {
+            totalSubMateri++;
+            if (sm.completed) totalCompleted++;
+          });
+        });
+        const overallPercentage = totalSubMateri > 0 ? Math.round((totalCompleted / totalSubMateri) * 100) : 0;
+
+        return (
+          <div className="space-y-6 animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            
+            {/* Stats Cards */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+              <div className="glass-card p-5 rounded-3xl border border-slate-100 flex items-center gap-4">
+                <div style={{ width: '48px', height: '48px', borderRadius: '16px', background: 'linear-gradient(135deg,#3B82F6,#2563EB)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <TrendingUp size={22} color="white" />
+                </div>
+                <div>
+                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#1e293b', fontFamily: "'Poppins',sans-serif" }}>{overallPercentage}%</div>
+                  <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>Rata-rata Progress Kurikulum</div>
+                </div>
+              </div>
+              <div className="glass-card p-5 rounded-3xl border border-slate-100 flex items-center gap-4">
+                <div style={{ width: '48px', height: '48px', borderRadius: '16px', background: 'linear-gradient(135deg,#10B981,#059669)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <CheckSquare size={22} color="white" />
+                </div>
+                <div>
+                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#1e293b', fontFamily: "'Poppins',sans-serif" }}>{totalCompleted} / {totalSubMateri}</div>
+                  <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>Sub Proyek / Modul Selesai</div>
+                </div>
+              </div>
+              <div className="glass-card p-5 rounded-3xl border border-slate-100 flex items-center gap-4">
+                <div style={{ width: '48px', height: '48px', borderRadius: '16px', background: 'linear-gradient(135deg,#F59E0B,#D97706)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Users size={22} color="white" />
+                </div>
+                <div>
+                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#1e293b', fontFamily: "'Poppins',sans-serif" }}>{new Set(filteredTracker.map(i => i.teacherId)).size} Guru</div>
+                  <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>Guru Aktif Mengajar</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Filter Bar */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '20px', border: '1px solid #f1f5f9' }}>
+              <div style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center', gap: '8px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '8px 14px' }}>
+                <Search size={14} color="#94a3b8" />
+                <input
+                  type="text"
+                  placeholder="Cari guru atau materi..."
+                  value={trackerSearch}
+                  onChange={e => setTrackerSearch(e.target.value)}
+                  style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: '12.5px', color: '#334155', width: '100%' }}
+                />
+              </div>
+
+              <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => setTrackerBranch('')}
+                  style={{
+                    padding: '6px 12px', borderRadius: '10px', fontSize: '11px', fontWeight: 700, border: 'none', cursor: 'pointer',
+                    background: trackerBranch === '' ? 'linear-gradient(135deg,#2563EB,#3B82F6)' : '#f1f5f9',
+                    color: trackerBranch === '' ? 'white' : '#475569',
+                    boxShadow: trackerBranch === '' ? '0 4px 12px rgba(37,99,235,0.2)' : 'none'
+                  }}
+                >
+                  Semua Cabang
+                </button>
+                {['Sentul', 'Jonggol', 'Pamijahan', 'Solo', 'Akhwat'].map(b => (
+                  <button
+                    key={b}
+                    onClick={() => setTrackerBranch(b)}
+                    style={{
+                      padding: '6px 12px', borderRadius: '10px', fontSize: '11px', fontWeight: 700, border: 'none', cursor: 'pointer',
+                      background: trackerBranch === b ? 'linear-gradient(135deg,#2563EB,#3B82F6)' : '#f1f5f9',
+                      color: trackerBranch === b ? 'white' : '#475569',
+                      boxShadow: trackerBranch === b ? '0 4px 12px rgba(37,99,235,0.2)' : 'none'
+                    }}
+                  >
+                    {b}
+                  </button>
+                ))}
+              </div>
+
+              <div style={{ display: 'flex', gap: '4px', marginRight: 'auto' }}>
+                {[['', 'Semua Kelas'], ['7', 'Kelas 7'], ['8', 'Kelas 8']].map(([val, label]) => (
+                  <button
+                    key={val}
+                    onClick={() => setTrackerGrade(val)}
+                    style={{
+                      padding: '6px 12px', borderRadius: '10px', fontSize: '11px', fontWeight: 700, border: 'none', cursor: 'pointer',
+                      background: trackerGrade === val ? '#7C3AED' : '#f1f5f9',
+                      color: trackerGrade === val ? 'white' : '#475569',
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Refresh Button */}
+              <button
+                onClick={fetchTrackerData}
+                disabled={trackerLoading}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                  background: 'white', border: '1px solid #E2E8F0', borderRadius: '12px',
+                  padding: '8px 14px', cursor: trackerLoading ? 'not-allowed' : 'pointer',
+                  fontSize: '11px', fontWeight: 700, color: '#475569',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+                  opacity: trackerLoading ? 0.6 : 1
+                }}
+              >
+                <RefreshCw size={12} style={{ animation: trackerLoading ? 'spin 0.8s linear infinite' : 'none' }} />
+                Refresh Google Sheets
+              </button>
+            </div>
+
+            {/* Error Message */}
+            {trackerError && (
+              <div style={{ padding: '12px 18px', background: '#FFF1F2', border: '1px solid #FECDD3', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px', color: '#BE123C' }}>
+                <AlertCircle size={16} />
+                <span>{trackerError}</span>
+              </div>
+            )}
+
+            {/* Loading Spinner */}
+            {trackerLoading ? (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px', padding: '60px 0' }}>
+                <div style={{ width: '36px', height: '36px', border: '3px solid #E2E8F0', borderTop: '3px solid #2563EB', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600 }}>Memuat progress guru langsung dari Google Spreadsheet...</span>
+              </div>
+            ) : (() => {
+              // Group filtered data by Teacher
+              const teacherGroups: Record<string, {
+                teacherName: string;
+                teacherId: string;
+                branch: string;
+                totalSubMateri: number;
+                completedSubMateri: number;
+                subjects: {
+                  id: string;
+                  subjectTitle: string;
+                  semester: string;
+                  gradeLevel: string;
+                  total: number;
+                  completed: number;
+                  pct: number;
+                  subMateri: {
+                    name: string;
+                    completed: boolean;
+                    completedAt?: string;
+                  }[];
+                }[];
+              }> = {};
+
+              filteredTracker.forEach(item => {
+                const tName = item.teacherName || 'Guru Lain';
+                const tId = item.teacherId || 'unknown';
+                const key = `${tId}_${item.branch}`;
+
+                if (!teacherGroups[key]) {
+                  teacherGroups[key] = {
+                    teacherName: tName,
+                    teacherId: tId,
+                    branch: item.branch,
+                    totalSubMateri: 0,
+                    completedSubMateri: 0,
+                    subjects: []
+                  };
+                }
+
+                const total = item.subMateriProgress.length;
+                const completed = item.subMateriProgress.filter(s => s.completed).length;
+
+                teacherGroups[key].totalSubMateri += total;
+                teacherGroups[key].completedSubMateri += completed;
+
+                teacherGroups[key].subjects.push({
+                  id: item.id,
+                  subjectTitle: item.subjectTitle,
+                  semester: item.semester,
+                  gradeLevel: item.gradeLevel,
+                  total,
+                  completed,
+                  pct: total > 0 ? Math.round((completed / total) * 100) : 0,
+                  subMateri: item.subMateriProgress
+                });
+              });
+
+              const teacherList = Object.values(teacherGroups).sort((a, b) => a.teacherName.localeCompare(b.teacherName));
+
+              if (teacherList.length === 0) {
+                return (
+                  <div style={{ textAlign: 'center', padding: '40px', background: 'white', borderRadius: '24px', border: '1px solid #e2e8f0' }}>
+                    <TrendingUp size={36} color="#94a3b8" style={{ margin: '0 auto 12px' }} />
+                    <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#334155', margin: 0 }}>Tidak ada progres pengajaran</h4>
+                    <p style={{ fontSize: '12px', color: '#64748b', marginTop: '4px', margin: 0 }}>Coba ubah kata kunci pencarian atau filter cabang.</p>
+                  </div>
+                );
+              }
+
+              return (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+                  {teacherList.map(teacherGroup => {
+                    const teacherPct = teacherGroup.totalSubMateri > 0 ? Math.round((teacherGroup.completedSubMateri / teacherGroup.totalSubMateri) * 100) : 0;
+                    
+                    // Determine theme gradient colors based on progress percentage
+                    let startColor = '#2563eb';
+                    let endColor = '#60a5fa';
+                    let bgOverlay = '#EFF6FF';
+                    let borderCol = '#BFDBFE';
+                    if (teacherPct === 100) {
+                      startColor = '#10B981';
+                      endColor = '#34D399';
+                      bgOverlay = '#F0FDF4';
+                      borderCol = '#BBF7D0';
+                    } else if (teacherPct >= 50) {
+                      startColor = '#7C3AED';
+                      endColor = '#A78BFA';
+                      bgOverlay = '#F5F3FF';
+                      borderCol = '#DDD6FE';
+                    }
+
+                    // Circle calculations
+                    const radius = 45;
+                    const strokeWidth = 9;
+                    const circ = 2 * Math.PI * radius;
+                    const offset = circ - (teacherPct / 100) * circ;
+
+                    return (
+                      <div key={teacherGroup.teacherId + '-' + teacherGroup.branch} className="glass-card p-6 md:p-8 rounded-3xl border border-slate-100 flex flex-col md:flex-row gap-8 relative overflow-hidden" style={{ background: 'white', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+                        
+                        {/* Left Side: Circular achievement gauge */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minWidth: '180px', borderRight: '1px solid #f1f5f9', paddingRight: '16px' }} className="hidden-mobile-border">
+                          <div style={{ position: 'relative', width: '110px', height: '110px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <svg width="110" height="110" style={{ transform: 'rotate(-90deg)' }}>
+                              <defs>
+                                <linearGradient id={`teacherGrad-${teacherGroup.teacherId}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" stopColor={startColor} />
+                                  <stop offset="100%" stopColor={endColor} />
+                                </linearGradient>
+                              </defs>
+                              <circle cx="55" cy="55" r={radius} fill="transparent" stroke="#f1f5f9" strokeWidth={strokeWidth} />
+                              <circle 
+                                cx="55" 
+                                cy="55" 
+                                r={radius} 
+                                fill="transparent" 
+                                stroke={`url(#teacherGrad-${teacherGroup.teacherId})`}
+                                strokeWidth={strokeWidth} 
+                                strokeDasharray={`${circ}`} 
+                                strokeDashoffset={`${offset}`} 
+                                strokeLinecap="round" 
+                                style={{ transition: 'stroke-dashoffset 0.6s ease' }}
+                              />
+                            </svg>
+                            <div style={{ position: 'absolute', textAlign: 'center' }}>
+                              <div style={{ fontSize: '24px', fontWeight: 800, color: '#1e293b', fontFamily: "'Poppins',sans-serif", lineHeight: 1 }}>{teacherPct}%</div>
+                              <span style={{ fontSize: '9px', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Capaian</span>
+                            </div>
+                          </div>
+                          <div style={{ textAlign: 'center', marginTop: '14px' }}>
+                            <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', margin: 0 }}>{teacherGroup.teacherName}</h3>
+                            <span style={{
+                              fontSize: '10px', fontWeight: 800, padding: '3px 8px', borderRadius: '999px',
+                              background: teacherGroup.branch === 'Sentul' ? '#EFF6FF' : teacherGroup.branch === 'Solo' ? '#F0FDF4' : '#FFF1F2',
+                              color: teacherGroup.branch === 'Sentul' ? '#2563EB' : teacherGroup.branch === 'Solo' ? '#16A34A' : '#E11D48',
+                              border: `1px solid ${teacherGroup.branch === 'Sentul' ? '#DBEAFE' : teacherGroup.branch === 'Solo' ? '#DCFCE7' : '#FFE4E6'}`,
+                              display: 'inline-block', marginTop: '6px'
+                            }}>
+                              {teacherGroup.branch}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Right Side: Subjects details timeline */}
+                        <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #f1f5f9', paddingBottom: '10px' }}>
+                            <span style={{ fontSize: '12px', fontWeight: 800, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Progress Pengajaran Materi &amp; Sub-Proyek</span>
+                            <span style={{ fontSize: '12px', fontWeight: 700, color: '#64748b' }}>{teacherGroup.completedSubMateri} / {teacherGroup.totalSubMateri} Modul Selesai</span>
+                          </div>
+
+                          {/* List of projects / subjects assigned to this teacher */}
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px' }}>
+                            {teacherGroup.subjects.map(subject => (
+                              <div key={subject.id} style={{ padding: '14px', borderRadius: '18px', border: '1px solid #f1f5f9', background: '#f8fafc', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+                                  <div>
+                                    <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#1e293b', margin: 0 }}>{subject.subjectTitle}</h4>
+                                    <span style={{ fontSize: '10px', color: '#94a3b8', display: 'block', marginTop: '1px' }}>Kelas {subject.gradeLevel} · {subject.semester}</span>
+                                  </div>
+                                  <span style={{
+                                    fontSize: '9.5px', fontWeight: 800, padding: '2px 6px', borderRadius: '100px',
+                                    background: subject.pct === 100 ? '#D1FAE5' : bgOverlay,
+                                    color: subject.pct === 100 ? '#065F46' : startColor,
+                                    border: `1px solid ${subject.pct === 100 ? '#A7F3D0' : borderCol}`
+                                  }}>
+                                    {subject.pct}%
+                                  </span>
+                                </div>
+
+                                {/* Mini Progress bar */}
+                                <div style={{ height: '4px', background: '#e2e8f0', borderRadius: '100px', overflow: 'hidden' }}>
+                                  <div style={{ height: '100%', width: `${subject.pct}%`, background: subject.pct === 100 ? '#10B981' : startColor, borderRadius: '100px' }} />
+                                </div>
+
+                                {/* Sub-materi mini view list */}
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '4px' }}>
+                                  {subject.subMateri.map((sm, smIdx) => (
+                                    <div key={smIdx} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10.5px' }}>
+                                      <div style={{
+                                        width: '11px', height: '11px', borderRadius: '3px',
+                                        border: `1.2px solid ${sm.completed ? '#10B981' : '#cbd5e1'}`,
+                                        background: sm.completed ? '#10B981' : 'transparent',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0
+                                      }}>
+                                        {sm.completed && <Check size={8} strokeWidth={4} />}
+                                      </div>
+                                      <span style={{ color: sm.completed ? '#1e293b' : '#64748b', fontWeight: sm.completed ? 600 : 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={sm.name}>
+                                        {sm.name}
+                                      </span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
+          </div>
+        );
+      })()}
+
 
       {/* ====== TAB CONTENT: REVISI (Log of revisions) ====== */}
       {activeTab === 'revisions' && (

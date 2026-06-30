@@ -110,7 +110,39 @@ export interface SystemConfig {
   totalStudents?: string; // Jumlah siswa
 }
 
-// Initial Seeds
+
+
+export interface Student {
+  nama: string;
+  email: string;
+  nis: string;
+  gender: string;
+  birth_date: string;
+  phone: string;
+  personal_website: string;
+  photo_drive_url: string;
+  is_active: string;
+  cabang: string;
+}
+
+export interface SubMateriProgressItem {
+  name: string;
+  completed: boolean;
+  completedAt?: string;
+}
+
+export interface TeacherProgress {
+  id: string;
+  teacherId: string;
+  teacherName: string;
+  branch: string;
+  subjectId: string;
+  subjectTitle: string;
+  gradeLevel: '7' | '8';
+  semester: string;
+  subMateriProgress: SubMateriProgressItem[];
+}
+
 const INITIAL_TEACHERS: Teacher[] = [
   { id: 'T_1', name: 'Ahmad Fauzi', branch: 'Sentul', classLevel: '7', email: 'ahmad.fauzi@idn.sch.id', phone: '081234567890', photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200' },
   { id: 'T_2', name: 'Rizki Maulana', branch: 'Pamijahan', classLevel: '8', email: 'rizki.maulana@idn.sch.id', phone: '082345678901', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200' },
@@ -846,6 +878,72 @@ export const mockDb = {
     localStorage.setItem('idn_config', JSON.stringify(config));
   },
 
+  getStudents(): Student[] {
+    const data = localStorage.getItem('idn_students');
+    if (!data) return [];
+    try {
+      return JSON.parse(data);
+    } catch {
+      return [];
+    }
+  },
+
+  saveStudents(students: Student[]) {
+    localStorage.setItem('idn_students', JSON.stringify(students));
+  },
+
+  getTeacherProgress(): TeacherProgress[] {
+    const data = localStorage.getItem('idn_teacher_progress');
+    if (!data) {
+      const teachers = this.getTeachers();
+      const curriculum = this.getCurriculum();
+      const progressList: TeacherProgress[] = [];
+
+      teachers.forEach(teacher => {
+        const matchingSubjects = curriculum.filter(subject => {
+          if (teacher.classLevel === '7 & 8') return true;
+          return subject.gradeLevel === teacher.classLevel;
+        });
+
+        matchingSubjects.forEach(subject => {
+          const totalSub = subject.subMateri.length;
+          const numCompleted = Math.floor(Math.random() * (totalSub + 1));
+          
+          const subMateriProgress = subject.subMateri.map((sm, idx) => {
+            const completed = idx < numCompleted;
+            return {
+              name: sm.name,
+              completed,
+              completedAt: completed ? new Date(2026, 5, 10 + idx).toLocaleDateString('id-ID') : undefined
+            };
+          });
+
+          progressList.push({
+            id: `progress_${teacher.id}_${subject.id}`,
+            teacherId: teacher.id,
+            teacherName: teacher.name,
+            branch: teacher.branch,
+            subjectId: subject.id,
+            subjectTitle: subject.title,
+            gradeLevel: subject.gradeLevel,
+            semester: subject.semester,
+            subMateriProgress
+          });
+        });
+      });
+
+      localStorage.setItem('idn_teacher_progress', JSON.stringify(progressList));
+      return progressList;
+    }
+    return JSON.parse(data);
+  },
+
+  saveTeacherProgress(progressList: TeacherProgress[]) {
+    localStorage.setItem('idn_teacher_progress', JSON.stringify(progressList));
+    this.addLog('System', 'Updated teacher curriculum delivery progress tracker', 'Curriculum');
+  },
+
+
   // Dummy Seeder Function
   seedDummyData(counts: { lessons: number; projects: number; teachers: number; inventory: number }) {
     this.addLog('Admin', `Triggered dummy data seeder (Materi: ${counts.lessons}, Projects: ${counts.projects}, Guru: ${counts.teachers}, Inventaris: ${counts.inventory})`, 'Settings');
@@ -989,6 +1087,7 @@ export const mockDb = {
     localStorage.removeItem('idn_sops');
     localStorage.removeItem('idn_inventory');
     localStorage.removeItem('idn_config');
+    localStorage.removeItem('idn_teacher_progress');
     this.clearLogs();
     
     // Trigger getters to rebuild defaults
@@ -1026,7 +1125,9 @@ export const mockDb = {
         { route: '/api/projects', key: 'idn_projects' },
         { route: '/api/inventory', key: 'idn_inventory' },
         { route: '/api/sops', key: 'idn_sops' },
-        { route: '/api/logs', key: 'idn_audit_logs' }
+        { route: '/api/logs', key: 'idn_audit_logs' },
+        { route: '/api/students', key: 'idn_students' },
+        { route: '/api/tracker', key: 'idn_teacher_progress' },
       ];
       
       for (const item of routes) {

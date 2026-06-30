@@ -1,7 +1,7 @@
 import { 
   LayoutDashboard, BookOpen, GraduationCap, Code2,
   FolderGit, FileText, Users, Wrench,
-  ClipboardList, Boxes, Info, X, LogOut
+  ClipboardList, Boxes, Info, X, LogOut, UserRound
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -22,6 +22,7 @@ const menuItems = [
   { id: 'kurikulum', name: 'Draft Kurikulum', Icon: FileText },
   { id: 'people', name: 'Guru', Icon: Users },
   { id: 'people-tech', name: 'Teknisi', Icon: Wrench },
+  { id: 'students', name: 'Data Siswa', Icon: UserRound },
   { id: 'sop', name: 'SOP Penggunaan Robot', Icon: ClipboardList },
   { id: 'inventory', name: 'Inventaris LAB', Icon: Boxes },
   { id: 'tentang', name: 'Tentang', Icon: Info },
