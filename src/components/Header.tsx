@@ -8,7 +8,8 @@ import {
   Bell, 
   ChevronDown, 
   ShieldAlert,
-  LogOut
+  LogOut,
+  Cpu
 } from 'lucide-react';
 import { mockDb } from '../services/db';
 
@@ -231,6 +232,26 @@ export default function Header({
             >
               <GraduationCap size={15} />
               LMS
+            </a>
+            <a
+              href="https://elearning.codestechno.com/" target="_blank" rel="noopener noreferrer"
+              style={{
+                display:'flex', alignItems:'center', gap:'6px',
+                background:'#ECFDF5', border:'1px solid #A7F3D0',
+                borderRadius:'12px', padding:'8px 16px',
+                fontSize:'12px', fontWeight:700, color:'#047857',
+                textDecoration:'none',
+                transition:'all 0.2s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = '#D1FAE5';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = '#ECFDF5';
+              }}
+            >
+              <Cpu size={15} />
+              eLearning Microbit
             </a>
             <button
               onClick={() => setTab('inventory')}

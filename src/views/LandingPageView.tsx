@@ -4,7 +4,7 @@ import {
   BookOpen, Code2, FolderGit, GraduationCap,
   Package, Users, FileText, Compass, Search,
   Sparkles, ArrowRight,
-  Bot, ChevronRight, Globe, UserRound
+  Bot, ChevronRight, Globe, UserRound, Cpu
 } from 'lucide-react';
 
 interface LandingPageViewProps {
@@ -34,6 +34,7 @@ export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPag
     { id: 'projects',    title: 'Project Library', desc: `${projectsCount} Project`,     Icon: FolderGit,     grad: 'linear-gradient(135deg,#8B5CF6,#7C3AED)', glow: 'rgba(124,58,237,0.28)' },
     { id: 'source-code', title: 'Source Code',     desc: `${reposCount} Repository`,     Icon: Code2,         grad: 'linear-gradient(135deg,#10B981,#059669)', glow: 'rgba(16,185,129,0.28)' },
     { id: 'lms',         title: 'LMS',             desc: 'Akses Pembelajaran',   Icon: GraduationCap, grad: 'linear-gradient(135deg,#F59E0B,#D97706)', glow: 'rgba(245,158,11,0.28)' },
+    { id: 'elearning-microbit', title: 'eLearning Microbit', desc: 'Akses E-Learning', Icon: Cpu, grad: 'linear-gradient(135deg,#10B981,#059669)', glow: 'rgba(16,185,129,0.28)', url: 'https://elearning.codestechno.com/' },
     { id: 'inventory',   title: 'Inventaris LAB',  desc: 'Kelola Inventaris',    Icon: Package,       grad: 'linear-gradient(135deg,#06B6D4,#0891B2)', glow: 'rgba(6,182,212,0.28)' },
     { id: 'people',      title: 'Guru & Teknisi',  desc: 'Kelola Data',          Icon: Users,         grad: 'linear-gradient(135deg,#EC4899,#DB2777)', glow: 'rgba(236,72,153,0.28)' },
     { id: 'students',    title: 'Data Siswa',      desc: 'Database Siswa',       Icon: UserRound,     grad: 'linear-gradient(135deg,#0EA5E9,#0284C7)', glow: 'rgba(14,165,233,0.28)' },
@@ -840,8 +841,8 @@ export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPag
             </button>
           </div>
           <div className="lp-quick">
-            {quickItems.map(({ id, title, desc, Icon, grad, glow }) => (
-              <button key={id} onClick={() => onNavigate(id)} className="lp-quick-card"
+            {quickItems.map(({ id, title, desc, Icon, grad, glow, url }) => (
+              <button key={id} onClick={() => url ? window.open(url, '_blank') : onNavigate(id)} className="lp-quick-card"
                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = `0 12px 28px ${glow}`; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 16px rgba(37,99,235,0.06)'; }}
               >

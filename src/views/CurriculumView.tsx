@@ -1250,6 +1250,48 @@ export default function CurriculumView() {
             return `Siswa mampu memahami & mempraktikkan: ${name}`;
           });
 
+          // Dynamically generate CP based on sub-materials!
+          const dynamicCp = sub.subMateri.map((sm) => {
+            const name = sm.name;
+            if (name.toLowerCase().includes('k3')) {
+              return `Siswa menguasai prinsip keselamatan kerja dan standar operasional dalam ${name}.`;
+            }
+            if (name.toLowerCase().includes('fundamental') || name.toLowerCase().includes('konsep')) {
+              return `Siswa memahami landasan teori dasar, arsitektur sistem, dan cara kerja dari ${name}.`;
+            }
+            if (name.toLowerCase().includes('pemrograman') || name.toLowerCase().includes('programming') || name.toLowerCase().includes('coding')) {
+              return `Siswa memiliki kecakapan koding dalam merancang kontrol logika dan struktur program pada ${name}.`;
+            }
+            if (name.toLowerCase().includes('integrasi') || name.toLowerCase().includes('hardware')) {
+              return `Siswa terampil mengintegrasikan sirkuit fisik/komponen elektronik dengan logika koding ${name}.`;
+            }
+            if (name.toLowerCase().includes('chatgpt') || name.toLowerCase().includes('ai') || name.toLowerCase().includes('prompting')) {
+              return `Siswa mampu mendayagunakan alat bantu kecerdasan buatan (${name}) untuk akselerasi koding.`;
+            }
+            return `Siswa menguasai aspek kognitif, psikomotorik, dan analisis sistem untuk topik: ${name}.`;
+          });
+
+          // Dynamically generate TP based on sub-materials!
+          const dynamicTp = sub.subMateri.map((sm) => {
+            const name = sm.name;
+            if (name.toLowerCase().includes('k3')) {
+              return `Menerapkan regulasi K3 laboratorium saat melakukan pengerjaan ${name}.`;
+            }
+            if (name.toLowerCase().includes('fundamental') || name.toLowerCase().includes('konsep')) {
+              return `Mengidentifikasi komponen utama dan menerangkan skema kerja ${name}.`;
+            }
+            if (name.toLowerCase().includes('pemrograman') || name.toLowerCase().includes('programming') || name.toLowerCase().includes('coding')) {
+              return `Menyusun dan menguji baris kode program logika kontrol (event, condition) untuk ${name}.`;
+            }
+            if (name.toLowerCase().includes('integrasi') || name.toLowerCase().includes('hardware')) {
+              return `Melakukan perakitan modul sensor/aktuator ke pin mikrokontroler untuk ${name}.`;
+            }
+            if (name.toLowerCase().includes('chatgpt') || name.toLowerCase().includes('ai') || name.toLowerCase().includes('prompting')) {
+              return `Menggunakan AI generator/prompting untuk mengoptimalkan penulisan kode program pada ${name}.`;
+            }
+            return `Menganalisis, merancang, dan menyimulasikan fungsionalitas utama dari sub materi: ${name}.`;
+          });
+
           const cohortIds = ['kelas-7-smt-2', 'kelas-8-smt-3', 'kelas-8-smt-4'];
           const activeCohortId = cohortIds[activeBookGradeIdx];
           const timelineMeta = getSubjectMeta(activeCohortId, sub.id);
@@ -1276,11 +1318,11 @@ export default function CurriculumView() {
               sections: [
                 {
                   title: 'B. Capaian Pembelajaran (CP)',
-                  bullet: subContent.cp
+                  bullet: dynamicCp
                 },
                 {
                   title: 'C. Tujuan Pembelajaran (TP)',
-                  bullet: subContent.tp
+                  bullet: dynamicTp
                 },
                 {
                   title: 'D. Indikator Pembelajaran',
