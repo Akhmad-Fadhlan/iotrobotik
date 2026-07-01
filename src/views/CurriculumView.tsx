@@ -290,7 +290,8 @@ const getSubjectDates = (cohortId: string, subjectId: string) => {
       case 'smart-trashbin': return { start: new Date(2027, 0, 6), end: new Date(2027, 0, 26) };
       case 'tinybit-bluetooth': return { start: new Date(2027, 0, 27), end: new Date(2027, 1, 16) };
       case 'tinybit-gesture': return { start: new Date(2027, 1, 17), end: new Date(2027, 2, 16) };
-      case 'smart-watering': return { start: new Date(2027, 2, 17), end: new Date(2027, 3, 13) };
+      case 'smart-watering':
+      case 'smart-watering-plant': return { start: new Date(2027, 2, 17), end: new Date(2027, 3, 13) };
       case 'tinybit-line': return { start: new Date(2027, 3, 14), end: new Date(2027, 4, 11) };
       case 'smart-parking': return { start: new Date(2027, 4, 12), end: new Date(2027, 5, 8) };
       case 'graduation-7': return { start: new Date(2027, 5, 9), end: new Date(2027, 5, 20) };
@@ -320,7 +321,8 @@ const getSubjectMeta = (cohortId: string, subjectId: string) => {
       case 'smart-trashbin': return { weeks: 'Minggu 1 - 3', duration: '3 Minggu', color: 'blue' };
       case 'tinybit-bluetooth': return { weeks: 'Minggu 4 - 6', duration: '3 Minggu', color: 'indigo' };
       case 'tinybit-gesture': return { weeks: 'Minggu 7 - 10', duration: '4 Minggu', color: 'purple' };
-      case 'smart-watering': return { weeks: 'Minggu 11 - 14', duration: '4 Minggu', color: 'emerald' };
+      case 'smart-watering':
+      case 'smart-watering-plant': return { weeks: 'Minggu 11 - 14', duration: '4 Minggu', color: 'emerald' };
       case 'tinybit-line': return { weeks: 'Minggu 15 - 18', duration: '4 Minggu', color: 'sky' };
       case 'smart-parking': return { weeks: 'Minggu 19 - 22', duration: '4 Minggu', color: 'amber' };
       case 'graduation-7': return { weeks: 'Minggu 23 - 24', duration: '2 Minggu', color: 'red' };
@@ -416,7 +418,7 @@ export default function CurriculumView() {
   const isSubMateriCompleted = (sub: Subject, index: number) => {
     if (sub.status === 'Selesai') return true;
     if (sub.status === 'Belum Dimulai') return false;
-    if (sub.id === 'smart-watering' && index < 2) return true;
+    if ((sub.id === 'smart-watering' || sub.id === 'smart-watering-plant') && index < 2) return true;
     return false;
   };
 
@@ -760,7 +762,7 @@ export default function CurriculumView() {
         };
         const subjectColors: Record<string,string> = {
           'robot-bluetooth':'#6366f1','robot-gesture':'#8b5cf6','parking-ai':'#3b82f6','robot-line':'#06b6d4','robot-transporter':'#10b981','graduation-8':'#ef4444',
-          'smart-trashbin':'#10b981','tinybit-bluetooth':'#6366f1','tinybit-gesture':'#8b5cf6','smart-watering':'#06b6d4','tinybit-line':'#f59e0b','smart-parking':'#f97316','graduation-7':'#ef4444',
+          'smart-trashbin':'#10b981','tinybit-bluetooth':'#6366f1','tinybit-gesture':'#8b5cf6','smart-watering':'#06b6d4','smart-watering-plant':'#06b6d4','tinybit-line':'#f59e0b','smart-parking':'#f97316','graduation-7':'#ef4444',
           'smart-home':'#3b82f6','smart-greenhouse':'#10b981','graduation-9':'#ef4444',
         };
 
@@ -999,6 +1001,7 @@ export default function CurriculumView() {
         const track = timelineData[activeBookGradeIdx];
 
         const getSubjectContent = (id: string) => {
+          const normId = id === 'smart-watering-plant' ? 'smart-watering' : id;
           const contentMap: Record<string, { descLeft: string, descRight: string, cp: string[], tp: string[] }> = {
             'smart-trashbin': {
               descLeft: 'Siswa merakit tempat sampah pintar otomatis menggunakan sensor ultrasonik HC-SR04 untuk mendeteksi objek mendekat dan menggerakkan motor servo untuk membuka tutupnya secara otomatis.',
@@ -1157,7 +1160,7 @@ export default function CurriculumView() {
               ]
             }
           };
-          return contentMap[id] || {
+          return contentMap[normId] || {
             descLeft: 'Pada materi ini, siswa akan belajar membangun proyek sains teknologi yang menuntut pemahaman sirkuit fisik dan alur pemrograman yang presisi.',
             descRight: 'Proyek robotika dan IoT mandiri terintegrasi.',
             cp: [
@@ -1172,25 +1175,58 @@ export default function CurriculumView() {
         };
 
         // Base spreads
-        const baseSpreads = [
-          {
-            left: { tag: 'Fase D', title: 'Kurikulum Pembelajaran', subtitle: `Robotik & IoT IDN - ${track.grade}`, desc: 'Panduan lengkap silabus, Capaian Pembelajaran (CP), Alur Tujuan Pembelajaran (ATP), dan proyek sains teknologi siswa SMP.', isCover: true },
-            right: { tag: 'PROLOGUE', title: 'Kata Pengantar', content: [
-              'Pendidikan berbasis teknologi masa kini menuntut siswa untuk berinovasi sejak dini. Kurikulum Robotik & IoT ini dikembangkan secara holistik guna mempersiapkan siswa menghadapi era otomatisasi.',
-              'Melalui integrasi pemrograman blok (MakeCode), sirkuit elektronik, serta platform cloud database, siswa dilatih mengasah logika computational thinking dan problem solving secara sistematis.'
-            ]}
-          },
-          {
-            left: { tag: 'STANDAR CP', title: 'Capaian Pembelajaran (CP)', isList: true, items: [
-              { title: 'Berpikir Komputasional', text: 'Siswa mampu dekomposisi masalah, abstraksi logika, pengenalan pola, dan merancang algoritma.' },
-              { title: 'Teknologi & Mekanika', text: 'Siswa dapat mengidentifikasi komponen elektronik dan merakit kerangka mekanik robot.' }
-            ]},
-            right: { tag: 'STANDAR TP', title: 'Tujuan Pembelajaran (TP)', isList: true, items: [
-              { title: 'Pemahaman Fondasi IoT', text: 'Mengenal sensor input analog/digital dan aktuator penggerak.' },
-              { title: 'Keterampilan Coding', text: 'Mampu menyusun program logika sekuensial (looping, condition) di platform MakeCode.' }
-            ]}
-          }
-        ];
+      const baseSpreads = [
+  {
+    left: {
+      tag: 'Fase D',
+      title: 'Kurikulum Pembelajaran',
+      subtitle: `Robotik & IoT IDN - ${track.grade}`,
+      desc: 'Panduan lengkap silabus, Capaian Pembelajaran (CP), Alur Tujuan Pembelajaran (ATP), dan proyek sains teknologi siswa SMP — dari logika dasar hingga kecerdasan buatan.',
+      isCover: true,
+      coverStats: [
+        { label: 'Modul Proyek', val: '13+' },
+        { label: 'Semester', val: '2' },
+        { label: 'Bahasa Program', val: 'Block & Python' },
+      ]
+    },
+    right: {
+      tag: 'PROLOGUE',
+      title: 'Kata Pengantar',
+      content: [
+        'Pendidikan berbasis teknologi masa kini menuntut siswa untuk berinovasi sejak dini. Kurikulum Robotik & IoT ini dikembangkan secara holistik guna mempersiapkan siswa menghadapi era otomatisasi, mulai dari pengenalan logika dasar hingga penerapan kecerdasan buatan pada perangkat fisik.',
+        'Perjalanan belajar dirancang berjenjang: siswa memulai dari pemrograman blok visual (MakeCode) di Microbit, berlanjut ke robot mobil Tinybit dengan sensor dan aktuator, lalu naik ke robot berbasis Python dengan kendali motor presisi (L298N, PID), dan akhirnya menyentuh Internet of Things menggunakan ESP32 serta database cloud Firebase.',
+        'Selain aspek teknis, kurikulum ini juga mengintegrasikan Computer Vision dan Machine Learning melalui Teachable Machine, sehingga siswa terbiasa menggabungkan kecerdasan buatan dengan sistem robotik nyata — sebuah kompetensi yang semakin relevan di dunia industri.',
+        'Setiap modul ditutup dengan proyek nyata yang dipresentasikan dan didokumentasikan, melatih tidak hanya keterampilan teknis tetapi juga kemampuan berpikir kritis, kolaborasi, dan komunikasi hasil karya.'
+      ]
+    }
+  },
+  {
+    left: {
+      tag: 'STANDAR CP',
+      title: 'Capaian Pembelajaran (CP)',
+      isList: true,
+      items: [
+        { title: 'Berpikir Komputasional', text: 'Siswa mampu melakukan dekomposisi masalah, abstraksi logika, pengenalan pola, dan merancang algoritma untuk menyelesaikan persoalan nyata.' },
+        { title: 'Teknologi & Mekanika', text: 'Siswa dapat mengidentifikasi komponen elektronik, merakit kerangka mekanik robot, dan memahami prinsip kerja sensor-aktuator.' },
+        { title: 'Pemrograman Bertingkat', text: 'Siswa menguasai transisi dari pemrograman blok visual (MakeCode) menuju bahasa tekstual Python untuk kendali hardware.' },
+        { title: 'Internet of Things (IoT)', text: 'Siswa memahami konsep konektivitas nirkabel, protokol komunikasi data, serta integrasi perangkat dengan database cloud.' },
+        { title: 'Kecerdasan Buatan Terapan', text: 'Siswa mampu melatih dan mengintegrasikan model Machine Learning sederhana (Computer Vision) ke dalam sistem robotik.' },
+      ]
+    },
+    right: {
+      tag: 'STANDAR TP',
+      title: 'Tujuan Pembelajaran (TP)',
+      isList: true,
+      items: [
+        { title: 'Pemahaman Fondasi IoT', text: 'Mengenal sensor input analog/digital (ultrasonik, inframerah, kelembaban) dan aktuator penggerak (servo, motor DC, relay).' },
+        { title: 'Keterampilan Coding Dasar', text: 'Mampu menyusun program logika sekuensial (looping, condition, event) di platform MakeCode untuk Microbit dan Tinybit.' },
+        { title: 'Kendali Robot Tingkat Lanjut', text: 'Mampu memprogram driver motor L298N dengan Python, termasuk algoritma kendali PID untuk pergerakan presisi.' },
+        { title: 'Integrasi Cloud & Database', text: 'Mampu menghubungkan mikrokontroler ESP32 ke jaringan Wi-Fi dan menyinkronkan data sensor ke Firebase Realtime Database.' },
+        { title: 'Computer Vision & AI', text: 'Mampu melatih model Teachable Machine dan menghubungkan hasil klasifikasinya sebagai perintah kendali robot.' },
+      ]
+    }
+  }
+];
 
         // Dynamic subject spreads from selected track in roadmap
         const subjectSpreads = track.subjects.map((sub, sIdx) => {
@@ -1223,8 +1259,12 @@ export default function CurriculumView() {
           let imagePath = '/microbit_board.png';
           if (sub.id === 'smart-trashbin') {
             imagePath = '/smart_trashbin.png';
-          } else if (sub.id === 'smart-watering') {
+          } else if (sub.id === 'smart-watering' || sub.id === 'smart-watering-plant') {
             imagePath = '/smart_watering_plant.png';
+          } else if (sub.id === 'tinybit-bluetooth') {
+            imagePath = '/tinybit_bt.png';
+          } else if (sub.id === 'tinybit-line') {
+            imagePath = '/tinybit_lf.png';
           } else if (sub.id.includes('parking')) {
             imagePath = '/smart_trashbin.png';
           } else if (sub.id.includes('tinybit') || sub.id.includes('robot')) {
@@ -1334,8 +1374,16 @@ export default function CurriculumView() {
                     title: sub.title,
                     desc: subContent.descRight,
                     image: imagePath,
-                    flyerImage: sub.id === 'smart-trashbin' ? '/ketentuan_flyer_smart_trashbin.png' : null,
-                    demoImage: sub.id === 'smart-trashbin' ? '/video_smart_trashbin.png' : null
+                    flyerImage: 
+                      sub.id === 'smart-trashbin' ? '/ketentuan_flyer_smart_trashbin.png' :
+                      (sub.id === 'smart-watering' || sub.id === 'smart-watering-plant') ? '/ketentuan_flyer_smart_watering_plant.png' :
+                      sub.id === 'tinybit-bluetooth' ? '/ketentuan_flyer_tinybit_bc.png' :
+                      sub.id === 'tinybit-line' ? '/ketentuan_flyer_tinybit_lf.png' : null,
+                    demoImage: 
+                      sub.id === 'smart-trashbin' ? '/video_smart_trashbin.png' :
+                      (sub.id === 'smart-watering' || sub.id === 'smart-watering-plant') ? '/video_smart_watering_plant.png' :
+                      sub.id === 'tinybit-bluetooth' ? '/video_tinybit_bc.png' :
+                      sub.id === 'tinybit-line' ? '/video_tybitlf.png' : null
                   }
                 }
               ]
@@ -1759,15 +1807,77 @@ export default function CurriculumView() {
                         {activeSpreadData.left.title}
                       </h3>
 
-                      {activeSpreadData.left.isCover ? (
-                        <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', flex:1, textAlign:'center', gap:'16px', padding:'10px' }}>
-                          <div style={{ width:'70px', height:'70px', borderRadius:'20px', background:'linear-gradient(135deg,#2563eb,#7c3aed)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 10px 20px -5px rgba(37,99,235,0.3)' }}>
-                            <Cpu size={32} color="white" />
+                  {activeSpreadData.left.isCover ? (() => {
+                    const isGrade7 = track.gradeNum === '7';
+
+                    const coverIcons = isGrade7
+                      ? [
+                          { Icon: Bluetooth, top:'6%', left:'10%' },
+                          { Icon: Hand,      top:'12%', left:'80%' },
+                          { Icon: Droplet,   top:'70%', left:'12%' },
+                          { Icon: Car,       top:'75%', left:'82%' },
+                        ]
+                      : [
+                          { Icon: Code2,     top:'6%', left:'10%' },
+                          { Icon: Brain,     top:'12%', left:'80%' },
+                          { Icon: Home,      top:'70%', left:'12%' },
+                          { Icon: LineChart, top:'75%', left:'82%' },
+                        ];
+
+                    const coverStats = isGrade7
+                      ? [
+                          { label: 'Bahasa Program', val: 'Block (MakeCode)' },
+                          { label: 'Robot Utama', val: 'Tinybit' },
+                          { label: 'Modul Proyek', val: '7' },
+                        ]
+                      : [
+                          { label: 'Bahasa Program', val: 'Python' },
+                          { label: 'Fokus', val: 'IoT & AI' },
+                          { label: 'Modul Proyek', val: '6+' },
+                        ];
+
+                    const coverSubtitle = isGrade7
+                      ? 'Fondasi Pemrograman Blok & Robotika Dasar'
+                      : activeSpreadData.left.subtitle;
+
+                    return (
+                      <div style={{ position:'relative', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', flex:1, textAlign:'center', gap:'16px', padding:'10px', overflow:'hidden' }}>
+
+                        {/* Decorative background pattern */}
+                        <div style={{ position:'absolute', inset:0, opacity:0.5, pointerEvents:'none', backgroundImage:'radial-gradient(rgba(37,99,235,0.12) 1.5px, transparent 1.5px)', backgroundSize:'16px 16px' }} />
+                        <div style={{ position:'absolute', top:'-40px', right:'-40px', width:'140px', height:'140px', borderRadius:'50%', background:'radial-gradient(circle, rgba(124,58,237,0.16) 0%, transparent 70%)', pointerEvents:'none' }} />
+                        <div style={{ position:'absolute', bottom:'-30px', left:'-30px', width:'110px', height:'110px', borderRadius:'50%', background:'radial-gradient(circle, rgba(37,99,235,0.14) 0%, transparent 70%)', pointerEvents:'none' }} />
+
+                        {/* Floating mini icons representing project domains, per grade */}
+                        {coverIcons.map(({ Icon, top, left }, i) => (
+                          <div key={i} style={{ position:'absolute', top, left, width:'26px', height:'26px', borderRadius:'8px', background:'rgba(255,255,255,0.7)', border:'1px solid rgba(226,232,240,0.8)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 6px rgba(0,0,0,0.05)' }}>
+                            <Icon size={13} style={{ color:'#6366f1' }} />
                           </div>
-                          <h4 style={{ fontFamily:"'Poppins',sans-serif", fontSize:'15px', fontWeight:800, color:'#4338ca', margin:0 }}>{activeSpreadData.left.subtitle}</h4>
-                          <p style={{ fontSize:'11.5px', color:'#64748b', lineHeight:1.6, maxWidth:'280px', margin:0 }}>{activeSpreadData.left.desc}</p>
+                        ))}
+
+                        <span style={{ position:'relative', fontSize:'9px', fontWeight:800, color:'#7c3aed', background:'rgba(124,58,237,0.08)', border:'1px solid rgba(124,58,237,0.2)', borderRadius:'999px', padding:'3px 10px', textTransform:'uppercase', letterSpacing:'0.08em' }}>
+                          Edisi {activeSpreadData.left.tag} · Kelas {track.gradeNum}
+                        </span>
+
+                        <div style={{ position:'relative', width:'76px', height:'76px', borderRadius:'22px', background:'linear-gradient(135deg,#2563eb,#7c3aed)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 14px 26px -8px rgba(37,99,235,0.4), inset 0 1px 0 rgba(255,255,255,0.25)' }}>
+                          <div style={{ position:'absolute', inset:'-6px', borderRadius:'26px', border:'1.5px dashed rgba(99,102,241,0.35)' }} />
+                          {isGrade7 ? <Code2 size={34} color="white" /> : <Cpu size={34} color="white" />}
                         </div>
-                      ) : (
+
+                        <h4 style={{ position:'relative', fontFamily:"'Poppins',sans-serif", fontSize:'15px', fontWeight:800, color:'#4338ca', margin:0 }}>{coverSubtitle}</h4>
+                        <p style={{ position:'relative', fontSize:'11.5px', color:'#64748b', lineHeight:1.6, maxWidth:'280px', margin:0 }}>{activeSpreadData.left.desc}</p>
+
+                        <div style={{ position:'relative', display:'flex', gap:'8px', marginTop:'4px' }}>
+                          {coverStats.map((s, i) => (
+                            <div key={i} style={{ background:'rgba(255,255,255,0.75)', border:'1px solid rgba(226,232,240,0.8)', borderRadius:'12px', padding:'6px 10px', textAlign:'center', boxShadow:'0 2px 6px rgba(0,0,0,0.03)' }}>
+                              <div style={{ fontSize:'12px', fontWeight:800, color:'#1e293b' }}>{s.val}</div>
+                              <div style={{ fontSize:'8px', color:'#94a3b8', fontWeight:600, textTransform:'uppercase' }}>{s.label}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })() : (
                         <div style={{ display:'flex', flexDirection:'column', flex:1, gap:'12px' }}>
                           {activeSpreadData.left.subtitle && (
                             <p style={{ fontSize:'11px', color:'#475569', lineHeight:1.5, margin:0 }}>{activeSpreadData.left.subtitle}</p>
