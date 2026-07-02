@@ -271,19 +271,39 @@ img { max-width: 100%; display: block; }
 
 /* ── Default Glass Card ── */
 .glass-card {
-  background: var(--clr-surface);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.50);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(25px) saturate(1.8);
+  -webkit-backdrop-filter: blur(25px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-2);
+  box-shadow: 
+    0 1px 1px rgba(255, 255, 255, 0.9) inset,
+    0 10px 30px -10px rgba(37, 99, 235, 0.12),
+    0 2px 4px rgba(37, 99, 235, 0.04);
   padding: var(--space-6);
-  transition: transform var(--dur-normal) var(--ease-spring),
-              box-shadow var(--dur-normal) ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 .glass-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: var(--shadow-3);
+  transform: translateY(-8px) rotateX(3deg) rotateY(-1.5deg) scale(1.025);
+  box-shadow: 
+    0 1px 1px rgba(255, 255, 255, 0.9) inset,
+    0 24px 48px -12px rgba(37, 99, 235, 0.22),
+    0 8px 16px -8px rgba(37, 99, 235, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+.lp-timeline-track-card {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.lp-timeline-track-card:hover {
+  transform: translateY(-4px) rotateX(1.5deg) rotateY(-1deg) scale(1.01) !important;
+  box-shadow: 0 12px 36px -8px rgba(37, 99, 235, 0.18), inset 0 1px 0 rgba(255,255,255,0.8) !important;
+  border-color: rgba(37, 99, 235, 0.3) !important;
 }
 
 /* ── Dark Hero Card ── */
@@ -1782,6 +1802,12 @@ img { max-width: 100%; display: block; }
   /* Track cards: make scrollable horizontally, stack badge above */
   .lp-timeline-track-card {
     padding: 14px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-backdrop-overlay {
+    display: none !important;
   }
 }
 

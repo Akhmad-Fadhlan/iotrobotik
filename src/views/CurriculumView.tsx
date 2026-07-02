@@ -270,37 +270,37 @@ interface Cohort {
 }
 
 const cohorts: Cohort[] = [
-  { id: 'kelas-8-smt-3', name: 'Kelas 8 - Semester 3 (Juli 2026 - Des 2026)', grade: 'Kelas 8', semester: 'Semester 3', startDate: '8 Jul 2026', endDate: '20 Des 2026', durationWeeks: 24 },
-  { id: 'kelas-7-smt-2', name: 'Kelas 7 - Semester 2 (Jan 2027 - Jun 2027)', grade: 'Kelas 7', semester: 'Semester 2', startDate: '6 Jan 2027', endDate: '20 Jun 2027', durationWeeks: 24 },
-  { id: 'kelas-8-smt-4', name: 'Kelas 8 - Semester 4 (Jan 2027 - Jun 2027)', grade: 'Kelas 8', semester: 'Semester 4', startDate: '6 Jan 2027', endDate: '20 Jun 2027', durationWeeks: 24 }
+  { id: 'kelas-8-smt-3', name: 'Kelas 8 - Semester 3 (Juli 2026 - Des 2026)', grade: 'Kelas 8', semester: 'Semester 3', startDate: '8 Jul 2026', endDate: '1 Des 2026', durationWeeks: 21 },
+  { id: 'kelas-7-smt-2', name: 'Kelas 7 - Semester 2 (Jan 2027 - Jun 2027)', grade: 'Kelas 7', semester: 'Semester 2', startDate: '6 Jan 2027', endDate: '1 Jun 2027', durationWeeks: 21 },
+  { id: 'kelas-8-smt-4', name: 'Kelas 8 - Semester 4 (Jan 2027 - Jun 2027)', grade: 'Kelas 8', semester: 'Semester 4', startDate: '6 Jan 2027', endDate: '1 Jun 2027', durationWeeks: 21 }
 ];
 
 const getSubjectDates = (cohortId: string, subjectId: string) => {
   if (cohortId === 'kelas-8-smt-3') {
     switch (subjectId) {
-      case 'robot-bluetooth': return { start: new Date(2026, 6, 8), end: new Date(2026, 6, 26) };
-      case 'robot-gesture': return { start: new Date(2026, 6, 27), end: new Date(2026, 7, 16) };
-      case 'parking-ai': return { start: new Date(2026, 7, 17), end: new Date(2026, 8, 13) };
-      case 'robot-line': return { start: new Date(2026, 8, 14), end: new Date(2026, 9, 11) };
-      case 'robot-transporter': return { start: new Date(2026, 9, 12), end: new Date(2026, 10, 29) };
-      case 'graduation-8': return { start: new Date(2026, 10, 30), end: new Date(2026, 11, 20) };
+      case 'robot-bluetooth-controller': return { start: new Date(2026, 6, 8), end: new Date(2026, 7, 11) };
+      case 'robot-hand-gesture': return { start: new Date(2026, 7, 12), end: new Date(2026, 8, 15) };
+      case 'parking-ai': return { start: new Date(2026, 8, 16), end: new Date(2026, 9, 20) };
+      case 'robot-line-follower': return { start: new Date(2026, 9, 21), end: new Date(2026, 10, 24) };
+      case 'robot-transporter': return { start: new Date(2026, 10, 25), end: new Date(2026, 11, 29) };
+      case 'graduation-8': return { start: new Date(2026, 11, 30), end: new Date(2026, 11, 31) };
     }
   } else if (cohortId === 'kelas-7-smt-2') {
     switch (subjectId) {
       case 'smart-trashbin': return { start: new Date(2027, 0, 6), end: new Date(2027, 0, 26) };
       case 'tinybit-bluetooth': return { start: new Date(2027, 0, 27), end: new Date(2027, 1, 16) };
-      case 'tinybit-gesture': return { start: new Date(2027, 1, 17), end: new Date(2027, 2, 16) };
+      case 'tinybit-gesture': return { start: new Date(2027, 1, 17), end: new Date(2027, 2, 9) };
       case 'smart-watering':
-      case 'smart-watering-plant': return { start: new Date(2027, 2, 17), end: new Date(2027, 3, 13) };
-      case 'tinybit-line': return { start: new Date(2027, 3, 14), end: new Date(2027, 4, 11) };
-      case 'smart-parking': return { start: new Date(2027, 4, 12), end: new Date(2027, 5, 8) };
-      case 'graduation-7': return { start: new Date(2027, 5, 9), end: new Date(2027, 5, 20) };
+      case 'smart-watering-plant': return { start: new Date(2027, 2, 10), end: new Date(2027, 2, 30) };
+      case 'tinybit-line': return { start: new Date(2027, 2, 31), end: new Date(2027, 3, 20) };
+      case 'smart-parking': return { start: new Date(2027, 3, 21), end: new Date(2027, 4, 11) };
+      case 'graduation-7': return { start: new Date(2027, 4, 12), end: new Date(2027, 5, 1) };
     }
   } else if (cohortId === 'kelas-8-smt-4') {
     switch (subjectId) {
-      case 'smart-home': return { start: new Date(2027, 0, 6), end: new Date(2027, 1, 28) };
-      case 'smart-greenhouse': return { start: new Date(2027, 2, 1), end: new Date(2027, 4, 30) };
-      case 'graduation-9': return { start: new Date(2027, 4, 31), end: new Date(2027, 5, 20) };
+      case 'smart-home': return { start: new Date(2027, 0, 6), end: new Date(2027, 1, 16) };
+      case 'smart-greenhouse': return { start: new Date(2027, 1, 17), end: new Date(2027, 2, 30) };
+      case 'graduation-9': return { start: new Date(2027, 2, 31), end: new Date(2027, 5, 1) };
     }
   }
   return { start: new Date(), end: new Date() };
@@ -309,29 +309,29 @@ const getSubjectDates = (cohortId: string, subjectId: string) => {
 const getSubjectMeta = (cohortId: string, subjectId: string) => {
   if (cohortId === 'kelas-8-smt-3') {
     switch (subjectId) {
-      case 'robot-bluetooth': return { weeks: 'Minggu 1 - 3', duration: '3 Minggu', color: 'indigo' };
-      case 'robot-gesture': return { weeks: 'Minggu 4 - 6', duration: '3 Minggu', color: 'purple' };
-      case 'parking-ai': return { weeks: 'Minggu 7 - 10', duration: '4 Minggu', color: 'blue' };
-      case 'robot-line': return { weeks: 'Minggu 11 - 14', duration: '4 Minggu', color: 'sky' };
-      case 'robot-transporter': return { weeks: 'Minggu 15 - 21', duration: '7 Minggu', color: 'emerald' };
-      case 'graduation-8': return { weeks: 'Minggu 22 - 24', duration: '3 Minggu', color: 'red' };
+      case 'robot-bluetooth-controller': return { weeks: 'Minggu 1 - 5', duration: '5 Minggu', color: 'indigo' };
+      case 'robot-hand-gesture': return { weeks: 'Minggu 6 - 10', duration: '5 Minggu', color: 'purple' };
+      case 'parking-ai': return { weeks: 'Minggu 11 - 15', duration: '5 Minggu', color: 'blue' };
+      case 'robot-line-follower': return { weeks: 'Minggu 16 - 20', duration: '5 Minggu', color: 'sky' };
+      case 'robot-transporter': return { weeks: 'Minggu 21 - 25', duration: '5 Minggu', color: 'emerald' };
+      case 'graduation-8': return { weeks: 'Minggu 26 - 28', duration: '3 Minggu', color: 'red' };
     }
   } else if (cohortId === 'kelas-7-smt-2') {
     switch (subjectId) {
       case 'smart-trashbin': return { weeks: 'Minggu 1 - 3', duration: '3 Minggu', color: 'blue' };
       case 'tinybit-bluetooth': return { weeks: 'Minggu 4 - 6', duration: '3 Minggu', color: 'indigo' };
-      case 'tinybit-gesture': return { weeks: 'Minggu 7 - 10', duration: '4 Minggu', color: 'purple' };
+      case 'tinybit-gesture': return { weeks: 'Minggu 7 - 9', duration: '3 Minggu', color: 'purple' };
       case 'smart-watering':
-      case 'smart-watering-plant': return { weeks: 'Minggu 11 - 14', duration: '4 Minggu', color: 'emerald' };
-      case 'tinybit-line': return { weeks: 'Minggu 15 - 18', duration: '4 Minggu', color: 'sky' };
-      case 'smart-parking': return { weeks: 'Minggu 19 - 22', duration: '4 Minggu', color: 'amber' };
-      case 'graduation-7': return { weeks: 'Minggu 23 - 24', duration: '2 Minggu', color: 'red' };
+      case 'smart-watering-plant': return { weeks: 'Minggu 10 - 12', duration: '3 Minggu', color: 'emerald' };
+      case 'tinybit-line': return { weeks: 'Minggu 13 - 15', duration: '3 Minggu', color: 'sky' };
+      case 'smart-parking': return { weeks: 'Minggu 16 - 18', duration: '3 Minggu', color: 'amber' };
+      case 'graduation-7': return { weeks: 'Minggu 19 - 21', duration: '3 Minggu', color: 'red' };
     }
   } else if (cohortId === 'kelas-8-smt-4') {
     switch (subjectId) {
-      case 'smart-home': return { weeks: 'Minggu 1 - 8', duration: '8 Minggu', color: 'blue' };
-      case 'smart-greenhouse': return { weeks: 'Minggu 9 - 20', duration: '12 Minggu', color: 'emerald' };
-      case 'graduation-9': return { weeks: 'Minggu 21 - 24', duration: '4 Minggu', color: 'red' };
+      case 'smart-home': return { weeks: 'Minggu 1 - 6', duration: '6 Minggu', color: 'blue' };
+      case 'smart-greenhouse': return { weeks: 'Minggu 7 - 12', duration: '6 Minggu', color: 'emerald' };
+      case 'graduation-9': return { weeks: 'Minggu 13 - 21', duration: '9 Minggu', color: 'red' };
     }
   }
   return { weeks: 'Minggu 1', duration: '1 Minggu', color: 'blue' };
@@ -601,66 +601,107 @@ export default function CurriculumView() {
                         </div>
                         <div className="overflow-x-auto scrollbar-none" style={{ paddingBottom:'4px' }}>
                           <div style={{ minWidth: `${Math.max(480, track.subjects.length * 110)}px`, position:'relative', paddingTop:'8px', paddingBottom:'50px', paddingLeft:'16px', paddingRight:'16px' }}>
-                            <svg style={{ position:'absolute', left:0, right:0, bottom:'12px', width:'100%', height:'32px', zIndex:1, pointerEvents:'none' }} preserveAspectRatio="none">
+                            {/* ── Elegant SVG Rail Track ── */}
+                            <svg style={{ position:'absolute', left:0, right:0, bottom:'14px', width:'100%', height:'28px', zIndex:1, pointerEvents:'none' }} preserveAspectRatio="none">
                               <defs>
+                                {/* Edge fade mask */}
                                 <linearGradient id={`mg-${tIdx}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                                  <stop offset="0%" stopColor="#fff" stopOpacity="0" />
-                                  <stop offset="4%" stopColor="#fff" stopOpacity="1" />
-                                  <stop offset="96%" stopColor="#fff" stopOpacity="1" />
+                                  <stop offset="0%"   stopColor="#fff" stopOpacity="0" />
+                                  <stop offset="3%"   stopColor="#fff" stopOpacity="1" />
+                                  <stop offset="97%"  stopColor="#fff" stopOpacity="1" />
                                   <stop offset="100%" stopColor="#fff" stopOpacity="0" />
                                 </linearGradient>
+                                <mask id={`fm-${tIdx}`}>
+                                  <rect width="100%" height="28" fill={`url(#mg-${tIdx})`} />
+                                </mask>
+                                {/* Sleeper (bantalan) gradient — warm wood */}
                                 <linearGradient id={`wg-${tIdx}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                                  <stop offset="0%" stopColor="#7c5c50" />
-                                  <stop offset="100%" stopColor="#3d2218" />
+                                  <stop offset="0%"   stopColor="#c4a882" />
+                                  <stop offset="50%"  stopColor="#a07850" />
+                                  <stop offset="100%" stopColor="#7a5430" />
                                 </linearGradient>
+                                {/* Rail gradient — metallic silver */}
                                 <linearGradient id={`rg-${tIdx}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                                  <stop offset="0%" stopColor="#334155" />
-                                  <stop offset="35%" stopColor="#e2e8f0" />
-                                  <stop offset="65%" stopColor="#94a3b8" />
+                                  <stop offset="0%"   stopColor="#475569" />
+                                  <stop offset="30%"  stopColor="#cbd5e1" />
+                                  <stop offset="70%"  stopColor="#94a3b8" />
                                   <stop offset="100%" stopColor="#334155" />
                                 </linearGradient>
-                                <pattern id={`sp-${tIdx}`} width="22" height="32" patternUnits="userSpaceOnUse">
-                                  <rect x="9" y="2" width="4" height="28" rx="1" fill={`url(#wg-${tIdx})`} />
-                                  <rect x="8" y="7" width="6" height="1.5" fill="#475569" opacity="0.85" />
-                                  <rect x="8" y="22" width="6" height="1.5" fill="#475569" opacity="0.85" />
+                                {/* Sleeper pattern — wider spacing, softer look */}
+                                <pattern id={`sp-${tIdx}`} width="28" height="28" patternUnits="userSpaceOnUse">
+                                  <rect x="10" y="3" width="8" height="22" rx="2" fill={`url(#wg-${tIdx})`} opacity="0.82" />
                                 </pattern>
-                                <mask id={`fm-${tIdx}`}>
-                                  <rect width="100%" height="32" fill={`url(#mg-${tIdx})`} />
-                                </mask>
+                                {/* Progress rail gradient */}
                                 {hasSelectedInTrack && (
                                   <linearGradient id={`pg-${tIdx}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="#6366f1" />
-                                    <stop offset="100%" stopColor="#7c3aed" />
+                                    <stop offset="0%"   stopColor="#6366f1" stopOpacity="0.5" />
+                                    <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.9" />
                                   </linearGradient>
                                 )}
+                                {/* Rail glow filter */}
+                                <filter id={`glow-${tIdx}`} x="-10%" y="-80%" width="120%" height="260%">
+                                  <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur" />
+                                  <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                                </filter>
                               </defs>
                               <g mask={`url(#fm-${tIdx})`}>
-                                <rect x="0" y="5" width="100%" height="22" rx="3" fill="#e2e8f0" />
-                                <rect x="0" y="0" width="100%" height="32" fill={`url(#sp-${tIdx})`} />
-                                <line x1="0" y1="8" x2="100%" y2="8" stroke={`url(#rg-${tIdx})`} strokeWidth="2.5" />
-                                <line x1="0" y1="24" x2="100%" y2="24" stroke={`url(#rg-${tIdx})`} strokeWidth="2.5" />
+                                {/* Ballast bed */}
+                                <rect x="0" y="8" width="100%" height="12" rx="2" fill="#e2e8f0" opacity="0.5" />
+                                {/* Sleepers */}
+                                <rect x="0" y="0" width="100%" height="28" fill={`url(#sp-${tIdx})`} />
+                                {/* Rails */}
+                                <line x1="0" y1="7"  x2="100%" y2="7"  stroke={`url(#rg-${tIdx})`} strokeWidth="2" strokeLinecap="round" />
+                                <line x1="0" y1="21" x2="100%" y2="21" stroke={`url(#rg-${tIdx})`} strokeWidth="2" strokeLinecap="round" />
+                                {/* Progress rails (glowing indigo) */}
                                 {hasSelectedInTrack && selectedIdx > 0 && (
                                   <>
-                                    <line x1={`${(0.5 / track.subjects.length) * 100}%`} y1="8" x2={`${((selectedIdx + 0.5) / track.subjects.length) * 100}%`} y2="8" stroke={`url(#pg-${tIdx})`} strokeWidth="2.5" opacity="0.7" />
-                                    <line x1={`${(0.5 / track.subjects.length) * 100}%`} y1="24" x2={`${((selectedIdx + 0.5) / track.subjects.length) * 100}%`} y2="24" stroke={`url(#pg-${tIdx})`} strokeWidth="2.5" opacity="0.7" />
+                                    <line
+                                      x1={`${(0.5 / track.subjects.length) * 100}%`} y1="7"
+                                      x2={`${((selectedIdx + 0.5) / track.subjects.length) * 100}%`} y2="7"
+                                      stroke={`url(#pg-${tIdx})`} strokeWidth="2.5" strokeLinecap="round"
+                                      filter={`url(#glow-${tIdx})`}
+                                    />
+                                    <line
+                                      x1={`${(0.5 / track.subjects.length) * 100}%`} y1="21"
+                                      x2={`${((selectedIdx + 0.5) / track.subjects.length) * 100}%`} y2="21"
+                                      stroke={`url(#pg-${tIdx})`} strokeWidth="2.5" strokeLinecap="round"
+                                      filter={`url(#glow-${tIdx})`}
+                                    />
                                   </>
                                 )}
                               </g>
                             </svg>
+
+                            {/* ── Train marker — sits exactly on the rail ── */}
                             {hasSelectedInTrack && (
-                              <div style={{ position: 'absolute', bottom: '42px', left: `calc(${((selectedIdx + 0.5) / track.subjects.length) * 100}% - 18px)`, transition: 'left 0.55s cubic-bezier(0.34,1.56,0.64,1)', zIndex: 20, pointerEvents: 'none' }}>
-                                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'linear-gradient(135deg, #2563eb, #7c3aed)', border: '2.5px solid white', display: 'flex', alignItems: 'center', justifyContent:'center', boxShadow: '0 4px 16px -4px rgba(37,99,235,0.55)', animation: 'trainBounce 0.5s ease' }}>
-                                  <div style={{ width:'18px', height:'18px', flexShrink:0 }}><TrainIcon className="w-full h-full text-white" /></div>
+                              <div style={{
+                                position:   'absolute',
+                                /* Rail SVG bottom=14px, height=28px → rail center at 14+14=28px from bottom of container */
+                                /* marker height 32px → offset by 16px upward from rail center → bottom = 28+16−2 = 42px */
+                                bottom: '28px',
+                                /* card width = 88px, card gap fills (containerWidth/numSubjects)
+                                   center of card[i] = paddingLeft(16) + i*(containerWidth/n) + 44px
+                                   as percent: left = (i+0.5)/n * 100% + 16px − 16px(marker half) */
+                                left: `calc(${((selectedIdx + 0.5) / track.subjects.length) * 100}% - 16px)`,
+                                transition: 'left 0.55s cubic-bezier(0.34,1.56,0.64,1)',
+                                zIndex: 20,
+                                pointerEvents: 'none',
+                              }}>
+                                {/* Ping aura */}
+                                <div style={{ position:'absolute', inset:'-6px', borderRadius:'50%', background:'rgba(99,102,241,0.18)', animation:'ping 1.8s ease-in-out infinite' }} />
+                                {/* Train badge */}
+                                <div style={{ width:'32px', height:'32px', borderRadius:'50%', background:'linear-gradient(135deg,#2563eb,#7c3aed)', border:'2.5px solid white', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 4px 14px -4px rgba(37,99,235,0.60), 0 0 0 3px rgba(99,102,241,0.18)', animation:'trainBounce 0.5s ease' }}>
+                                  <div style={{ width:'16px', height:'16px', flexShrink:0 }}><TrainIcon className="w-full h-full text-white" /></div>
                                 </div>
-                                <div style={{ position:'absolute', inset:'-6px', borderRadius:'50%', background: 'rgba(99,102,241,0.15)', animation: 'ping 1.5s ease-in-out infinite' }} />
                               </div>
                             )}
-                            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', height:'100px', position:'relative', zIndex:10 }}>
+
+                            <div style={{ display:'flex', alignItems:'flex-end', height:'100px', position:'relative', zIndex:10 }}>
                               {track.subjects.map((sub) => {
                                 const isSelected = selectedSubject.id === sub.id;
                                 const IconComp = iconMap[sub.icon] || Cpu;
                                 return (
-                                  <div key={sub.id} style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-end', height:'100%', position:'relative', zIndex:10 }}>
+                                  <div key={sub.id} style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-end', height:'100%', position:'relative', zIndex:10 }}>
                                     <button
                                       onClick={() => handleSelectSubject(sub)}
                                       style={{ width:'88px', height:'76px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'5px', padding:'8px 4px', borderRadius:'16px', border: isSelected ? '1.5px solid rgba(99,102,241,0.5)' : '1px solid rgba(226,232,240,0.9)', background: isSelected ? 'linear-gradient(135deg, #2563eb, #7c3aed)' : 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)', boxShadow: isSelected ? '0 8px 20px -6px rgba(37,99,235,0.40), inset 0 1px 0 rgba(255,255,255,0.25)' : '0 2px 8px -3px rgba(0,0,0,0.08)', transform: isSelected ? 'translateY(-6px) scale(1.04)' : 'none', transition: 'all 0.3s cubic-bezier(0.34,1.56,0.64,1)', cursor: 'pointer' }}
@@ -761,7 +802,7 @@ export default function CurriculumView() {
           'kelas-8-smt-4': { bg:'rgba(245,158,11,0.12)', border:'rgba(245,158,11,0.35)', text:'#92400e', dot:'#f59e0b' },
         };
         const subjectColors: Record<string,string> = {
-          'robot-bluetooth':'#6366f1','robot-gesture':'#8b5cf6','parking-ai':'#3b82f6','robot-line':'#06b6d4','robot-transporter':'#10b981','graduation-8':'#ef4444',
+          'robot-bluetooth-controller':'#6366f1','robot-hand-gesture':'#8b5cf6','parking-ai':'#3b82f6','robot-line-follower':'#06b6d4','robot-transporter':'#10b981','graduation-8':'#ef4444',
           'smart-trashbin':'#10b981','tinybit-bluetooth':'#6366f1','tinybit-gesture':'#8b5cf6','smart-watering':'#06b6d4','smart-watering-plant':'#06b6d4','tinybit-line':'#f59e0b','smart-parking':'#f97316','graduation-7':'#ef4444',
           'smart-home':'#3b82f6','smart-greenhouse':'#10b981','graduation-9':'#ef4444',
         };
@@ -1075,7 +1116,7 @@ export default function CurriculumView() {
                 'Menggerakkan palang servo secara mulus dan menampilkan status pada display LED.'
               ]
             },
-            'robot-bluetooth': {
+            'robot-bluetooth-controller': {
               descLeft: 'Mengembangkan mobil robot beroda 4 berbasis pemrograman Python pada modul driver L298N. Robot dikendalikan secara nirkabel melalui koneksi Bluetooth menggunakan web controller.',
               descRight: 'Robot mobil Python dengan driver motor kuat L298N untuk pergerakan presisi dan stabil.',
               cp: [
@@ -1087,7 +1128,7 @@ export default function CurriculumView() {
                 'Memetakan instruksi kontrol arah roda maju/mundur/berputar.'
               ]
             },
-            'robot-gesture': {
+            'robot-hand-gesture': {
               descLeft: 'Proyek kendali robot Python menggunakan isyarat tubuh/pose tangan yang ditangkap oleh webcam. Model klasifikasi isyarat tangan Teachable Machine dihubungkan ke skrip Python robot.',
               descRight: 'Sistem robotika canggih yang mengawinkan computer vision dengan robot Python roda 4.',
               cp: [
@@ -1111,7 +1152,7 @@ export default function CurriculumView() {
                 'Menyimpan data waktu masuk dan plat nomor kendaraan ke database.'
               ]
             },
-            'robot-line': {
+            'robot-line-follower': {
               descLeft: 'Membangun robot pengikut garis tingkat lanjut dengan Python menggunakan algoritma kendali PID (Proportional-Integral-Derivative) untuk pergerakan sirkuit yang mulus dan cepat.',
               descRight: 'Robot pengikut garis presisi tinggi dengan algoritma kendali PID di Python.',
               cp: [
