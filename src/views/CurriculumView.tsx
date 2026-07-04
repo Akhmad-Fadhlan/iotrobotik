@@ -298,9 +298,9 @@ const getSubjectDates = (cohortId: string, subjectId: string) => {
     }
   } else if (cohortId === 'kelas-8-smt-4') {
     switch (subjectId) {
-      case 'smart-home': return { start: new Date(2027, 0, 6), end: new Date(2027, 1, 16) };
-      case 'smart-greenhouse': return { start: new Date(2027, 1, 17), end: new Date(2027, 2, 30) };
-      case 'graduation-9': return { start: new Date(2027, 2, 31), end: new Date(2027, 5, 1) };
+      case 'smart-home': return { start: new Date(2027, 0, 6), end: new Date(2027, 2, 2) };
+      case 'smart-greenhouse': return { start: new Date(2027, 2, 3), end: new Date(2027, 3, 13) };
+      case 'graduation-9': return { start: new Date(2027, 3, 14), end: new Date(2027, 5, 1) };
     }
   }
   return { start: new Date(), end: new Date() };
@@ -329,9 +329,9 @@ const getSubjectMeta = (cohortId: string, subjectId: string) => {
     }
   } else if (cohortId === 'kelas-8-smt-4') {
     switch (subjectId) {
-      case 'smart-home': return { weeks: 'Minggu 1 - 6', duration: '6 Minggu', color: 'blue' };
-      case 'smart-greenhouse': return { weeks: 'Minggu 7 - 12', duration: '6 Minggu', color: 'emerald' };
-      case 'graduation-9': return { weeks: 'Minggu 13 - 21', duration: '9 Minggu', color: 'red' };
+      case 'smart-home': return { weeks: 'Minggu 1 - 8', duration: '8 Minggu', color: 'blue' };
+      case 'smart-greenhouse': return { weeks: 'Minggu 9 - 14', duration: '6 Minggu', color: 'emerald' };
+      case 'graduation-9': return { weeks: 'Minggu 15 - 21', duration: '7 Minggu', color: 'red' };
     }
   }
   return { weeks: 'Minggu 1', duration: '1 Minggu', color: 'blue' };
@@ -406,13 +406,8 @@ export default function CurriculumView() {
     setShowSidebar(true);
   };
 
-  const handleStartStudy = (sub: Subject) => {
-    const linkObj = sub.subMateri.find(sm => sm.link);
-    if (linkObj && linkObj.link && linkObj.link.startsWith('http')) {
-      window.open(linkObj.link, '_blank');
-    } else {
-      alert(`Memulai pembelajaran modul: ${sub.title}`);
-    }
+  const handleStartStudy = (_sub: Subject) => {
+    window.dispatchEvent(new CustomEvent('changeTab', { detail: 'lms' }));
   };
 
   const isSubMateriCompleted = (sub: Subject, index: number) => {

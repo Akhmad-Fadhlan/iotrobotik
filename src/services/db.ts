@@ -462,7 +462,7 @@ const INITIAL_PROJECTS: Project[] = [
     competencies: 'ESP32 Wi-Fi Client, Firebase SDK, Web Interface Dashboard, Relay Logic.',
     hardware: ['ESP32 NodeMCU', 'Sensor DHT11 / DHT22', 'Relay Module 4 Ch', 'Sensor Gas MQ2'],
     software: ['Arduino IDE', 'Firebase Console', 'Lovable', 'Vercel'],
-    duration: '6 Minggu',
+    duration: '8 Minggu',
     driveLink: 'https://drive.google.com/drive/folders/p7_drive',
     githubLink: 'https://github.com/idn-robotics/smart-home-esp32',
     author: 'Mr. Rizal',
@@ -746,7 +746,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     semester: 'Semester 4',
     icon: 'home',
     desc: 'Membangun rumah pintar berbasis ESP32 dengan kendali relay nirkabel dan Firebase database.',
-    duration: '6 Minggu',
+    duration: '8 Minggu',
     level: 'Lanjut',
     type: 'Deploy Project',
     status: 'Belum Dimulai',
@@ -902,7 +902,7 @@ export const mockDb = {
         if (!smartWatering || !robotBt || !smartHome || 
             smartWatering.duration !== '3 Minggu' || 
             robotBt.duration !== '5 Minggu' || 
-            smartHome.duration !== '6 Minggu' ||
+            smartHome.duration !== '8 Minggu' ||
             !robotBt.subMateri || robotBt.subMateri.length !== 6) {
           localStorage.removeItem('idn_curriculum');
           data = null;

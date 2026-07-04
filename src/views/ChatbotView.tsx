@@ -7,7 +7,7 @@ import {
   Link as LinkIcon,
   HelpCircle
 } from 'lucide-react';
-import { mockDb } from '../services/db';
+import { getChatbotResponse } from '../services/chatbot';
 
 interface Message {
   sender: 'bot' | 'user';
@@ -43,64 +43,7 @@ export default function ChatbotView() {
   }, [messages, isTyping]);
 
   const getSystemResponse = (query: string): Omit<Message, 'sender' | 'timestamp'> => {
-    const q = query.toLowerCase();
-    
-    if (q.includes('bluetooth') || q.includes('source code tinybit')) {
-      return {
-        text: 'Source code untuk **Tinybit Bluetooth Controller** tersedia di repositori Github resmi. Anda dapat langsung mengunduh file Makecode Hex atau melakukan clone menggunakan git command di panel Source Code.',
-        link: { label: 'Buka Source Code Repository', tab: 'source-code' }
-      };
-    }
-    
-    if (q.includes('parking') || q.includes('rppm smart parking')) {
-      return {
-        text: 'Ya, dokumen RPPM untuk project **Smart Parking System** tersedia di Project Library. Anda dapat membukanya melalui folder Google Drive yang tersemat pada detail project tersebut.',
-        link: { label: 'Lihat Project Library', tab: 'projects' }
-      };
-    }
-    
-    if (q.includes('esp32')) {
-      // Find projects using ESP32
-      const projects = mockDb.getProjects().filter(p => p.hardware.some(h => h.includes('ESP32')));
-      const names = projects.map(p => `• **${p.name}** (${p.difficulty})`).join('\n');
-      return {
-        text: `Berikut adalah proyek di Project Library yang menggunakan microcontroller **ESP32**:\n\n${names}\n\nAnda dapat membuka tab Project Library untuk mengunduh modul instruksi dan rangkaian masing-masing proyek.`,
-        link: { label: 'Buka Project Library', tab: 'projects' }
-      };
-    }
-    
-    if (q.includes('setelah tinybit') || q.includes('materi setelah tinybit')) {
-      return {
-        text: 'Berdasarkan **Roadmap Kurikulum Kelas 7**, setelah menyelesaikan materi pemrograman robot **Tinybit**, materi selanjutnya adalah **Microbit Basic** (mengenal pin out, display LED, dan sensor internal) sebelum masuk ke IoT Basic.',
-        link: { label: 'Buka Draft Kurikulum', tab: 'kurikulum' }
-      };
-    }
-    
-    if (q.includes('computer vision') || q.includes('guru') && q.includes('vision')) {
-      // Let's find who teaches CV or check lessons
-      const cvTeacher = mockDb.getLessons().find(l => l.topic === 'Computer Vision')?.creator || 'Fajar Nugraha';
-      return {
-        text: `Guru yang menyusun modul dan mengajarkan materi **Computer Vision** (Kelas 8) adalah **${cvTeacher}**. Anda dapat melihat profil lengkap dan kontak beliau di menu Guru & Teknisi.`,
-        link: { label: 'Lihat Profil Guru', tab: 'people' }
-      };
-    }
-
-    if (q.includes('inventaris') || q.includes('alat') || q.includes('solder') || q.includes('microbit')) {
-      const inv = mockDb.getInventory();
-      const match = inv.filter(i => q.includes(i.name.toLowerCase()) || q.includes(i.category.toLowerCase()));
-      if (match.length > 0) {
-        const list = match.map(m => `• **${m.name}** (${m.code}) - Status: *${m.status}* di *${m.location}*`).join('\n');
-        return {
-          text: `Hasil pencarian inventaris lab terkait query Anda:\n\n${list}\n\nAnda dapat meminjam atau mengupdate statusnya langsung di menu Inventaris.`,
-          link: { label: 'Buka Inventaris LAB', tab: 'inventory' }
-        };
-      }
-    }
-
-    // Default reply using mock database query heuristics
-    return {
-      text: 'Maaf, saya tidak dapat menemukan dokumen spesifik tentang hal itu. Namun, Anda dapat mencari informasi tersebut menggunakan pencarian global di bagian atas website, atau menavigasi ke kategori terkait seperti **Draft Kurikulum** atau **Project Library**.'
-    };
+    return getChatbotResponse(query);
   };
 
   const handleSend = (textToSend: string) => {

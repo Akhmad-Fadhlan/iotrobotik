@@ -6,6 +6,8 @@ import {
   Sparkles, ArrowRight,
   Bot, ChevronRight, Globe, UserRound, Cpu
 } from 'lucide-react';
+import ThreeDCarousel from '../components/ThreeDCarousel';
+import CinematicTextReveal from '../components/CinematicTextReveal';
 
 interface LandingPageViewProps {
   onNavigate: (tab: string) => void;
@@ -831,31 +833,30 @@ export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPag
 
         {/* ══════════════ 3. AKSES CEPAT ══════════════ */}
         <div>
-          <div className="lp-sec-head">
-            <div>
-              <h2 className="lp-sec-title">Akses Cepat</h2>
-              <p className="lp-sec-sub">Pilih modul yang ingin Anda telusuri</p>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '32px', gap: '8px' }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              background: 'rgba(37, 99, 235, 0.08)',
+              border: '1px solid rgba(37, 99, 235, 0.18)',
+              borderRadius: '100px',
+              padding: '5px 14px',
+              fontSize: '11px',
+              fontWeight: 700,
+              color: '#2563EB',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}>
+              Eksplorasi Modul
             </div>
-            <button className="lp-see-all" onClick={() => onNavigate('materi')}>
-              Lihat Semua <ArrowRight size={13} />
-            </button>
+            <h2 className="lp-sec-title" style={{ fontSize: '32px', fontWeight: 900, color: '#0F172A', letterSpacing: '-0.02em', margin: '4px 0 2px 0' }}>
+              <CinematicTextReveal text="Akses Cepat" />
+            </h2>
+            <p className="lp-sec-sub" style={{ margin: 0, fontSize: '14.5px', color: '#64748B', maxWidth: '480px', lineHeight: 1.6 }}>
+              Pilih modul yang ingin Anda telusuri secara interaktif
+            </p>
           </div>
-          <div className="lp-quick">
-            {quickItems.map(({ id, title, desc, Icon, grad, glow, url }) => (
-              <button key={id} onClick={() => url ? window.open(url, '_blank') : onNavigate(id)} className="lp-quick-card"
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = `0 12px 28px ${glow}`; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 16px rgba(37,99,235,0.06)'; }}
-              >
-                <div className="lp-quick-icon" style={{ background: grad, boxShadow: `0 4px 14px ${glow}` }}>
-                  <Icon size={22} color="white" />
-                </div>
-                <div>
-                  <div className="lp-quick-title">{title}</div>
-                  <div className="lp-quick-desc">{desc}</div>
-                </div>
-              </button>
-            ))}
-          </div>
+          <ThreeDCarousel items={quickItems} onNavigate={onNavigate} />
         </div>
 
         {/* ══════════════ 4. GALERI ══════════════ */}

@@ -19,6 +19,7 @@ import AdminView from './views/AdminView';
 import StudentsView from './views/StudentsView';
 
 import { mockDb } from './services/db';
+import { getChatbotResponse } from './services/chatbot';
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -38,10 +39,11 @@ export default function App() {
   const handleSendChat = () => {
     if (!chatMsg.trim()) return;
     const userMsg = chatMsg.trim();
+    const botResponse = getChatbotResponse(userMsg);
     setChatHistory(prev => [
       ...prev,
       { from: 'user', text: userMsg },
-      { from: 'ai', text: 'Berikut langkah umum membuat robot line follower:\n1. Siapkan komponen sensor line, mikrokontroler, motor driver, dan motor.\n2. Rangkai sensor line di bagian depan robot.\n3. Program mikrokontroler untuk membaca sensor dan mengatur motor.\n4. Uji coba dan lakukan kalibrasi.' }
+      { from: 'ai', text: botResponse.text }
     ]);
     setChatMsg('');
   };
