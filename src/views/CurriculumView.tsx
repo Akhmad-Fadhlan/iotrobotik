@@ -44,12 +44,7 @@ import {
   Search,
   RefreshCw,
   AlertCircle,
-  BookOpen,
-  Database,
-  Cloud,
-  Globe,
-  Zap,
-  Workflow
+  BookOpen
 } from 'lucide-react';
 
 const TrainIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -359,6 +354,280 @@ const DownArrow = ({ color }: { color: string }) => (
   </div>
 );
 
+// Custom SVG Icons matching the ones in the user's roadmap image
+const HardwareIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#10B981" />
+    <rect x="25" y="25" width="50" height="50" rx="6" fill="#1F2937" stroke="#F59E0B" strokeWidth="2" />
+    <rect x="42" y="42" width="16" height="16" rx="2" fill="#E2E8F0" opacity="0.8" />
+    <rect x="15" y="32" width="10" height="4" rx="1" fill="#F59E0B" />
+    <rect x="15" y="42" width="10" height="4" rx="1" fill="#F59E0B" />
+    <rect x="15" y="52" width="10" height="4" rx="1" fill="#F59E0B" />
+    <rect x="15" y="62" width="10" height="4" rx="1" fill="#F59E0B" />
+    <rect x="75" y="32" width="10" height="4" rx="1" fill="#F59E0B" />
+    <rect x="75" y="42" width="10" height="4" rx="1" fill="#F59E0B" />
+    <rect x="75" y="52" width="10" height="4" rx="1" fill="#F59E0B" />
+    <rect x="75" y="62" width="10" height="4" rx="1" fill="#F59E0B" />
+    <rect x="32" y="15" width="4" height="10" rx="1" fill="#F59E0B" />
+    <rect x="42" y="15" width="4" height="10" rx="1" fill="#F59E0B" />
+    <rect x="52" y="15" width="4" height="10" rx="1" fill="#F59E0B" />
+    <rect x="62" y="15" width="4" height="10" rx="1" fill="#F59E0B" />
+    <rect x="32" y="75" width="4" height="10" rx="1" fill="#F59E0B" />
+    <rect x="42" y="75" width="4" height="10" rx="1" fill="#F59E0B" />
+    <rect x="52" y="75" width="4" height="10" rx="1" fill="#F59E0B" />
+    <rect x="62" y="75" width="4" height="10" rx="1" fill="#F59E0B" />
+    <path d="M25 35H12M25 65H12M75 35H88M75 65H88" stroke="#10B981" strokeWidth="2" opacity="0.5" />
+  </svg>
+);
+
+const SensorIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#1E2937" />
+    <circle cx="32" cy="50" r="16" fill="#4B5563" stroke="#9CA3AF" strokeWidth="2" />
+    <circle cx="32" cy="50" r="8" fill="#111827" />
+    <circle cx="32" cy="50" r="3" fill="#60A5FA" />
+    <circle cx="68" cy="50" r="16" fill="#4B5563" stroke="#9CA3AF" strokeWidth="2" />
+    <circle cx="68" cy="50" r="8" fill="#111827" />
+    <circle cx="68" cy="50" r="3" fill="#60A5FA" />
+    <rect x="47" y="15" width="6" height="20" fill="#EF4444" rx="3" />
+    <line x1="50" y1="35" x2="50" y2="45" stroke="#9CA3AF" strokeWidth="2" />
+    <line x1="30" y1="80" x2="30" y2="90" stroke="#F59E0B" strokeWidth="3" />
+    <line x1="50" y1="80" x2="50" y2="90" stroke="#F59E0B" strokeWidth="3" />
+    <line x1="70" y1="80" x2="70" y2="90" stroke="#F59E0B" strokeWidth="3" />
+  </svg>
+);
+
+const MicrobitIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#0F172A" />
+    <rect x="5" y="80" width="90" height="14" fill="#F59E0B" rx="2" />
+    <line x1="18" y1="80" x2="18" y2="94" stroke="#1F2937" strokeWidth="3" />
+    <line x1="36" y1="80" x2="36" y2="94" stroke="#1F2937" strokeWidth="3" />
+    <line x1="54" y1="80" x2="54" y2="94" stroke="#1F2937" strokeWidth="3" />
+    <line x1="72" y1="80" x2="72" y2="94" stroke="#1F2937" strokeWidth="3" />
+    <circle cx="20" cy="45" r="7" fill="#EF4444" />
+    <circle cx="20" cy="45" r="4" fill="#111827" />
+    <text x="17" y="65" fill="#9CA3AF" fontSize="10" fontWeight="900">A</text>
+    <circle cx="80" cy="45" r="7" fill="#EF4444" />
+    <circle cx="80" cy="45" r="4" fill="#111827" />
+    <text x="77" y="65" fill="#9CA3AF" fontSize="10" fontWeight="900">B</text>
+    <g fill="#EF4444" opacity="0.95">
+      <circle cx="40" cy="25" r="2.5" /><circle cx="45" cy="25" r="2.5" /><circle cx="50" cy="25" r="2.5" /><circle cx="55" cy="25" r="2.5" /><circle cx="60" cy="25" r="2.5" />
+      <circle cx="40" cy="33" r="2.5" /><circle cx="45" cy="33" r="2.5" /><circle cx="50" cy="33" r="2.5" /><circle cx="55" cy="33" r="2.5" /><circle cx="60" cy="33" r="2.5" />
+      <circle cx="40" cy="41" r="2.5" /><circle cx="45" cy="41" r="2.5" /><circle cx="50" cy="41" r="2.5" /><circle cx="55" cy="41" r="2.5" /><circle cx="60" cy="41" r="2.5" />
+      <circle cx="40" cy="49" r="2.5" /><circle cx="45" cy="49" r="2.5" /><circle cx="50" cy="49" r="2.5" /><circle cx="55" cy="49" r="2.5" /><circle cx="60" cy="49" r="2.5" />
+      <circle cx="40" cy="57" r="2.5" /><circle cx="45" cy="57" r="2.5" /><circle cx="50" cy="57" r="2.5" /><circle cx="55" cy="57" r="2.5" /><circle cx="60" cy="57" r="2.5" />
+    </g>
+  </svg>
+);
+
+const BlockCodingIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#2563EB" />
+    <path d="M20 30h18a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6v-8a6 6 0 0 1 6-6z" fill="#60A5FA" />
+    <path d="M26 38h6v4h-6z" fill="white" opacity="0.8" />
+    <path d="M45 42h18a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H45a6 6 0 0 1-6-6v-8a6 6 0 0 1 6-6z" fill="#10B981" />
+    <circle cx="48" cy="50" r="3" fill="white" opacity="0.8" />
+    <path d="M30 60h22a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6v-8a6 6 0 0 1 6-6z" fill="#A78BFA" />
+  </svg>
+);
+
+const PythonIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#1E2937" />
+    <path d="M49.6 20c-11.8 0-11 5.1-11 5.1l.1 5.3h11.2v1.6H34.4s-9.2-.8-9.2 10.9c0 11.6 8.1 11.2 8.1 11.2h4.8v-6.7c0-7.8 6.7-7.4 6.7-7.4h11.4s7.2.2 7.2-7.1V27.2s.5-7.2-13.8-7.2z" fill="#306998" />
+    <circle cx="43" cy="25" r="1.5" fill="white" />
+    <path d="M50.4 80c11.8 0 11-5.1 11-5.1l-.1-5.3H50.1v-1.6h15.5s9.2.8 9.2-10.9c0-11.6-8.1-11.2-8.1-11.2h-4.8v6.7c0 7.8-6.7 7.4-6.7 7.4H33.8s-7.2-.2-7.2 7.1v15.2s-.5 7.2 13.8 7.2z" fill="#FFE052" />
+    <circle cx="57" cy="75" r="1.5" fill="black" />
+  </svg>
+);
+
+const TeachableMachineIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#7C3AED" />
+    <text x="18" y="62" fill="white" fontSize="32" fontWeight="900" fontFamily="sans-serif">TM</text>
+    <rect x="68" y="25" width="8" height="50" rx="4" fill="#60A5FA" />
+    <rect x="78" y="38" width="8" height="37" rx="4" fill="#10B981" />
+    <rect x="88" y="50" width="8" height="25" rx="4" fill="#F59E0B" />
+  </svg>
+);
+
+const AIIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#7C3AED" />
+    <rect x="30" y="30" width="40" height="40" rx="8" fill="#1F2937" stroke="#A78BFA" strokeWidth="2" />
+    <text x="37" y="56" fill="#A78BFA" fontSize="20" fontWeight="900" fontFamily="sans-serif">AI</text>
+    <path d="M50 30V15M50 70v15M30 50H15M70 50h15" stroke="#A78BFA" strokeWidth="3" strokeLinecap="round" />
+    <path d="M36 36L26 26M64 36l10-10M36 64L26 74M64 64l10 10" stroke="#A78BFA" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
+
+const DatabaseIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#6366F1" />
+    <ellipse cx="50" cy="30" rx="25" ry="8" fill="#E2E8F0" stroke="#1F2937" strokeWidth="2" />
+    <path d="M25 30v15c0 4.4 11.2 8 25 8s25-3.6 25-8V30" fill="#CBD5E1" stroke="#1F2937" strokeWidth="2" />
+    <ellipse cx="50" cy="45" rx="25" ry="8" fill="#E2E8F0" stroke="#1F2937" strokeWidth="2" />
+    <path d="M25 45v15c0 4.4 11.2 8 25 8s25-3.6 25-8V45" fill="#94A3B8" stroke="#1F2937" strokeWidth="2" />
+    <ellipse cx="50" cy="60" rx="25" ry="8" fill="#E2E8F0" stroke="#1F2937" strokeWidth="2" />
+    <circle cx="35" cy="30" r="1.5" fill="#10B981" />
+    <circle cx="35" cy="45" r="1.5" fill="#10B981" />
+    <circle cx="35" cy="60" r="1.5" fill="#10B981" />
+  </svg>
+);
+
+const WebsiteIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#3B82F6" />
+    <rect x="15" y="20" width="70" height="48" rx="6" fill="#1F2937" stroke="#E2E8F0" strokeWidth="2" />
+    <path d="M42 68l-6 12h28l-6-12" fill="#E2E8F0" />
+    <rect x="20" y="25" width="60" height="38" rx="2" fill="#111827" />
+    <path d="M24 53l10-15 12 10 16-18 10 8" stroke="#10B981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="34" cy="38" r="3" fill="#F59E0B" />
+    <circle cx="62" cy="30" r="3" fill="#F59E0B" />
+  </svg>
+);
+
+const IoTIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#0EA5E9" />
+    <path d="M35 65c-6.6 0-12-5.4-12-12 0-5.8 4.2-10.7 9.8-11.8 1.4-6.8 7.4-11.8 14.5-11.8 5 0 9.5 2.5 12.1 6.3 3-2.7 7-4.3 11.4-4.3 9.4 0 17 7.6 17 17s-7.6 17-17 17H35z" fill="white" />
+    <text x="36" y="59" fill="#0EA5E9" fontSize="16" fontWeight="900" fontFamily="sans-serif">IoT</text>
+  </svg>
+);
+
+const SmartHomeIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#10B981" />
+    <path d="M50 18L18 45h64L50 18z" fill="#F59E0B" />
+    <rect x="25" y="45" width="50" height="38" fill="#F8FAFC" rx="2" />
+    <rect x="44" y="58" width="12" height="25" fill="#3B82F6" rx="2" />
+    <rect x="32" y="52" width="8" height="8" fill="#60A5FA" rx="1" />
+    <rect x="60" y="52" width="8" height="8" fill="#60A5FA" rx="1" />
+    <path d="M44 32c3-3 8-3 11 0" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" />
+    <path d="M40 28c5-5 14-5 19 0" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const SmartGreenhouseIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#10B981" />
+    <path d="M50 15C25 15 15 45 15 80h70C85 45 75 15 50 15z" fill="rgba(255,255,255,0.4)" stroke="white" strokeWidth="3" />
+    <line x1="50" y1="15" x2="50" y2="80" stroke="white" strokeWidth="2" />
+    <line x1="32" y1="28" x2="32" y2="80" stroke="white" strokeWidth="1.5" />
+    <line x1="68" y1="28" x2="68" y2="80" stroke="white" strokeWidth="1.5" />
+    <path d="M20 50h60M16 65h68" stroke="white" strokeWidth="1.5" />
+    <path d="M50 80c0-15-5-20-10-22 5 2 9 8 10 14h2c1-6 5-12 10-14-5 2-10 7-10 22h-2z" fill="#047857" />
+    <path d="M40 58c-6-3-6-10 0-12 0 6 3 9 0 12z" fill="#10B981" />
+    <path d="M60 58c6-3 6-10 0-12 0 6-3 9 0 12z" fill="#10B981" />
+  </svg>
+);
+
+const LineFollowerIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#E2E8F0" />
+    <path d="M50 10v80" stroke="#1E2937" strokeWidth="8" strokeLinecap="round" />
+    <rect x="28" y="30" width="44" height="40" rx="8" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="3" />
+    <rect x="20" y="38" width="8" height="24" rx="2" fill="#1E2937" />
+    <rect x="72" y="38" width="8" height="24" rx="2" fill="#1E2937" />
+    <circle cx="45" cy="78" r="3" fill="#EF4444" />
+    <circle cx="55" cy="78" r="3" fill="#EF4444" />
+    <path d="M45 78v-8M55 78v-8" stroke="#F59E0B" strokeWidth="1.5" />
+  </svg>
+);
+
+const BluetoothIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#E2E8F0" />
+    <rect x="28" y="35" width="44" height="40" rx="8" fill="#8B5CF6" stroke="#6D28D9" strokeWidth="3" />
+    <rect x="20" y="43" width="8" height="24" rx="2" fill="#1E2937" />
+    <rect x="72" y="43" width="8" height="24" rx="2" fill="#1E2937" />
+    <path d="M50 15l5 6.5-10 8V15l10 8-5 6.5" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const SmartParkingIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#E2E8F0" />
+    <rect x="22" y="40" width="12" height="45" fill="#475569" rx="2" />
+    <rect x="30" y="46" width="55" height="6" fill="#EF4444" rx="1" />
+    <rect x="42" y="46" width="10" height="6" fill="white" />
+    <rect x="62" y="46" width="10" height="6" fill="white" />
+    <circle cx="70" cy="24" r="12" fill="#2563EB" />
+    <text x="66" y="29" fill="white" fontSize="14" fontWeight="900" fontFamily="sans-serif">P</text>
+  </svg>
+);
+
+const RobotCommIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#1F2937" />
+    <rect x="18" y="20" width="38" height="28" rx="4" fill="#4B5563" stroke="white" strokeWidth="2" />
+    <rect x="23" y="23" width="28" height="20" fill="#111827" />
+    <rect x="62" y="48" width="24" height="20" rx="4" fill="#8B5CF6" />
+    <circle cx="68" cy="70" r="4" fill="#E2E8F0" />
+    <circle cx="80" cy="70" r="4" fill="#E2E8F0" />
+    <path d="M50 48c4-4 8-4 12 0M38 58c4-4 8-4 12 0" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
+    <path d="M38 42l24 16" stroke="#10B981" strokeWidth="2" strokeDasharray="3 3" />
+  </svg>
+);
+
+const NetworkIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#047857" />
+    <circle cx="50" cy="50" r="8" fill="white" />
+    <circle cx="25" cy="25" r="6" fill="#F59E0B" />
+    <circle cx="75" cy="25" r="6" fill="#60A5FA" />
+    <circle cx="25" cy="75" r="6" fill="#EF4444" />
+    <circle cx="75" cy="75" r="6" fill="#A78BFA" />
+    <line x1="50" y1="50" x2="25" y2="25" stroke="white" strokeWidth="2" />
+    <line x1="50" y1="50" x2="75" y2="25" stroke="white" strokeWidth="2" />
+    <line x1="50" y1="50" x2="25" y2="75" stroke="white" strokeWidth="2" />
+    <line x1="50" y1="50" x2="75" y2="75" stroke="white" strokeWidth="2" />
+    <path d="M25 25h50v50H25z" stroke="white" strokeWidth="1" strokeDasharray="2 2" />
+  </svg>
+);
+
+const RealtimeChartIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#111827" />
+    <path d="M20 20v60h60" stroke="#4B5563" strokeWidth="3" strokeLinecap="round" />
+    <path d="M24 70q10-40 20-10t20-30t20 20" fill="none" stroke="#10B981" strokeWidth="4" strokeLinecap="round" />
+    <line x1="20" y1="40" x2="80" y2="40" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 4" />
+  </svg>
+);
+
+const AutomationIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#065F46" />
+    <path d="M50 20a30 30 0 1 1-21.2 51.2l-3.8-3.8" fill="none" stroke="#34D399" strokeWidth="6" strokeLinecap="round" />
+    <polyline points="45 15 50 20 45 25" fill="none" stroke="#34D399" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M54 36L42 52h10l-2 18l14-20H52l2-14z" fill="#FBBF24" />
+  </svg>
+);
+
+const IntegrasiSensorIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#5B21B6" />
+    <rect x="18" y="25" width="24" height="24" rx="4" fill="#374151" stroke="#9CA3AF" strokeWidth="2" />
+    <circle cx="30" cy="37" r="5" fill="#EF4444" />
+    <rect x="58" y="50" width="24" height="24" rx="4" fill="#1F2937" stroke="#A78BFA" strokeWidth="2" />
+    <rect x="64" y="56" width="12" height="12" fill="#E2E8F0" />
+    <path d="M30 49v18h28" stroke="#F59E0B" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IntegrasiAIWithWebIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+    <rect width="100" height="100" rx="18" fill="#4C1D95" />
+    <rect x="18" y="18" width="34" height="34" rx="6" fill="#8B5CF6" />
+    <text x="24" y="40" fill="white" fontSize="13" fontWeight="900" fontFamily="sans-serif">AI</text>
+    <rect x="44" y="44" width="38" height="38" rx="4" fill="#1E2937" stroke="#34D399" strokeWidth="2" />
+    <rect x="44" y="44" width="38" height="8" fill="#34D399" />
+    <path d="M35 52v12h9" stroke="#FBBF24" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    <polyline points="40 59 44 64 40 69" fill="none" stroke="#FBBF24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const overviewColumns = [
   {
     semester: 'KELAS 7 — SEMESTER 2',
@@ -368,23 +637,23 @@ const overviewColumns = [
     borderColor: 'rgba(59, 130, 246, 0.2)',
     badgeColor: '#2563EB',
     items: [
-      { id: 'c1-1', title: 'Hardware & Elektronika Dasar', desc: 'Komponen dasar elektronika dan fungsinya.', icon: Cpu, compId: 'hardware' },
-      { id: 'c1-2', title: 'Mengenal Sensor, Aktuator, Motor, Servo, LED, Buzzer', desc: 'Memahami jenis sensor dan aktuator yang digunakan.', icon: Settings, compId: 'hardware' },
-      { id: 'c1-3', title: 'Memahami Cara Kerja Micro:bit', desc: 'Alur kerja Micro:bit secara sederhana (Input → Process → Output).', icon: Zap, compId: 'microbit' },
-      { id: 'c1-4', title: 'Pemrograman Dasar (Block Coding - MakeCode)', desc: 'Belajar coding dasar dengan block programming.', icon: Code2, compId: 'block' },
+      { id: 'c1-1', title: 'Hardware & Elektronika Dasar', desc: 'Komponen dasar elektronika dan fungsinya.', icon: HardwareIcon, compId: 'hardware' },
+      { id: 'c1-2', title: 'Mengenal Sensor, Aktuator, Motor, Servo, LED, Buzzer', desc: 'Memahami jenis sensor dan aktuator yang digunakan.', icon: SensorIcon, compId: 'hardware' },
+      { id: 'c1-3', title: 'Memahami Cara Kerja Micro:bit', desc: 'Alur kerja Micro:bit secara sederhana (Input → Process → Output).', icon: MicrobitIcon, compId: 'microbit' },
+      { id: 'c1-4', title: 'Pemrograman Dasar (Block Coding - MakeCode)', desc: 'Belajar coding dasar dengan block programming.', icon: BlockCodingIcon, compId: 'block' },
       {
         id: 'c1-5',
         isSubSection: true,
         title: 'Mempelajari & Memodifikasi Project Robot',
         compId: 'microbit',
         projects: [
-          { name: 'Line Follower', icon: Route, desc: 'Robot pengikut garis' },
-          { name: 'Bluetooth Controller', icon: Bluetooth, desc: 'Kontrol robot via HP' },
-          { name: 'Smart Parking', icon: Car, desc: 'Palang parkir otomatis' }
+          { name: 'Line Follower', icon: LineFollowerIcon, desc: 'Robot pengikut garis' },
+          { name: 'Bluetooth Controller', icon: BluetoothIcon, desc: 'Kontrol robot via HP' },
+          { name: 'Smart Parking', icon: SmartParkingIcon, desc: 'Palang parkir otomatis' }
         ]
       },
-      { id: 'c1-6', title: 'Artificial Intelligence Dasar (Teachable Machine)', desc: 'Klasifikasi gambar & deteksi objek dengan AI Google.', icon: Brain, compId: 'ai' },
-      { id: 'c1-7', title: 'Memahami Konsep Integrasi Robot + AI', desc: 'Menggabungkan visi komputer AI dengan kontrol fisik robot.', icon: InfinityIcon, compId: 'ai' }
+      { id: 'c1-6', title: 'Artificial Intelligence Dasar (Teachable Machine)', desc: 'Klasifikasi gambar & deteksi objek dengan AI Google.', icon: TeachableMachineIcon, compId: 'ai' },
+      { id: 'c1-7', title: 'Memahami Konsep Integrasi Robot + AI', desc: 'Menggabungkan visi komputer AI dengan kontrol fisik robot.', icon: AIIcon, compId: 'ai' }
     ]
   },
   {
@@ -395,12 +664,12 @@ const overviewColumns = [
     borderColor: 'rgba(139, 92, 246, 0.2)',
     badgeColor: '#7C3AED',
     items: [
-      { id: 'c2-1', title: 'Pemrograman Python pada Micro:bit', desc: 'Menggunakan Python untuk pemrograman Micro:bit tingkat lanjut.', icon: Code2, compId: 'python' },
-      { id: 'c2-2', title: 'Integrasi Sensor & Aktuator', desc: 'Menghubungkan sensor dan aktuator dengan Micro:bit secara kompleks.', icon: GitFork, compId: 'python' },
-      { id: 'c2-3', title: 'Komunikasi Data Robot ↔ Komputer', desc: 'Transfer data sensor & perintah kontrol antara robot dan komputer.', icon: RefreshCw, compId: 'python' },
-      { id: 'c2-4', title: 'Database Dasar', desc: 'Menyimpan dan mengelola data log robot dengan database.', icon: Database, compId: 'database' },
-      { id: 'c2-5', title: 'Website Monitoring dan Control', desc: 'Membuat dashboard website untuk monitoring & kontrol robot.', icon: Globe, compId: 'web' },
-      { id: 'c2-6', title: 'Integrasi AI dengan Website (Object Detection, Realtime Monitoring, Automation)', desc: 'Menghubungkan deteksi objek AI, grafik real-time, dan otomasi web.', icon: Sparkles, compId: 'ai' }
+      { id: 'c2-1', title: 'Pemrograman Python pada Micro:bit', desc: 'Menggunakan Python untuk pemrograman Micro:bit tingkat lanjut.', icon: PythonIcon, compId: 'python' },
+      { id: 'c2-2', title: 'Integrasi Sensor & Aktuator', desc: 'Menghubungkan sensor dan aktuator dengan Micro:bit secara kompleks.', icon: IntegrasiSensorIcon, compId: 'python' },
+      { id: 'c2-3', title: 'Komunikasi Data Robot ↔ Komputer', desc: 'Transfer data sensor & perintah kontrol antara robot dan komputer.', icon: RobotCommIcon, compId: 'python' },
+      { id: 'c2-4', title: 'Database Dasar', desc: 'Menyimpan dan mengelola data log robot dengan database.', icon: DatabaseIcon, compId: 'database' },
+      { id: 'c2-5', title: 'Website Monitoring dan Control', desc: 'Membuat dashboard website untuk monitoring & kontrol robot.', icon: WebsiteIcon, compId: 'web' },
+      { id: 'c2-6', title: 'Integrasi AI dengan Website (Object Detection, Realtime Monitoring, Automation)', desc: 'Menghubungkan deteksi objek AI, grafik real-time, dan otomasi web.', icon: IntegrasiAIWithWebIcon, compId: 'ai' }
     ]
   },
   {
@@ -411,18 +680,18 @@ const overviewColumns = [
     borderColor: 'rgba(16, 185, 129, 0.2)',
     badgeColor: '#10B981',
     items: [
-      { id: 'c3-1', title: 'Internet of Things (IoT)', desc: 'Memahami konsep IoT dan penerapannya dalam kehidupan nyata.', icon: Cloud, compId: 'iot' },
-      { id: 'c3-2', title: 'Integrasi Sensor, Micro:bit, Website, Database, AI', desc: 'Mengintegrasikan seluruh ekosistem dalam satu kesatuan sistem.', icon: Workflow, compId: 'iot' },
-      { id: 'c3-3', title: 'Realtime Monitoring', desc: 'Memantau data sensor secara real-time dengan grafik interaktif.', icon: LineChart, compId: 'iot' },
-      { id: 'c3-4', title: 'Automation', desc: 'Sistem otomasi tertutup berdasarkan ambang batas data sensor.', icon: Shield, compId: 'iot' },
+      { id: 'c3-1', title: 'Internet of Things (IoT)', desc: 'Memahami konsep IoT dan penerapannya dalam kehidupan nyata.', icon: IoTIcon, compId: 'iot' },
+      { id: 'c3-2', title: 'Integrasi Sensor, Micro:bit, Website, Database, AI', desc: 'Mengintegrasikan seluruh ekosistem dalam satu kesatuan sistem.', icon: NetworkIcon, compId: 'iot' },
+      { id: 'c3-3', title: 'Realtime Monitoring', desc: 'Memantau data sensor secara real-time dengan grafik interaktif.', icon: RealtimeChartIcon, compId: 'iot' },
+      { id: 'c3-4', title: 'Automation', desc: 'Sistem otomasi tertutup berdasarkan ambang batas data sensor.', icon: AutomationIcon, compId: 'iot' },
       {
         id: 'c3-5',
         isSubSection: true,
         title: 'Capstone Project',
         compId: 'capstone',
         projects: [
-          { name: 'Smart Home', icon: Home, desc: 'Rumah pintar terintegrasi' },
-          { name: 'Smart Greenhouse', icon: Sprout, desc: 'Kubah pertanian otomatis' }
+          { name: 'Smart Home', icon: SmartHomeIcon, desc: 'Rumah pintar terintegrasi' },
+          { name: 'Smart Greenhouse', icon: SmartGreenhouseIcon, desc: 'Kubah pertanian otomatis' }
         ],
         subtext: 'Mewujudkan solusi nyata berbasis IoT dan AI dalam kehidupan sehari-hari.'
       }
@@ -431,15 +700,15 @@ const overviewColumns = [
 ];
 
 const outputCompetencies = [
-  { id: 'hardware', label: 'Hardware & Elektronika', icon: Cpu, desc: 'Pemahaman sirkuit elektronika dasar, sensor, aktuator, dan mikrokontroler.' },
-  { id: 'microbit', label: 'Micro:bit', icon: Cpu, desc: 'Pemahaman cara kerja mikrokontroler micro:bit dan integrasi hardware.' },
-  { id: 'block', label: 'Block Coding (MakeCode)', icon: Code2, desc: 'Logika pemrograman dasar menggunakan antarmuka blok visual.' },
-  { id: 'python', label: 'Python Programming', icon: Code2, desc: 'Penulisan kode pemrograman tekstual tingkat lanjut menggunakan Python.' },
-  { id: 'ai', label: 'Artificial Intelligence', icon: Brain, desc: 'Penerapan model kecerdasan buatan (klasifikasi visi komputer & deteksi objek).' },
-  { id: 'database', label: 'Database', icon: Database, desc: 'Penyimpanan, pengambilan, dan pengelolaan data sensor secara terstruktur.' },
-  { id: 'web', label: 'Website Monitoring & Control', icon: Globe, desc: 'Pembuatan antarmuka web interaktif untuk memantau & mengontrol perangkat fisik.' },
-  { id: 'iot', label: 'Internet of Things (IoT)', icon: Cloud, desc: 'Komunikasi data nirkabel berbasis Wi-Fi/Cloud untuk perangkat terhubung.' },
-  { id: 'capstone', label: 'Smart Home & Smart Greenhouse', icon: Sprout, desc: 'Integrasi seluruh kompetensi untuk menciptakan solusi otomasi lingkungan cerdas.' }
+  { id: 'hardware', label: 'Hardware & Elektronika', icon: HardwareIcon, desc: 'Pemahaman sirkuit elektronika dasar, sensor, aktuator, dan mikrokontroler.' },
+  { id: 'microbit', label: 'Micro:bit', icon: MicrobitIcon, desc: 'Pemahaman cara kerja mikrokontroler micro:bit dan integrasi hardware.' },
+  { id: 'block', label: 'Block Coding (MakeCode)', icon: BlockCodingIcon, desc: 'Logika pemrograman dasar menggunakan antarmuka blok visual.' },
+  { id: 'python', label: 'Python Programming', icon: PythonIcon, desc: 'Penulisan kode pemrograman tekstual tingkat lanjut menggunakan Python.' },
+  { id: 'ai', label: 'Artificial Intelligence', icon: AIIcon, desc: 'Penerapan model kecerdasan buatan (klasifikasi visi komputer & deteksi objek).' },
+  { id: 'database', label: 'Database', icon: DatabaseIcon, desc: 'Penyimpanan, pengambilan, dan pengelolaan data sensor secara terstruktur.' },
+  { id: 'web', label: 'Website Monitoring & Control', icon: WebsiteIcon, desc: 'Pembuatan antarmuka web interaktif untuk memantau & mengontrol perangkat fisik.' },
+  { id: 'iot', label: 'Internet of Things (IoT)', icon: IoTIcon, desc: 'Komunikasi data nirkabel berbasis Wi-Fi/Cloud untuk perangkat terhubung.' },
+  { id: 'capstone', label: 'Smart Home & Smart Greenhouse', icon: SmartGreenhouseIcon, desc: 'Integrasi seluruh kompetensi untuk menciptakan solusi otomasi lingkungan cerdas.' }
 ];
 
 const competencyDetails: Record<string, { title: string; desc: string; skills: string[]; projects: string[] }> = {
@@ -2926,7 +3195,7 @@ export default function CurriculumView() {
                               
                               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                                 {item.projects?.map((proj, pIdx) => {
-                                  const ProjIcon = proj.icon;
+                                  const ProjIcon = proj.icon as any;
                                   return (
                                     <div key={pIdx} style={{
                                       flex: '1 1 80px',
