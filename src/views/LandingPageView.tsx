@@ -32,7 +32,7 @@ export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPag
   const totalSiswa = mockDb.getConfig().totalStudents || '2.5K+';
 
   const quickItems = [
-    { id: 'materi',       title: 'Materi',         desc: `${lessonsCount} Materi`,       Icon: BookOpen,      grad: 'linear-gradient(135deg,#3B82F6,#2563EB)', glow: 'rgba(37,99,235,0.28)' },
+    { id: 'tes-recruitment', title: 'Tes Recruitment Pegawai', desc: 'Tes Rekrutmen Karyawan', Icon: FileText, grad: 'linear-gradient(135deg,#3B82F6,#2563EB)', glow: 'rgba(37,99,235,0.28)', url: 'https://teskandidat.vercel.app/' },
     { id: 'projects',    title: 'Project Library', desc: `${projectsCount} Project`,     Icon: FolderGit,     grad: 'linear-gradient(135deg,#8B5CF6,#7C3AED)', glow: 'rgba(124,58,237,0.28)' },
     { id: 'source-code', title: 'Source Code',     desc: `${reposCount} Repository`,     Icon: Code2,         grad: 'linear-gradient(135deg,#10B981,#059669)', glow: 'rgba(16,185,129,0.28)' },
     { id: 'lms',         title: 'LMS',             desc: 'Akses Pembelajaran',   Icon: GraduationCap, grad: 'linear-gradient(135deg,#F59E0B,#D97706)', glow: 'rgba(245,158,11,0.28)' },
