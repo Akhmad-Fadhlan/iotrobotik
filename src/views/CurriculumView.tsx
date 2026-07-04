@@ -23,7 +23,6 @@ import {
   ArrowRight, 
   Map, 
   Calendar, 
-  History, 
   TrendingUp, 
   Play, 
   Clock, 
@@ -44,7 +43,13 @@ import {
   Users,
   Search,
   RefreshCw,
-  AlertCircle
+  AlertCircle,
+  BookOpen,
+  Database,
+  Cloud,
+  Globe,
+  Zap,
+  Workflow
 } from 'lucide-react';
 
 const TrainIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -299,8 +304,8 @@ const getSubjectDates = (cohortId: string, subjectId: string) => {
   } else if (cohortId === 'kelas-8-smt-4') {
     switch (subjectId) {
       case 'smart-home': return { start: new Date(2027, 0, 6), end: new Date(2027, 2, 2) };
-      case 'smart-greenhouse': return { start: new Date(2027, 2, 3), end: new Date(2027, 3, 13) };
-      case 'graduation-9': return { start: new Date(2027, 3, 14), end: new Date(2027, 5, 1) };
+      case 'smart-greenhouse': return { start: new Date(2027, 2, 3), end: new Date(2027, 3, 27) };
+      case 'graduation-9': return { start: new Date(2027, 3, 28), end: new Date(2027, 5, 1) };
     }
   }
   return { start: new Date(), end: new Date() };
@@ -330,8 +335,8 @@ const getSubjectMeta = (cohortId: string, subjectId: string) => {
   } else if (cohortId === 'kelas-8-smt-4') {
     switch (subjectId) {
       case 'smart-home': return { weeks: 'Minggu 1 - 8', duration: '8 Minggu', color: 'blue' };
-      case 'smart-greenhouse': return { weeks: 'Minggu 9 - 14', duration: '6 Minggu', color: 'emerald' };
-      case 'graduation-9': return { weeks: 'Minggu 15 - 21', duration: '7 Minggu', color: 'red' };
+      case 'smart-greenhouse': return { weeks: 'Minggu 9 - 16', duration: '8 Minggu', color: 'emerald' };
+      case 'graduation-9': return { weeks: 'Minggu 17 - 21', duration: '5 Minggu', color: 'red' };
     }
   }
   return { weeks: 'Minggu 1', duration: '1 Minggu', color: 'blue' };
@@ -345,9 +350,159 @@ const getSubjectMeta = (cohortId: string, subjectId: string) => {
 //   return `${months[date.getMonth()]} ${date.getFullYear()}`;
 // };
 
+const DownArrow = ({ color }: { color: string }) => (
+  <div style={{ display: 'flex', justifyContent: 'center', margin: '4px 0', color: color, opacity: 0.7 }}>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <polyline points="19 12 12 19 5 12"></polyline>
+    </svg>
+  </div>
+);
+
+const overviewColumns = [
+  {
+    semester: 'KELAS 7 — SEMESTER 2',
+    title: 'Foundation of Robotics & AI',
+    color: 'blue',
+    bgColor: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+    borderColor: 'rgba(59, 130, 246, 0.2)',
+    badgeColor: '#2563EB',
+    items: [
+      { id: 'c1-1', title: 'Hardware & Elektronika Dasar', desc: 'Komponen dasar elektronika dan fungsinya.', icon: Cpu, compId: 'hardware' },
+      { id: 'c1-2', title: 'Mengenal Sensor, Aktuator, Motor, Servo, LED, Buzzer', desc: 'Memahami jenis sensor dan aktuator yang digunakan.', icon: Settings, compId: 'hardware' },
+      { id: 'c1-3', title: 'Memahami Cara Kerja Micro:bit', desc: 'Alur kerja Micro:bit secara sederhana (Input → Process → Output).', icon: Zap, compId: 'microbit' },
+      { id: 'c1-4', title: 'Pemrograman Dasar (Block Coding - MakeCode)', desc: 'Belajar coding dasar dengan block programming.', icon: Code2, compId: 'block' },
+      {
+        id: 'c1-5',
+        isSubSection: true,
+        title: 'Mempelajari & Memodifikasi Project Robot',
+        compId: 'microbit',
+        projects: [
+          { name: 'Line Follower', icon: Route, desc: 'Robot pengikut garis' },
+          { name: 'Bluetooth Controller', icon: Bluetooth, desc: 'Kontrol robot via HP' },
+          { name: 'Smart Parking', icon: Car, desc: 'Palang parkir otomatis' }
+        ]
+      },
+      { id: 'c1-6', title: 'Artificial Intelligence Dasar (Teachable Machine)', desc: 'Klasifikasi gambar & deteksi objek dengan AI Google.', icon: Brain, compId: 'ai' },
+      { id: 'c1-7', title: 'Memahami Konsep Integrasi Robot + AI', desc: 'Menggabungkan visi komputer AI dengan kontrol fisik robot.', icon: InfinityIcon, compId: 'ai' }
+    ]
+  },
+  {
+    semester: 'KELAS 8 — SEMESTER 3',
+    title: 'Smart Robot Development',
+    color: 'purple',
+    bgColor: 'linear-gradient(135deg, #8B5CF6, #6D28D9)',
+    borderColor: 'rgba(139, 92, 246, 0.2)',
+    badgeColor: '#7C3AED',
+    items: [
+      { id: 'c2-1', title: 'Pemrograman Python pada Micro:bit', desc: 'Menggunakan Python untuk pemrograman Micro:bit tingkat lanjut.', icon: Code2, compId: 'python' },
+      { id: 'c2-2', title: 'Integrasi Sensor & Aktuator', desc: 'Menghubungkan sensor dan aktuator dengan Micro:bit secara kompleks.', icon: GitFork, compId: 'python' },
+      { id: 'c2-3', title: 'Komunikasi Data Robot ↔ Komputer', desc: 'Transfer data sensor & perintah kontrol antara robot dan komputer.', icon: RefreshCw, compId: 'python' },
+      { id: 'c2-4', title: 'Database Dasar', desc: 'Menyimpan dan mengelola data log robot dengan database.', icon: Database, compId: 'database' },
+      { id: 'c2-5', title: 'Website Monitoring dan Control', desc: 'Membuat dashboard website untuk monitoring & kontrol robot.', icon: Globe, compId: 'web' },
+      { id: 'c2-6', title: 'Integrasi AI dengan Website (Object Detection, Realtime Monitoring, Automation)', desc: 'Menghubungkan deteksi objek AI, grafik real-time, dan otomasi web.', icon: Sparkles, compId: 'ai' }
+    ]
+  },
+  {
+    semester: 'KELAS 8 — SEMESTER 4',
+    title: 'Smart Environment Development',
+    color: 'emerald',
+    bgColor: 'linear-gradient(135deg, #10B981, #047857)',
+    borderColor: 'rgba(16, 185, 129, 0.2)',
+    badgeColor: '#10B981',
+    items: [
+      { id: 'c3-1', title: 'Internet of Things (IoT)', desc: 'Memahami konsep IoT dan penerapannya dalam kehidupan nyata.', icon: Cloud, compId: 'iot' },
+      { id: 'c3-2', title: 'Integrasi Sensor, Micro:bit, Website, Database, AI', desc: 'Mengintegrasikan seluruh ekosistem dalam satu kesatuan sistem.', icon: Workflow, compId: 'iot' },
+      { id: 'c3-3', title: 'Realtime Monitoring', desc: 'Memantau data sensor secara real-time dengan grafik interaktif.', icon: LineChart, compId: 'iot' },
+      { id: 'c3-4', title: 'Automation', desc: 'Sistem otomasi tertutup berdasarkan ambang batas data sensor.', icon: Shield, compId: 'iot' },
+      {
+        id: 'c3-5',
+        isSubSection: true,
+        title: 'Capstone Project',
+        compId: 'capstone',
+        projects: [
+          { name: 'Smart Home', icon: Home, desc: 'Rumah pintar terintegrasi' },
+          { name: 'Smart Greenhouse', icon: Sprout, desc: 'Kubah pertanian otomatis' }
+        ],
+        subtext: 'Mewujudkan solusi nyata berbasis IoT dan AI dalam kehidupan sehari-hari.'
+      }
+    ]
+  }
+];
+
+const outputCompetencies = [
+  { id: 'hardware', label: 'Hardware & Elektronika', icon: Cpu, desc: 'Pemahaman sirkuit elektronika dasar, sensor, aktuator, dan mikrokontroler.' },
+  { id: 'microbit', label: 'Micro:bit', icon: Cpu, desc: 'Pemahaman cara kerja mikrokontroler micro:bit dan integrasi hardware.' },
+  { id: 'block', label: 'Block Coding (MakeCode)', icon: Code2, desc: 'Logika pemrograman dasar menggunakan antarmuka blok visual.' },
+  { id: 'python', label: 'Python Programming', icon: Code2, desc: 'Penulisan kode pemrograman tekstual tingkat lanjut menggunakan Python.' },
+  { id: 'ai', label: 'Artificial Intelligence', icon: Brain, desc: 'Penerapan model kecerdasan buatan (klasifikasi visi komputer & deteksi objek).' },
+  { id: 'database', label: 'Database', icon: Database, desc: 'Penyimpanan, pengambilan, dan pengelolaan data sensor secara terstruktur.' },
+  { id: 'web', label: 'Website Monitoring & Control', icon: Globe, desc: 'Pembuatan antarmuka web interaktif untuk memantau & mengontrol perangkat fisik.' },
+  { id: 'iot', label: 'Internet of Things (IoT)', icon: Cloud, desc: 'Komunikasi data nirkabel berbasis Wi-Fi/Cloud untuk perangkat terhubung.' },
+  { id: 'capstone', label: 'Smart Home & Smart Greenhouse', icon: Sprout, desc: 'Integrasi seluruh kompetensi untuk menciptakan solusi otomasi lingkungan cerdas.' }
+];
+
+const competencyDetails: Record<string, { title: string; desc: string; skills: string[]; projects: string[] }> = {
+  hardware: {
+    title: 'Hardware & Elektronika',
+    desc: 'Pemahaman tentang dasar-dasar sirkuit listrik, komponen elektronika, dan penggunaan sensor/aktuator fisik.',
+    skills: ['Membaca skematik dasar', 'Merangkai komponen di breadboard', 'Memahami fungsi resistor, LED, transistor, dan relay', 'K3 kelistrikan'],
+    projects: ['Dasar Kelistrikan', 'Rangkaian Sensor Mandiri']
+  },
+  microbit: {
+    title: 'Micro:bit',
+    desc: 'Penggunaan board mikrokontroler micro:bit sebagai otak pemroses data sensor dan pengontrol aktuator.',
+    skills: ['Arsitektur input-proses-output', 'Membaca data sensor onboard (akselerometer, kompas, sensor cahaya)', 'Mengirim sinyal PWM ke servo'],
+    projects: ['Line Follower', 'Bluetooth Controller', 'Smart Parking']
+  },
+  block: {
+    title: 'Block Coding (MakeCode)',
+    desc: 'Pengembangan logika pemrograman dasar menggunakan block programming dari Microsoft MakeCode.',
+    skills: ['Logika percabangan (if-else)', 'Perulangan (loops)', 'Variabel dan operasi logika', 'Event-driven programming'],
+    projects: ['Game sederhana micro:bit', 'Logika palang parkir']
+  },
+  python: {
+    title: 'Python Programming',
+    desc: 'Migrasi dari pemrograman blok visual ke kode teks terstruktur menggunakan bahasa Python pada micro:bit.',
+    skills: ['Sintaks dasar Python', 'Fungsi (functions) & modularitas', 'Penanganan error sederhana', 'Pemrograman berorientasi objek dasar'],
+    projects: ['Robot Transporter Python', 'Robot Hand Gesture']
+  },
+  ai: {
+    title: 'Artificial Intelligence',
+    desc: 'Dasar kecerdasan buatan, visi komputer, dan klasifikasi data menggunakan Google Teachable Machine dan integrasinya.',
+    skills: ['Konsep Machine Learning', 'Image Classification', 'Object Detection', 'Integrasi model AI dengan mikrokontroler'],
+    projects: ['Parking AI (Klasifikasi Plat)', 'Integrasi Kamera AI']
+  },
+  database: {
+    title: 'Database Dasar',
+    desc: 'Penyimpanan data log sensor ke dalam database untuk keperluan monitoring jangka panjang dan histori data.',
+    skills: ['Konsep Relational & Non-relational Database', 'Firebase Realtime Database', 'CRUD API basics', 'Enkripsi data ringan'],
+    projects: ['IoT Logger', 'Smart Home Firebase Integration']
+  },
+  web: {
+    title: 'Website Monitoring & Control',
+    desc: 'Pembuatan aplikasi web frontend untuk menampilkan data sensor secara real-time dan mengontrol aktuator dari jarak jauh.',
+    skills: ['Dasar HTML & CSS', 'JavaScript modern (ES6+)', 'Protokol WebSockets & HTTP', 'Integrasi Vercel/Lovable'],
+    projects: ['Web Control Robot', 'Dashboard Smart Environment']
+  },
+  iot: {
+    title: 'Internet of Things (IoT)',
+    desc: 'Konektivitas nirkabel antar perangkat menggunakan modul Wi-Fi pada ESP32 untuk bertukar data secara global.',
+    skills: ['Protokol MQTT / WebSockets', 'Wi-Fi Manager', 'Firebase API Client', 'Power management (Deep sleep)'],
+    projects: ['Smart Home IoT', 'Smart Greenhouse IoT']
+  },
+  capstone: {
+    title: 'Smart Home & Smart Greenhouse',
+    desc: 'Proyek akhir integrasi penuh yang menggabungkan seluruh modul pembelajaran dari hardware, coding, database, website, hingga AI.',
+    skills: ['Sistem integrasi skala penuh', 'Troubleshooting sistem kompleks', 'Presentasi proyek', 'Desain arsitektur produk IoT'],
+    projects: ['Smart Home System', 'Smart Greenhouse Dome']
+  }
+};
+
 export default function CurriculumView() {
   const timelineData = getGroupedTimelineData();
-  const [activeTab, setActiveTab] = useState<'roadmap' | 'timeline' | 'tracker' | 'docs' | 'revisions'>('roadmap');
+  const [activeTab, setActiveTab] = useState<'overview' | 'roadmap' | 'timeline' | 'tracker' | 'docs'>('overview');
+  const [selectedCompetency, setSelectedCompetency] = useState<string | null>(null);
   const [trackerData, setTrackerData] = useState(() => mockDb.getTeacherProgress());
   const [selectedSubject, setSelectedSubject] = useState<Subject>(() => timelineData[0]?.subjects[0] || {} as Subject);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -417,36 +572,7 @@ export default function CurriculumView() {
     return false;
   };
 
-  const revisions = [
-    {
-      version: 'v2.3',
-      date: '25 Juni 2026',
-      author: 'Ahmad Fauzi',
-      changes: [
-        'Materi AI Robot dipindahkan dari awal Semester 1 ke akhir Semester 2 Kelas 8.',
-        'Penambahan modul praktek Tinybit pada Kelas 7 sebelum masuk ke IoT.',
-        'ESP32 MQTT dipindahkan sepenuhnya ke Kelas 8.'
-      ],
-      reasons: [
-        'Kecerdasan Buatan (AI) membutuhkan performa komputasi tinggi dan pemahaman programming tingkat lanjut.',
-        'Tinybit membantu melatih logika sekuensial siswa agar lebih siap saat memprogram microcontroller mandiri.',
-        'Materi MQTT membutuhkan pengetahuan dasar tentang protokol komunikasi jaringan (TCP/IP) yang diajarkan di Kelas 8.'
-      ]
-    },
-    {
-      version: 'v2.2',
-      date: '10 Desember 2025',
-      author: 'Rizki Maulana',
-      changes: [
-        'Arduino IDE diupdate menggunakan versi 2.x.',
-        'Blynk App diganti menggunakan Blynk IoT Cloud (New Console).'
-      ],
-      reasons: [
-        'Mengikuti standard software terbaru yang memiliki fitur autocomplete lebih baik.',
-        'Platform Blynk lama sudah deprecated dan tidak lagi didukung.'
-      ]
-    }
-  ];
+
 
   return (
     <div className="flex flex-col gap-5 animate-fade-in curriculum-page-wrap">
@@ -480,12 +606,12 @@ export default function CurriculumView() {
           }}
         >
           {(([
+            { id: 'overview',  label: 'Overview',      Icon: BookOpen },
             { id: 'roadmap',   label: 'Roadmap',       Icon: Map      },
             { id: 'timeline',  label: 'Timeline',      Icon: Calendar },
             { id: 'tracker',   label: 'Delivery Tracker', Icon: TrendingUp },
             { id: 'docs',      label: 'Kurikulum',     Icon: FileText },
-            { id: 'revisions', label: 'Revisi',        Icon: History  },
-          ]) as { id: 'roadmap'|'timeline'|'tracker'|'docs'|'revisions'; label: string; Icon: React.ElementType }[]).map(({ id, label, Icon }) => {
+          ]) as { id: 'overview'|'roadmap'|'timeline'|'tracker'|'docs'; label: string; Icon: React.ElementType }[]).map(({ id, label, Icon }) => {
             const isActive = activeTab === id;
             if (isActive) {
               return (
@@ -2639,52 +2765,403 @@ export default function CurriculumView() {
       })()}
 
 
-      {/* ====== TAB CONTENT: REVISI (Log of revisions) ====== */}
-      {activeTab === 'revisions' && (
-        <div className="space-y-6">
-          {revisions.map((rev, idx) => (
-            <div key={idx} className="glass-card p-6 rounded-3xl">
-              <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
-                <div className="flex items-center gap-3">
-                  <span className="rounded-full bg-blue-600 px-3 py-0.5 text-[10.5px] font-bold text-white uppercase tracking-wider">
-                    Versi {rev.version}
-                  </span>
-                  <span className="text-[12px] text-slate-500 font-semibold">{rev.date}</span>
-                </div>
-                <span className="text-[11.5px] text-slate-400 font-medium">Penyusun: {rev.author}</span>
+      {/* ====== TAB CONTENT: OVERVIEW (Interactive Roadmap) ====== */}
+      {activeTab === 'overview' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+          {/* Header Banner */}
+          <div className="glass-card" style={{
+            padding: '32px',
+            borderRadius: '24px',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 100%)',
+            border: '1px solid rgba(37,99,235,0.1)',
+            boxShadow: 'var(--shadow-2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '30px',
+            flexWrap: 'wrap'
+          }}>
+            <div style={{ flex: '1 1 500px' }}>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                background: 'rgba(37, 99, 235, 0.08)',
+                border: '1px solid rgba(37, 99, 235, 0.18)',
+                borderRadius: '100px',
+                padding: '4px 12px',
+                fontSize: '11px',
+                fontWeight: 700,
+                color: '#2563EB',
+                letterSpacing: '0.08em',
+                marginBottom: '16px',
+                textTransform: 'uppercase'
+              }}>
+                <Sparkles size={12} style={{ marginRight: '6px' }} />
+                DRAF KKM & ROADMAP
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="text-[12.5px] font-bold text-slate-800 mb-2 flex items-center gap-1">
-                    <TrendingUp size={14} className="text-blue-500" />
-                    Detail Perubahan
-                  </h4>
-                  <ul className="space-y-2 text-[12px] text-slate-600">
-                    {rev.changes.map((item, itemIdx) => (
-                      <li key={itemIdx} className="flex gap-2">
-                        <span className="text-blue-500">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-[12.5px] font-bold text-slate-800 mb-2 flex items-center gap-1">
-                    <FileText size={14} className="text-emerald-500" />
-                    Alasan Perubahan
-                  </h4>
-                  <ul className="space-y-2 text-[12px] text-slate-600">
-                    {rev.reasons.map((item, itemIdx) => (
-                      <li key={itemIdx} className="flex gap-2">
-                        <span className="text-emerald-500">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <h2 style={{ fontSize: '28px', fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>
+                Roadmap Pembelajaran
+              </h2>
+              <h3 style={{ fontSize: '22px', fontWeight: 700, color: '#2563EB', marginBottom: '14px', fontFamily: 'var(--font-heading)' }}>
+                <span style={{ color: '#2563EB' }}>Robotik</span> • <span style={{ color: '#7C3AED' }}>AI</span> • <span style={{ color: '#10B981' }}>IoT</span>
+              </h3>
+              <p style={{ fontSize: '13.5px', color: '#475569', lineHeight: 1.6, maxWidth: '650px' }}>
+                Alur pembelajaran bertahap dan terstruktur untuk membangun kompetensi dari dasar hingga implementasi solusi nyata.
+              </p>
             </div>
-          ))}
+            
+            {/* Interactive Robot Banner Graphic */}
+            <div className="lp-float" style={{
+              flex: '0 0 160px',
+              height: '160px',
+              background: 'linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(124,58,237,0.1) 100%)',
+              borderRadius: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '1px solid rgba(255,255,255,0.4)',
+              boxShadow: 'inset 0 2px 8px rgba(255,255,255,0.8)'
+            }}>
+              <svg width="90" height="90" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Robot Head */}
+                <rect x="25" y="30" width="50" height="42" rx="14" fill="url(#grad-robot)" stroke="#2563EB" strokeWidth="3" />
+                {/* Ears */}
+                <rect x="18" y="44" width="7" height="14" rx="3" fill="#7C3AED" />
+                <rect x="75" y="44" width="7" height="14" rx="3" fill="#7C3AED" />
+                {/* Eyes */}
+                <circle cx="40" cy="50" r="6" fill="#10B981">
+                  <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
+                </circle>
+                <circle cx="60" cy="50" r="6" fill="#10B981">
+                  <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
+                </circle>
+                {/* Mouth */}
+                <path d="M42 62h16" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" />
+                {/* Antenna */}
+                <line x1="50" y1="30" x2="50" y2="16" stroke="#7C3AED" strokeWidth="3" strokeLinecap="round" />
+                <circle cx="50" cy="13" r="5" fill="#EF4444">
+                  <animate attributeName="r" values="4;6;4" dur="1.5s" repeatCount="indefinite" />
+                </circle>
+                {/* Gradients */}
+                <defs>
+                  <linearGradient id="grad-robot" x1="25" y1="30" x2="75" y2="72" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#FFFFFF" />
+                    <stop offset="1" stopColor="#EBF3FF" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+
+          {/* 3 Columns Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '24px',
+            width: '100%'
+          }}>
+            {overviewColumns.map((col, colIdx) => {
+              return (
+                <div key={colIdx} className="glass-card" style={{
+                  borderRadius: '24px',
+                  padding: '24px',
+                  background: 'rgba(255,255,255,0.7)',
+                  border: `1px solid ${col.borderColor}`,
+                  boxShadow: 'var(--shadow-1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '16px'
+                }}>
+                  {/* Column Header pill */}
+                  <div style={{
+                    background: col.bgColor,
+                    padding: '8px 16px',
+                    borderRadius: '12px',
+                    color: 'white',
+                    fontWeight: 700,
+                    fontSize: '11px',
+                    letterSpacing: '0.05em',
+                    textAlign: 'center',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                  }}>
+                    {col.semester}
+                  </div>
+                  
+                  {/* Column Title */}
+                  <h3 style={{
+                    fontSize: '16px',
+                    fontWeight: 800,
+                    color: '#0F172A',
+                    textAlign: 'center',
+                    marginBottom: '8px'
+                  }}>
+                    {col.title}
+                  </h3>
+                  
+                  {/* Items Stack */}
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {col.items.map((item, itemIdx) => {
+                      const isHighlighted = selectedCompetency !== null && item.compId === selectedCompetency;
+                      const IconComponent = item.icon;
+                      const showArrow = itemIdx < col.items.length - 1;
+                      
+                      if (item.isSubSection) {
+                        return (
+                          <div key={item.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div className="glass-card" style={{
+                              padding: '16px',
+                              borderRadius: '16px',
+                              background: isHighlighted ? 'rgba(251, 191, 36, 0.08)' : 'rgba(255,255,255,0.5)',
+                              border: isHighlighted ? '2px solid #F59E0B' : '1px solid rgba(226,232,240,0.8)',
+                              boxShadow: isHighlighted ? '0 8px 24px rgba(245,158,11,0.15)' : 'none',
+                              transform: isHighlighted ? 'scale(1.02)' : 'none',
+                              transition: 'all 0.25s ease',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              gap: '10px'
+                            }}>
+                              <h4 style={{ fontSize: '12px', fontWeight: 800, color: col.badgeColor }}>
+                                {item.title}
+                              </h4>
+                              
+                              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                                {item.projects?.map((proj, pIdx) => {
+                                  const ProjIcon = proj.icon;
+                                  return (
+                                    <div key={pIdx} style={{
+                                      flex: '1 1 80px',
+                                      padding: '8px 10px',
+                                      borderRadius: '10px',
+                                      background: '#FFFFFF',
+                                      border: '1px solid rgba(226,232,240,0.6)',
+                                      display: 'flex',
+                                      flexDirection: 'column',
+                                      alignItems: 'center',
+                                      textAlign: 'center',
+                                      gap: '4px',
+                                      boxShadow: '0 2px 6px rgba(0,0,0,0.02)'
+                                    }}>
+                                      <ProjIcon size={16} color={col.badgeColor} />
+                                      <div style={{ fontSize: '10px', fontWeight: 700, color: '#1E293B' }}>{proj.name}</div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                              {(item as any).subtext && (
+                                <div style={{ fontSize: '10px', color: '#64748B', fontStyle: 'italic', marginTop: '2px' }}>
+                                  {(item as any).subtext}
+                                </div>
+                              )}
+                            </div>
+                            {showArrow && <DownArrow color={col.badgeColor} />}
+                          </div>
+                        );
+                      }
+                      
+                      return (
+                        <div key={item.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                          <div className="glass-card" style={{
+                            padding: '14px 16px',
+                            borderRadius: '16px',
+                            background: isHighlighted ? 'rgba(251, 191, 36, 0.08)' : 'rgba(255,255,255,0.5)',
+                            border: isHighlighted ? '2px solid #F59E0B' : '1px solid rgba(226,232,240,0.8)',
+                            boxShadow: isHighlighted ? '0 8px 24px rgba(245,158,11,0.15)' : 'none',
+                            transform: isHighlighted ? 'scale(1.02)' : 'none',
+                            transition: 'all 0.25s ease',
+                            display: 'flex',
+                            gap: '12px',
+                            alignItems: 'flex-start'
+                          }}>
+                            <div style={{
+                              width: '32px',
+                              height: '32px',
+                              borderRadius: '10px',
+                              background: isHighlighted ? '#F59E0B' : col.bgColor,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              flexShrink: 0,
+                              color: 'white',
+                              boxShadow: '0 2px 6px rgba(0,0,0,0.05)'
+                            }}>
+                              {IconComponent && <IconComponent size={15} />}
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                              <h4 style={{ fontSize: '12px', fontWeight: 800, color: '#1E293B' }}>
+                                {item.title}
+                              </h4>
+                              <p style={{ fontSize: '10.5px', color: '#64748B', lineHeight: 1.4 }}>
+                                {item.desc}
+                              </p>
+                            </div>
+                          </div>
+                          {showArrow && <DownArrow color={col.badgeColor} />}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Output Kompetensi Pathway */}
+          <div className="glass-card" style={{
+            padding: '24px',
+            borderRadius: '24px',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%)',
+            border: '1px solid rgba(37,99,235,0.08)',
+            boxShadow: 'var(--shadow-1)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+            alignItems: 'center'
+          }}>
+            <h3 style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              OUTPUT KOMPETENSI
+            </h3>
+            
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px',
+              width: '100%'
+            }}>
+              {outputCompetencies.map((comp, idx) => {
+                const isSelected = selectedCompetency === comp.id;
+                const CompIcon = comp.icon;
+                const isLast = idx === outputCompetencies.length - 1;
+                
+                return (
+                  <React.Fragment key={comp.id}>
+                    <button
+                      onClick={() => setSelectedCompetency(selectedCompetency === comp.id ? null : comp.id)}
+                      style={{
+                        padding: '10px 14px',
+                        borderRadius: '14px',
+                        background: isSelected ? 'linear-gradient(135deg, #F59E0B, #D97706)' : '#FFFFFF',
+                        border: isSelected ? '1px solid #D97706' : '1px solid rgba(226,232,240,0.8)',
+                        color: isSelected ? 'white' : '#1E293B',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        boxShadow: isSelected ? '0 6px 18px rgba(245,158,11,0.25)' : '0 2px 6px rgba(0,0,0,0.03)',
+                        transform: isSelected ? 'scale(1.05) translateY(-2px)' : 'none',
+                        transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
+                      }}
+                      className="curriculum-comp-node"
+                    >
+                      <div style={{
+                        width: '22px',
+                        height: '22px',
+                        borderRadius: '6px',
+                        background: isSelected ? 'rgba(255,255,255,0.2)' : 'rgba(37,99,235,0.08)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: isSelected ? 'white' : '#2563EB'
+                      }}>
+                        <CompIcon size={12} />
+                      </div>
+                      <span style={{ fontSize: '11px', fontWeight: 700 }}>{comp.label}</span>
+                    </button>
+                    {!isLast && (
+                      <span style={{
+                        color: '#94A3B8',
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        display: 'flex',
+                        alignItems: 'center'
+                      }} className="hidden-mobile">
+                        →
+                      </span>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+            
+            {/* Competency Explanation Box */}
+            <div style={{ width: '100%', marginTop: '10px' }}>
+              {selectedCompetency ? (
+                (() => {
+                  const details = competencyDetails[selectedCompetency];
+                  if (!details) return null;
+                  return (
+                    <div className="glass-card" style={{
+                      padding: '18px 20px',
+                      borderRadius: '16px',
+                      background: 'rgba(251, 191, 36, 0.04)',
+                      border: '1px solid rgba(245, 158, 11, 0.25)',
+                      animation: 'fadeInUp 0.3s ease',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{
+                          background: '#F59E0B',
+                          color: 'white',
+                          fontSize: '10px',
+                          fontWeight: 800,
+                          padding: '2px 8px',
+                          borderRadius: '6px'
+                        }}>
+                          KOMPETENSI TERPILIH
+                        </span>
+                        <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#1E293B' }}>{details.title}</h4>
+                      </div>
+                      <p style={{ fontSize: '11.5px', color: '#475569', lineHeight: 1.5 }}>
+                        {details.desc}
+                      </p>
+                      
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginTop: '4px' }}>
+                        <div>
+                          <div style={{ fontSize: '10.5px', fontWeight: 800, color: '#1E293B', marginBottom: '4px' }}>Skill yang Dikuasai:</div>
+                          <ul style={{ listStyleType: 'disc', listStylePosition: 'inside', paddingLeft: '4px', margin: 0 }}>
+                            {details.skills.map((s, idx) => (
+                              <li key={idx} style={{ fontSize: '10.5px', color: '#475569', margin: '2px 0' }}>{s}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <div style={{ fontSize: '10.5px', fontWeight: 800, color: '#1E293B', marginBottom: '4px' }}>Proyek Terkait:</div>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                            {details.projects.map((p, idx) => (
+                              <span key={idx} style={{
+                                background: '#FFFFFF',
+                                border: '1px solid rgba(226,232,240,0.8)',
+                                borderRadius: '6px',
+                                padding: '2px 6px',
+                                fontSize: '10px',
+                                color: '#1E293B',
+                                fontWeight: 600
+                              }}>
+                                {p}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()
+              ) : (
+                <div style={{
+                  textAlign: 'center',
+                  fontSize: '11px',
+                  color: '#64748B',
+                  fontStyle: 'italic',
+                  padding: '10px'
+                }}>
+                  Tip: Klik salah satu node kompetensi di atas untuk melihat detail keahlian dan menyorot modul pembelajaran terkait dalam kurikulum.
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       )}
 

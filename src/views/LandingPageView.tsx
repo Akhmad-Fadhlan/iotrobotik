@@ -70,6 +70,7 @@ export default function LandingPageView({ onNavigate, onOpenAiChat }: LandingPag
           flex-direction: column;
           gap: 20px;
           padding-bottom: 100px;
+          overflow-x: hidden;
         }
 
         /* ════════════════ HERO ════════════════ */

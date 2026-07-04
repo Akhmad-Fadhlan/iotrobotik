@@ -884,7 +884,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── Visitor container ── */
-.visitor-container { max-width: 100% !important; margin: 0 auto; padding: 20px 48px 0; }
+.visitor-container { max-width: 100% !important; margin: 0 auto; padding: 20px 48px 0; overflow-x: hidden; position: relative; }
 
 /* ================================================================
    RESPONSIVE LAYOUT SYSTEM
@@ -940,7 +940,7 @@ img { max-width: 100%; display: block; }
   }
   .hero-search-form { max-width: 100% !important; }
   .hero-text { padding-bottom: 24px !important; }
-  .visitor-container { padding: 12px 12px 0 !important; }
+  .visitor-container { padding: 12px 12px 0 !important; overflow-x: hidden; }
   .header-logo-text { display: none; }
 }
 
