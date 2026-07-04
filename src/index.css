@@ -1846,11 +1846,12 @@ img { max-width: 100%; display: block; }
   border-radius: inherit;
   background: conic-gradient(
     from 0deg,
-    #ff007f, /* Vibrant Pink */
-    #7c3aed, /* Electric Purple/Indigo */
-    #00f0ff, /* Aurora Cyan */
-    #00ff7f, /* Mint Green */
-    #ff007f  /* Back to Pink */
+    #3b82f6, /* Theme Blue */
+    #6366f1, /* Theme Indigo */
+    #7c3aed, /* Theme Purple */
+    #10b981, /* Theme Teal */
+    #00f0ff, /* Theme Cyan */
+    #3b82f6  /* Back to Blue */
   );
   filter: blur(14px);
   opacity: 0.65;
@@ -1884,11 +1885,12 @@ img { max-width: 100%; display: block; }
   height: 300%;
   background: conic-gradient(
     from 0deg,
-    #ff007f,
-    #7c3aed,
-    #00f0ff,
-    #00ff7f,
-    #ff007f
+    #3b82f6, /* Theme Blue */
+    #6366f1, /* Theme Indigo */
+    #7c3aed, /* Theme Purple */
+    #10b981, /* Theme Teal */
+    #00f0ff, /* Theme Cyan */
+    #3b82f6  /* Back to Blue */
   );
   animation: aurora-rotate 6s linear infinite;
 }

@@ -515,7 +515,7 @@ export default function CurriculumView() {
                       padding: '6.5px 12px',
                       borderRadius: '11px',
                       fontSize: '12px',
-                      background: 'linear-gradient(135deg, #1e293b, #0f172a)',
+                      background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
                       color: 'white',
                     }}
                   >

@@ -119,8 +119,8 @@ export default function Header({
           {/* Nav links - Desktop */}
           <nav style={{ display: 'flex', gap: '28px', alignItems: 'center' }} className="hidden-mobile">
             {navLinks.map(link => {
-              if (link.id === 'kurikulum') {
-                const isActive = currentTab === 'kurikulum';
+              const isActive = currentTab === link.id;
+              if (isActive) {
                 return (
                   <button
                     key={link.id}
@@ -129,9 +129,10 @@ export default function Header({
                     style={{
                       height: '36px',
                       padding: '1.5px',
+                      border: 'none',
                     }}
                   >
-                    <span className="aurora-cta-glow" style={{ opacity: isActive ? 0.95 : 0.45 }} />
+                    <span className="aurora-cta-glow" style={{ opacity: 0.95 }} />
                     <span className="aurora-cta-border-container">
                       <span className="aurora-cta-border-rotating" />
                     </span>
@@ -139,8 +140,8 @@ export default function Header({
                       className="aurora-cta-inner"
                       style={{
                         padding: '0 16px',
-                        background: isActive ? 'linear-gradient(135deg, #1e293b, #0f172a)' : '#ffffff',
-                        color: isActive ? '#ffffff' : '#2563eb',
+                        background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+                        color: '#ffffff',
                         fontSize: '12.5px',
                         height: '100%',
                       }}
@@ -156,10 +157,10 @@ export default function Header({
                   onClick={() => setTab(link.id)}
                   style={{
                     background: 'none', border: 'none', cursor: 'pointer',
-                    fontSize: '13px', fontWeight: currentTab === link.id ? 700 : 600,
-                    color: currentTab === link.id ? '#2563EB' : '#475569',
+                    fontSize: '13px', fontWeight: 600,
+                    color: '#475569',
                     padding: '4px 0',
-                    borderBottom: currentTab === link.id ? '2px solid #2563EB' : '2px solid transparent',
+                    borderBottom: '2px solid transparent',
                     transition: 'all 0.2s',
                   }}
                 >
@@ -376,8 +377,8 @@ export default function Header({
           padding:'16px', zIndex:50, marginTop:'4px',
         }}>
           {navLinks.map(link => {
-            if (link.id === 'kurikulum') {
-              const isActive = currentTab === 'kurikulum';
+            const isActive = currentTab === link.id;
+            if (isActive) {
               return (
                 <button
                   key={link.id}
@@ -391,7 +392,7 @@ export default function Header({
                     border: 'none',
                   }}
                 >
-                  <span className="aurora-cta-glow" style={{ opacity: isActive ? 0.95 : 0.45 }} />
+                  <span className="aurora-cta-glow" style={{ opacity: 0.95 }} />
                   <span className="aurora-cta-border-container">
                     <span className="aurora-cta-border-rotating" />
                   </span>
@@ -401,8 +402,8 @@ export default function Header({
                       display: 'flex',
                       width: '100%',
                       padding: '10px 16px',
-                      background: isActive ? 'linear-gradient(135deg, #1e293b, #0f172a)' : '#ffffff',
-                      color: isActive ? '#ffffff' : '#2563eb',
+                      background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+                      color: '#ffffff',
                       fontSize: '13px',
                       borderRadius: '11px',
                       justifyContent: 'flex-start',
@@ -420,7 +421,7 @@ export default function Header({
                 style={{
                   display:'block', width:'100%', textAlign:'left',
                   padding:'12px 16px', background:'none', border:'none',
-                  cursor:'pointer', fontSize:'14px', fontWeight:600, color: currentTab === link.id ? '#2563EB' : '#334155',
+                  cursor:'pointer', fontSize:'14px', fontWeight:600, color: '#334155',
                   borderRadius:'10px',
                 }}
               >
