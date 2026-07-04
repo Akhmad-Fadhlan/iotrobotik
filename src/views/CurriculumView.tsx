@@ -1731,7 +1731,9 @@ export default function CurriculumView() {
           } else if (sub.id === 'robot-line-follower') {
             imagePath = '/robot_lf.png';
           } else if (sub.id === 'robot-transporter') {
-            imagePath = '/transporter.png';
+            imagePath = '/robot_transporter.png';
+          } else if (sub.id === 'robot-hand-gesture') {
+            imagePath = '/robot_hand_gestures.png';
           } else if (sub.id === 'smart-parking') {
             imagePath = '/smart_parking.png';
           } else if (sub.id.includes('parking')) {
@@ -1849,14 +1851,16 @@ export default function CurriculumView() {
                       sub.id === 'tinybit-bluetooth' ? '/ketentuan_flyer_tinybit_bc.png' :
                       sub.id === 'tinybit-line' ? '/ketentuan_flyer_tinybit_lf.png' :
                       sub.id === 'robot-line-follower' ? '/ketentuan_flyer_robot_lf.png' :
-                      sub.id === 'smart-parking' ? '/ketentuan_flyer_smart_parking.png' : null,
+                      sub.id === 'smart-parking' ? '/ketentuan_flyer_smart_parking.png' :
+                      sub.id === 'robot-hand-gesture' ? '/ketentuan_flyer_robot_hand_gestures.png' : null,
                     demoImage: 
                       sub.id === 'smart-trashbin' ? '/video_smart_trashbin.png' :
                       (sub.id === 'smart-watering' || sub.id === 'smart-watering-plant') ? '/video_smart_watering_plant.png' :
                       sub.id === 'tinybit-bluetooth' ? '/video_tinybit_bc.png' :
                       sub.id === 'tinybit-line' ? '/video_tybitlf.png' :
                       sub.id === 'robot-line-follower' ? '/video_robot_lf.png' :
-                      sub.id === 'smart-parking' ? '/video_smart_parking.png' : null
+                      sub.id === 'smart-parking' ? '/video_smart_parking.png' :
+                      sub.id === 'robot-hand-gesture' ? '/video_robot_hand_gestures.png' : null
                   }
                 }
               ]
