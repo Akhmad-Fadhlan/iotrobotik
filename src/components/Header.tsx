@@ -118,22 +118,55 @@ export default function Header({
 
           {/* Nav links - Desktop */}
           <nav style={{ display: 'flex', gap: '28px', alignItems: 'center' }} className="hidden-mobile">
-            {navLinks.map(link => (
-              <button
-                key={link.id}
-                onClick={() => setTab(link.id)}
-                style={{
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  fontSize: '13px', fontWeight: currentTab === link.id ? 700 : 600,
-                  color: currentTab === link.id ? '#2563EB' : '#475569',
-                  padding: '4px 0',
-                  borderBottom: currentTab === link.id ? '2px solid #2563EB' : '2px solid transparent',
-                  transition: 'all 0.2s',
-                }}
-              >
-                {link.label}
-              </button>
-            ))}
+            {navLinks.map(link => {
+              if (link.id === 'kurikulum') {
+                const isActive = currentTab === 'kurikulum';
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => setTab(link.id)}
+                    className="aurora-cta-wrapper"
+                    style={{
+                      height: '36px',
+                      padding: '1.5px',
+                    }}
+                  >
+                    <span className="aurora-cta-glow" style={{ opacity: isActive ? 0.95 : 0.45 }} />
+                    <span className="aurora-cta-border-container">
+                      <span className="aurora-cta-border-rotating" />
+                    </span>
+                    <span 
+                      className="aurora-cta-inner"
+                      style={{
+                        padding: '0 16px',
+                        background: isActive ? 'linear-gradient(135deg, #1e293b, #0f172a)' : '#ffffff',
+                        color: isActive ? '#ffffff' : '#2563eb',
+                        fontSize: '12.5px',
+                        height: '100%',
+                      }}
+                    >
+                      {link.label}
+                    </span>
+                  </button>
+                );
+              }
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => setTab(link.id)}
+                  style={{
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    fontSize: '13px', fontWeight: currentTab === link.id ? 700 : 600,
+                    color: currentTab === link.id ? '#2563EB' : '#475569',
+                    padding: '4px 0',
+                    borderBottom: currentTab === link.id ? '2px solid #2563EB' : '2px solid transparent',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
           </nav>
 
           {/* Right: Masuk button + mobile menu */}
@@ -342,20 +375,59 @@ export default function Header({
           border:'1px solid #e2e8f0', boxShadow:'0 8px 32px rgba(0,0,0,0.1)',
           padding:'16px', zIndex:50, marginTop:'4px',
         }}>
-          {navLinks.map(link => (
-            <button
-              key={link.id}
-              onClick={() => { setTab(link.id); setShowMobileNav(false); }}
-              style={{
-                display:'block', width:'100%', textAlign:'left',
-                padding:'12px 16px', background:'none', border:'none',
-                cursor:'pointer', fontSize:'14px', fontWeight:600, color:'#334155',
-                borderRadius:'10px',
-              }}
-            >
-              {link.label}
-            </button>
-          ))}
+          {navLinks.map(link => {
+            if (link.id === 'kurikulum') {
+              const isActive = currentTab === 'kurikulum';
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => { setTab(link.id); setShowMobileNav(false); }}
+                  className="aurora-cta-wrapper"
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    padding: '1.5px',
+                    margin: '6px 0',
+                    border: 'none',
+                  }}
+                >
+                  <span className="aurora-cta-glow" style={{ opacity: isActive ? 0.95 : 0.45 }} />
+                  <span className="aurora-cta-border-container">
+                    <span className="aurora-cta-border-rotating" />
+                  </span>
+                  <span 
+                    className="aurora-cta-inner"
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                      padding: '10px 16px',
+                      background: isActive ? 'linear-gradient(135deg, #1e293b, #0f172a)' : '#ffffff',
+                      color: isActive ? '#ffffff' : '#2563eb',
+                      fontSize: '13px',
+                      borderRadius: '11px',
+                      justifyContent: 'flex-start',
+                    }}
+                  >
+                    {link.label}
+                  </span>
+                </button>
+              );
+            }
+            return (
+              <button
+                key={link.id}
+                onClick={() => { setTab(link.id); setShowMobileNav(false); }}
+                style={{
+                  display:'block', width:'100%', textAlign:'left',
+                  padding:'12px 16px', background:'none', border:'none',
+                  cursor:'pointer', fontSize:'14px', fontWeight:600, color: currentTab === link.id ? '#2563EB' : '#334155',
+                  borderRadius:'10px',
+                }}
+              >
+                {link.label}
+              </button>
+            );
+          })}
           <button
             onClick={() => { setShowLoginModal(true); setShowMobileNav(false); }}
             style={{

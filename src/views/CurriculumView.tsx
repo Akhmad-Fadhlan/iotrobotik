@@ -487,6 +487,44 @@ export default function CurriculumView() {
             { id: 'revisions', label: 'Revisi',        Icon: History  },
           ]) as { id: 'roadmap'|'timeline'|'tracker'|'docs'|'revisions'; label: string; Icon: React.ElementType }[]).map(({ id, label, Icon }) => {
             const isActive = activeTab === id;
+            if (isActive) {
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActiveTab(id)}
+                  className="aurora-cta-wrapper curriculum-tab-btn"
+                  style={{
+                    padding: '1.5px',
+                    borderRadius: '12px',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transform: 'translateY(-1px)',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  <span className="aurora-cta-glow" style={{ opacity: 0.95 }} />
+                  <span className="aurora-cta-border-container">
+                    <span className="aurora-cta-border-rotating" />
+                  </span>
+                  <span 
+                    className="aurora-cta-inner"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                      padding: '6.5px 12px',
+                      borderRadius: '11px',
+                      fontSize: '12px',
+                      background: 'linear-gradient(135deg, #1e293b, #0f172a)',
+                      color: 'white',
+                    }}
+                  >
+                    <Icon size={13} style={{ color: 'rgba(255,255,255,0.92)', flexShrink: 0 }} />
+                    {label}
+                  </span>
+                </button>
+              );
+            }
             return (
               <button
                 key={id}
@@ -496,25 +534,19 @@ export default function CurriculumView() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '5px',
-                  padding: '7px 13px',
+                  padding: '8px 13.5px',
                   borderRadius: '12px',
                   fontSize: '12px',
-                  fontWeight: isActive ? 700 : 500,
+                  fontWeight: 500,
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'all 0.22s cubic-bezier(0.4,0,0.2,1)',
-                  background: isActive
-                    ? 'linear-gradient(135deg, #2563eb, #7c3aed)'
-                    : 'transparent',
-                  color: isActive ? 'white' : '#64748b',
-                  boxShadow: isActive
-                    ? '0 4px 12px -4px rgba(37,99,235,0.45), inset 0 1px 0 rgba(255,255,255,0.18)'
-                    : 'none',
-                  transform: isActive ? 'translateY(-1px)' : 'none',
+                  background: 'transparent',
+                  color: '#64748b',
                   whiteSpace: 'nowrap'
                 }}
               >
-                <Icon size={13} style={{ color: isActive ? 'rgba(255,255,255,0.92)' : '#6366f1', flexShrink: 0 }} />
+                <Icon size={13} style={{ color: '#6366f1', flexShrink: 0 }} />
                 {label}
               </button>
             );

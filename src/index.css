@@ -1811,4 +1811,111 @@ img { max-width: 100%; display: block; }
   }
 }
 
+/* ================================================================
+   AURORA GRADIENT CTA BUTTON STYLE
+   ================================================================ */
 
+.aurora-cta-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 1.5px; /* The border thickness */
+  background: transparent;
+  overflow: visible; /* Allows the glow to bleed outside */
+  isolation: isolate; /* Create new stacking context so glow is behind */
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.aurora-cta-wrapper:hover {
+  transform: translateY(-2px);
+}
+
+.aurora-cta-wrapper:active {
+  transform: translateY(0px) scale(0.97);
+}
+
+/* Soft, blurred ambient backdrop underglow shadow */
+.aurora-cta-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    #ff007f, /* Vibrant Pink */
+    #7c3aed, /* Electric Purple/Indigo */
+    #00f0ff, /* Aurora Cyan */
+    #00ff7f, /* Mint Green */
+    #ff007f  /* Back to Pink */
+  );
+  filter: blur(14px);
+  opacity: 0.65;
+  z-index: -1;
+  pointer-events: none;
+  animation: aurora-rotate 6s linear infinite;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.aurora-cta-wrapper:hover .aurora-cta-glow {
+  opacity: 0.9;
+  filter: blur(16px);
+}
+
+/* The border container that clips the rotating gradient */
+.aurora-cta-border-container {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Rotating gradient background */
+.aurora-cta-border-rotating {
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: conic-gradient(
+    from 0deg,
+    #ff007f,
+    #7c3aed,
+    #00f0ff,
+    #00ff7f,
+    #ff007f
+  );
+  animation: aurora-rotate 6s linear infinite;
+}
+
+/* Inner content mask */
+.aurora-cta-inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 11px; /* Slightly smaller than wrapper (12px - 1px) */
+  background: #ffffff;
+  color: #1e293b;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  box-sizing: border-box;
+}
+
+@keyframes aurora-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
