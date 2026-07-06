@@ -2,7 +2,7 @@ import os
 import json
 
 def extract_excel_data():
-    file_path = "Kumpulan Link Modul robotic iot IDN (1).xlsx"
+    file_path = "Kumpulan Link Modul robotic iot IDN.xlsx"
     if not os.path.exists(file_path):
         print(f"Error: {file_path} not found.")
         return

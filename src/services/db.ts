@@ -504,11 +504,12 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     subMateri: [
       { name: 'Fundamental Microbit', ref: 'Doc microbit: https://makecode.microbit.org/docs', link: 'fundamental microbit' },
       { name: 'Algoritma, konsep, dan komponen smart trashbin', link: 'algoritma smart trashbin' },
-      { name: 'Pemrograman basic Makecode (variable, percabangan, looping, pins)', ref: 'Doc microbit: https://makecode.microbit.org/docs' },
-      { name: 'Pemrograman Smart trashbin' },
+      { name: 'Pemrograman basic Makecode (variable, percabangan, looping, pins)', ref: 'Doc microbit: https://makecode.microbit.org/docs', link: 'https://canva.link/5qgqy3ds7ophpl5' },
+      { name: 'Pemrograman Smart trashbin', link: 'https://canva.link/d3fipufedbmgp85' },
       { name: 'K3 dalam bekerja', ref: 'PEDOMAN K3 LAB.docx', link: 'https://docs.google.com/presentation/d/1yuJzz-Hh4nJzL0BtJeKIWrrAOzg9V2pG/edit?usp=drive_link&ouid=104394771420958359917&rtpof=true&sd=true' },
       { name: 'Integrasi hardware dan program smart trashbin', link: 'https://canva.link/fz5kuw9d8j9zdja' },
       { name: 'Chatgpt / Google Lens Sebagai pembantu pengenalan awal komponen' }
+    
     ],
     outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio']
   },
@@ -525,13 +526,14 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Selesai',
     pic: 'Mr Alfi',
     subMateri: [
-      { name: 'Komunikasi Bluetooth', ref: 'bluetooth: https://www.elecfreaks.com/learn-en' },
-      { name: 'Fundamental Tinybit', ref: 'tinybit: https://www.yahboom.net/study/Tinybit-Pro' },
-      { name: 'Pemrograman basic untuk menggerakkan tinybit' },
+      { name: 'Komunikasi Bluetooth', ref: 'bluetooth: https://www.elecfreaks.com/learn-en', link: 'https://canva.link/qbtjved7t7fae34' },
+      { name: 'Fundamental Tinybit', ref: 'tinybit: https://www.yahboom.net/study/Tinybit-Pro', link: 'https://canva.link/7fly21p5sidqe5r' },
+      { name: 'Pemrograman basic untuk menggerakkan tinybit', link: 'https://canva.link/rnojs4b9gn7132a' },
       { name: 'Integrasi' },
       { name: 'Pengembangan kontroller pada tinybit bluetooth controller' },
       { name: 'Teknik prompting lovable (chatgpt)' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' }
+    
     ],
     outputs: ['Aplikasi Web Controller', 'Video Demo']
   },
@@ -551,11 +553,12 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Sejarah AI', ref: 'Teachable Machine', link: 'Sejarah AI' },
       { name: 'Konsep AI dan cara kerja', ref: 'Buku AI Kemendikbud', link: 'Konsep AI' },
       { name: 'Faktor-faktor yang mempengaruhi pembuatan AI', link: 'Faktor pengaruh AI' },
-      { name: 'Teachable machine', ref: 'Apa Itu Machine Learning?' },
-      { name: 'Faktor yang mempengaruhi kualitas model AI pada teachable machine' },
+      { name: 'Teachable machine', ref: 'Apa Itu Machine Learning?', link: 'https://canva.link/7l59t6qrbrpbqo4' },
+      { name: 'Faktor yang mempengaruhi kualitas model AI pada teachable machine', link: 'https://canva.link/364c17kqf2sz7d4' },
       { name: 'Integrasi', ref: 'Control Robot With Hand Gestures - CARDBOARD ROBOTS' },
       { name: 'Teknik prompting lovable (chatgpt)', ref: 'membuat web dengan ai' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', ref: '6 Teknik Prompting ChatGPT Agar Hasilnya Setara Kerja Expert - Argia Academy' }
+    
     ],
     outputs: ['Program Transmitter-Receiver', 'Video Demo']
   },
@@ -572,12 +575,13 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Belum Dimulai',
     pic: 'Mr Fadhlan',
     subMateri: [
-      { name: 'Fundamental Line Follower' },
-      { name: 'Algoritma Line Follower' },
-      { name: 'Pemrograman basic dan lanjutan untuk menggerakkan line follower' },
-      { name: 'Praktek dengan track sederhana' },
+      { name: 'Fundamental Line Follower', link: 'fundamental line follower' },
+      { name: 'Algoritma Line Follower', link: 'Algoritma Line Follower' },
+      { name: 'Pemrograman basic dan lanjutan untuk menggerakkan line follower', link: 'Pemrograman line follower' },
+      { name: 'Praktek dengan track sederhana', link: 'Pemrograman line follower' },
       { name: 'Teknik prompting (chatgpt / deepseek / claude)', link: 'teknik prompting' },
-      { name: 'Tes dengan track advance (chatgpt / deepseek / claude)', link: 'track advance dengan ai' }
+      { name: 'Tes dengan track advance (chatgpt / deepseek / claude)', ref: 'track advance dengan ai', link: 'Track advance line follower' }
+    
     ],
     outputs: ['Robot Line Follower PID', 'Video Demo']
   },
@@ -594,11 +598,12 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Selesai',
     pic: 'Mr Fadhlan',
     subMateri: [
-      { name: 'Algoritma, konsep, dan komponen smart watering plant', link: 'smart watering plant' },
-      { name: 'Pemrograman Smart watering plant', link: 'smart watering plant' },
+      { name: 'Algoritma, konsep, dan komponen smart watering plant', link: 'https://docs.google.com/presentation/d/1IZLBFij0V2aRK15UeLotVumJg1eci6Uo/edit?usp=sharing&ouid=112099463869605700691&rtpof=true&sd=true' },
+      { name: 'Pemrograman Smart watering plant', link: 'https://docs.google.com/presentation/d/1LEB59CeHilt6IkwNsXnAz_4BvICL7Qe5/edit?usp=drive_link&ouid=112099463869605700691&rtpof=true&sd=true' },
       { name: 'K3 dalam bekerja', ref: 'PEDOMAN K3 LAB.docx', link: 'https://drive.google.com/file/d/18GPMXi9-nlijGMKDGzuXay0cJu6ZIdCD/view?usp=drive_link' },
-      { name: 'Integrasi hardware dan program smart watering plant', link: 'smart watering plant' },
-      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' }
+      { name: 'Integrasi hardware dan program smart watering plant', link: 'https://docs.google.com/presentation/d/1LEB59CeHilt6IkwNsXnAz_4BvICL7Qe5/edit?usp=drive_link&ouid=112099463869605700691&rtpof=true&sd=true' },
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur monitoring', link: 'https://docs.google.com/presentation/d/18ljOfjQpPwaGOj94h3F_uX3ukSTFMLOr/edit?usp=drive_link&ouid=112099463869605700691&rtpof=true&sd=true' }
+    
     ],
     outputs: ['Hardware Penyiram Tanaman', 'Video Demo']
   },
@@ -616,10 +621,11 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     pic: 'Mr Alfi',
     subMateri: [
       { name: 'Algoritma, konsep, dan komponen smart', link: 'modul smart parking' },
-      { name: 'Pemrograman Smart parking' },
+      { name: 'Pemrograman Smart parking', link: 'https://canva.link/85b8zcozo27u4ft' },
       { name: 'K3 dalam bekerja', link: 'https://drive.google.com/file/d/1hRZ1vqyA_ixJOPkkFh7Ab0oSh8rxUeX4/view?usp=sharing' },
       { name: 'Integrasi hardware dan program smart parking' },
-      { name: 'Teachable machine', ref: 'Apa Itu Machine Learning?' }
+      { name: 'Teachable machine', ref: 'Apa Itu Machine Learning?', link: 'https://canva.link/7l59t6qrbrpbqo4' }
+    
     ],
     outputs: ['Prototip Palang Parkir', 'Flyer Proyek']
   },
@@ -637,12 +643,13 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Belum Dimulai',
     pic: 'Mr. Rahmat Fadlan',
     subMateri: [
-      { name: 'Komunikasi Bluetooth' },
-      { name: 'Fundamental driver l298N' },
-      { name: 'Pemrograman python untuk menggerakkan motor' },
-      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app controller' },
-      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller' },
-      { name: 'Integrasi' }
+      { name: 'Komunikasi Bluetooth', ref: 'bluetooth: https://www.elecfreaks.com/learn-en', link: 'https://docs.google.com/presentation/d/17CRQvkqcS5YY2Lk1W_EVlmpTEbkET9JnpdNOatx3pKQ/edit?usp=sharing' },
+      { name: 'Fundamental driver l298N', link: 'https://docs.google.com/presentation/d/15Vdbf_ehjL3n6GhVnsiZn9iSMiIZkOnbfmRKGIZojX0/edit?usp=sharing' },
+      { name: 'Pemrograman python untuk menggerakkan motor', link: 'https://docs.google.com/presentation/d/1_uzwmtAwEvjc2jt8b1iaAmFAFVRCNdLo2F3EtOKb15E/edit?usp=sharing' },
+      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app controller', ref: 'membuat web dengan ai', link: 'https://docs.google.com/presentation/d/14Bhzum4DBnZHz18ajL2bfeX5-bHvEnE6POe1nyWF3X8/edit?usp=sharing' },
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', ref: 'teknik prompting', link: 'https://docs.google.com/presentation/d/1ZNYB5FgyAvQO3Fle6-EWr96qrxjV9Q83oZ1Fi4m3Scw/edit?usp=sharing' },
+      { name: 'Integrasi', link: 'https://docs.google.com/presentation/d/1W3atKC3J8z4SorKL120tXboWuhJY640XGllqSQZ032o/edit?usp=sharing' }
+    
     ],
     outputs: ['Aplikasi Web Controller Vercel', 'Video Demo']
   },
@@ -659,15 +666,16 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Belum Dimulai',
     pic: 'Mr. Rahmat Fadlan',
     subMateri: [
-      { name: 'Sejarah AI' },
-      { name: 'Konsep AI dan cara kerja' },
-      { name: 'Faktor-faktor yang mempengaruhi pembuatan AI' },
-      { name: 'Teachable machine' },
-      { name: 'Faktor yang mempengaruhi kualitas model AI pada teachable machine' },
-      { name: 'Pemrograman python untuk robot hand gestures' },
-      { name: 'Integrasi' },
-      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app AI' },
-      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller' }
+      { name: 'Sejarah AI', ref: 'Robot Hand Gesture.pdf', link: 'https://docs.google.com/presentation/d/1oaC3_iL1vlkVhY-mtLmJm3nOH_xcEvEy/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
+      { name: 'Konsep AI dan cara kerja', link: 'https://drive.google.com/file/d/1XUkzLStxltnQVqLP2xDGG25oC86jpukC/view?usp=drive_link' },
+      { name: 'Faktor-faktor yang mempengaruhi pembuatan AI', link: 'rahasia permodelan ai' },
+      { name: 'Teachable machine', link: 'https://drive.google.com/file/d/1SJhXVP8tRxdIBlGibcH-2F-6w-sGr4w7/view?usp=drive_link' },
+      { name: 'Faktor yang mempengaruhi kualitas model AI pada teachable machine', link: 'https://docs.google.com/presentation/d/1qEphLthnE9aUvmieQ1yXBntbBekeL05R/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
+      { name: 'Pemrograman python untuk robot hand gestures', link: 'https://makecode.microbit.org/S62132-14584-63645-60319' },
+      { name: 'Integrasi', link: 'https://docs.google.com/presentation/d/1902dOdmDZos7HZK3GFGKSnoVN_lsHVfN/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
+      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app AI', link: 'https://docs.google.com/presentation/d/1S4Y2VZpv5CeRhebC5FWNjf4u_7CrzEZO/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' }
+    
     ],
     outputs: ['Model Teachable Machine', 'Video Demo']
   },
@@ -684,14 +692,15 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Belum Dimulai',
     pic: 'Mr. Rahmat Fadlan',
     subMateri: [
-      { name: 'Faktor-faktor yang mempengaruhi pembuatan AI' },
-      { name: 'Pemrograman python untuk smart parking' },
-      { name: 'database' },
-      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor' },
-      { name: 'Pemrograman Smart parking' },
-      { name: 'K3 dalam projek smart parking' },
-      { name: 'Integrasi hardware dan program smart parking AI' },
-      { name: 'ChatGPT / Claude: brainstorming ide pengembangan smart parking' }
+      { name: 'Faktor-faktor yang mempengaruhi pembuatan AI', link: 'rahasia permodelan ai' },
+      { name: 'Pemrograman python untuk smart parking', link: 'https://makecode.microbit.org/S82659-39430-34315-71540' },
+      { name: 'Database', link: 'https://docs.google.com/presentation/d/1p53W65C62q_c3POPJxLl5saD27HMaG3c/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
+      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor', ref: 'membuat web dengan ai', link: 'https://docs.google.com/presentation/d/11IlEOH6ISFiEQEOaQK1LcwWB56vOdPJy/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
+      { name: 'Pemrograman Smart parking', link: 'https://docs.google.com/presentation/d/1YAIlIHVF56Glr1DEz3LfOyUtJU3csruJ/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
+      { name: 'K3 dalam projek smart parking', link: 'k3' },
+      { name: 'Integrasi hardware dan program smart parking AI', link: 'https://docs.google.com/presentation/d/15VPEcRH8diHF0s5alSJUCNrXILxCIgkV/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan smart parking', link: 'teknik prompting' }
+    
     ],
     outputs: ['Sistem Smart Parking AI', 'Video Demo']
   },
@@ -708,12 +717,13 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Belum Dimulai',
     pic: 'Ms. Nadia',
     subMateri: [
-      { name: 'Fundamental Line Follower' },
-      { name: 'Algoritma Line Follower' },
-      { name: 'Pemrograman python basic dan lanjutan untuk menggerakkan line follower' },
-      { name: 'Praktek dengan track sederhana' },
-      { name: 'Teknik prompting (chatgpt / deepseek / claude)' },
-      { name: 'Tes dengan track advance (chatgpt / deepseek / claude)' }
+      { name: 'Fundamental Line Follower', link: 'https://docs.google.com/presentation/d/1SKlrYPtTg5844ptWnNcLqYPHp2rMT3M5SLFDa-fV3Mo/edit?usp=sharing' },
+      { name: 'Algoritma Line Follower', link: 'https://docs.google.com/presentation/d/1ETGLF5zAujqcaxBEK_vA7os2sABlJw8VOmqXiluKOr0/edit?usp=sharing' },
+      { name: 'Pemrograman python basic dan lanjutan untuk menggerakkan line follower', link: 'https://docs.google.com/presentation/d/1H0Gu6aJZjRrLf_JjLEhclqgVQf02cgC007Q5IIHnseA/edit?usp=sharing' },
+      { name: 'Praktek dengan track sederhana', link: 'https://docs.google.com/presentation/d/1pEvJKqN9yzXjXRQovj3sm7zCfHUZXv_LHzsk-QwR-E8/edit?usp=sharing' },
+      { name: 'Teknik prompting (chatgpt / deepseek / claude)', link: 'https://docs.google.com/presentation/d/1RFv5K4sBEk0gfAQDoKi-bcr1LEh8h4SY_RmfFritbyk/edit?usp=sharing' },
+      { name: 'Tes dengan track advance (chatgpt / deepseek / claude)', link: 'https://docs.google.com/presentation/d/1sKbtq9lkWCKKnSErwqWryT6qz6T-d1zOcc3WrLkIsZk/edit?usp=sharing' }
+    
     ],
     outputs: ['Robot Python Line Follower', 'Video Demo']
   },
@@ -730,11 +740,12 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Belum Dimulai',
     pic: 'Ms. Nadia',
     subMateri: [
-      { name: 'Algoritma, konsep, dan komponen robot transporter' },
-      { name: 'Pemrograman python untuk robot transporter' },
-      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app controller' },
-      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller' },
-      { name: 'Integrasi' }
+      { name: 'Algoritma, konsep, dan komponen robot transporter', link: 'https://docs.google.com/presentation/d/131Kjv4T6P7gteRJ99w_cISCm6G7bbfGz8aB7O21903Q/edit?usp=sharing' },
+      { name: 'Pemrograman python untuk robot transporter', link: 'https://docs.google.com/presentation/d/1QBll2G4V7Dxg91M14QL-biUxmcYA1Gmq_VWecj2aWZ8/edit?usp=sharing' },
+      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app controller', ref: 'membuat web dengan ai', link: 'https://docs.google.com/presentation/d/1VOnlUoV3BUoca-zuazToy2PJon0dviTl03dpXRUUEzc/edit?usp=sharing' },
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'https://docs.google.com/presentation/d/1GnXOJ8uIDFaqANCKRsm0T4jo2LmV-WcCzsdz8_qmVRM/edit?usp=sharing' },
+      { name: 'Integrasi', link: 'https://docs.google.com/presentation/d/16zxsLnLDufAHGypJq406HjGbiFCAT9ZkY6P6ij_V10o/edit?usp=sharing' }
+    
     ],
     outputs: ['Robot Transporter dengan Capit', 'Video Demo']
   },
@@ -752,16 +763,17 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Belum Dimulai',
     pic: 'Mr. Rizal',
     subMateri: [
-      { name: 'Algoritma, konsep, dan komponen smart parking' },
+      { name: 'Algoritma, konsep, dan komponen smart home', ref: 'https://www.dicoding.com/blog/algoritma-pemrograman-pengertian-fungsi-dan-jenis/', link: 'Blueprint_Logika_Pemrograman' },
       { name: 'Faktor-faktor yang mempengaruhi pembuatan AI' },
-      { name: 'Fundamental esp32' },
-      { name: 'Pemrograman arduino ide' },
-      { name: 'database' },
-      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor' },
+      { name: 'Fundamental esp32', link: 'The_ESP32_IoT_Blueprint' },
+      { name: 'Pemrograman arduino ide', link: 'Arduino_Code_Anatomy' },
+      { name: 'database', ref: 'https://www.youtube.com/watch?v=aO92B-K4TnQ', link: 'ESP32_Firebase_Bridge' },
+      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor', link: 'membuat web dengan ai' },
       { name: 'Pemrograman Smart home' },
-      { name: 'K3 dalam bekerja' },
+      { name: 'K3 dalam bekerja', link: 'Strategic_Safety_Ecosystem' },
       { name: 'Integrasi hardware dan program smart home' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan smart parking' }
+    
     ],
     outputs: ['Prototype Smart Home', 'Video Demo']
   },
@@ -778,16 +790,17 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
     status: 'Belum Dimulai',
     pic: 'Mr. Rizal',
     subMateri: [
-      { name: 'Algoritma, konsep, dan komponen smart parking' },
+      { name: 'Algoritma, konsep, dan komponen smart greenhouse', link: 'Blueprint_Logika_Pemrograman' },
       { name: 'Faktor-faktor yang mempengaruhi pembuatan AI' },
-      { name: 'Fundamental esp32' },
-      { name: 'Pemrograman arduino ide' },
-      { name: 'database' },
-      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor' },
+      { name: 'Fundamental esp32', link: 'The_ESP32_IoT_Blueprint' },
+      { name: 'Pemrograman arduino ide', link: 'Arduino_Code_Anatomy' },
+      { name: 'database', link: 'ESP32_Firebase_Bridge' },
+      { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app control dan monitor', ref: 'membuat web dengan ai', link: 'membuat web dengan ai' },
       { name: 'Pemrograman Smart greenhouse' },
-      { name: 'K3 dalam bekerja' },
+      { name: 'K3 dalam bekerja', link: 'Strategic_Safety_Ecosystem' },
       { name: 'Integrasi hardware dan program smart greenhouse' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan smart greenhouse' }
+    
     ],
     outputs: ['Dashboard Web Monitoring', 'Video Demo']
   }
@@ -899,11 +912,16 @@ export const mockDb = {
         const smartWatering = parsed.find((c: any) => c.id === 'smart-watering-plant');
         const robotBt = parsed.find((c: any) => c.id === 'robot-bluetooth-controller');
         const smartHome = parsed.find((c: any) => c.id === 'smart-home');
+        // Check if curriculum needs sync with the Excel updates
+        const firstSubject = parsed.find((c: any) => c.id === 'smart-trashbin');
+        const hasLatestLinks = firstSubject && firstSubject.subMateri && firstSubject.subMateri[3] && firstSubject.subMateri[3].link === 'https://canva.link/d3fipufedbmgp85';
+
         if (!smartWatering || !robotBt || !smartHome || 
             smartWatering.duration !== '3 Minggu' || 
             robotBt.duration !== '5 Minggu' || 
             smartHome.duration !== '8 Minggu' ||
-            !robotBt.subMateri || robotBt.subMateri.length !== 6) {
+            !robotBt.subMateri || robotBt.subMateri.length !== 6 ||
+            !hasLatestLinks) {
           localStorage.removeItem('idn_curriculum');
           data = null;
         }

@@ -980,7 +980,7 @@ export default function CurriculumView() {
               </div>
               <div className="flex md:flex-col gap-2 shrink-0">
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-bold text-blue-700" style={{ background: 'rgba(219,234,254,0.7)', border: '1px solid rgba(147,197,253,0.6)' }}>
-                  <Calendar size={11} /><span>2 Semester</span>
+                  <Calendar size={11} /><span>3 Semester</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-bold text-violet-700" style={{ background: 'rgba(237,233,254,0.7)', border: '1px solid rgba(196,181,253,0.6)' }}>
                   <Sparkles size={11} /><span>13+ Materi</span>
@@ -1183,13 +1183,24 @@ export default function CurriculumView() {
                     <div className="space-y-1.5 max-h-[240px] overflow-y-auto pr-1 scrollbar-thin">
                       {selectedSubject.subMateri.map((sm, index) => {
                         const isCompleted = isSubMateriCompleted(selectedSubject, index);
+                        const clickableUrl = sm.link && sm.link.startsWith('http') ? sm.link : (sm.ref && sm.ref.startsWith('http') ? sm.ref : null);
                         return (
                           <div key={index} className="flex items-start justify-between gap-2 p-2 rounded-xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100">
                             <div className="flex items-start gap-2" style={{ minWidth:0, flex:1 }}>
                               <div className={isCompleted ? 'text-blue-600 shrink-0 mt-0.5' : 'text-slate-300 shrink-0 mt-0.5'}>{isCompleted ? <CheckSquare size={13} /> : <Square size={13} />}</div>
                               <span className={`text-[11px] leading-snug ${isCompleted ? 'text-slate-700 font-medium' : 'text-slate-500'}`} style={{ wordBreak:'break-word' }}>{sm.name}</span>
                             </div>
-                            {(sm.link || sm.ref) && (<a href={sm.link && sm.link.startsWith('http') ? sm.link : '#'} target={sm.link && sm.link.startsWith('http') ? "_blank" : undefined} rel="noopener noreferrer" title={sm.ref || sm.link} className="text-[9px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-lg shrink-0 hover:bg-blue-100 transition-colors">Modul</a>)}
+                            {clickableUrl && (
+                              <a 
+                                href={clickableUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                title={sm.ref || sm.link} 
+                                className="text-[9px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-lg shrink-0 hover:bg-blue-100 transition-colors"
+                              >
+                                Modul
+                              </a>
+                            )}
                           </div>
                         );
                       })}
@@ -1419,12 +1430,36 @@ export default function CurriculumView() {
                         <div style={{ display:'flex', flexDirection:'column', gap:'5px', maxHeight:'160px', overflowY:'auto' }}>
                           {subject.subMateri.map((sm, idx) => {
                             const done = isSubMateriCompleted(subject, idx);
+                            const clickableUrl = sm.link && sm.link.startsWith('http') ? sm.link : (sm.ref && sm.ref.startsWith('http') ? sm.ref : null);
                             return (
-                              <div key={idx} style={{ display:'flex', alignItems:'flex-start', gap:'7px' }}>
-                                <div style={{ width:'14px', height:'14px', borderRadius:'50%', border:`1.5px solid ${done?subColor:'#cbd5e1'}`, background:done?subColor:'transparent', flexShrink:0, marginTop:'1px', display:'flex', alignItems:'center', justifyContent:'center' }}>
-                                  {done && <div style={{ width:'5px', height:'5px', borderRadius:'50%', background:'white' }} />}
+                              <div key={idx} style={{ display:'flex', alignItems:'flex-start', gap:'7px', justifyContent:'space-between', width:'100%' }}>
+                                <div style={{ display:'flex', alignItems:'flex-start', gap:'7px', minWidth:0, flex:1 }}>
+                                  <div style={{ width:'14px', height:'14px', borderRadius:'50%', border:`1.5px solid ${done?subColor:'#cbd5e1'}`, background:done?subColor:'transparent', flexShrink:0, marginTop:'3px', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                                    {done && <div style={{ width:'5px', height:'5px', borderRadius:'50%', background:'white' }} />}
+                                  </div>
+                                  <span style={{ fontSize:'10.5px', color: done?'#334155':'#94a3b8', fontWeight: done?600:400, lineHeight:1.4, wordBreak:'break-word' }}>{sm.name}</span>
                                 </div>
-                                <span style={{ fontSize:'10.5px', color: done?'#334155':'#94a3b8', fontWeight: done?600:400, lineHeight:1.4 }}>{sm.name}</span>
+                                {clickableUrl && (
+                                  <a
+                                    href={clickableUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title={sm.ref || sm.link}
+                                    style={{
+                                      fontSize: '9px',
+                                      fontWeight: 800,
+                                      color: '#2563eb',
+                                      background: '#eff6ff',
+                                      border: '1px solid #dbeafe',
+                                      padding: '2px 6px',
+                                      borderRadius: '6px',
+                                      textDecoration: 'none',
+                                      flexShrink: 0
+                                    }}
+                                  >
+                                    Modul
+                                  </a>
+                                )}
                               </div>
                             );
                           })}
@@ -3011,21 +3046,45 @@ export default function CurriculumView() {
 
                                 {/* Sub-materi mini view list */}
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '4px' }}>
-                                  {subject.subMateri.map((sm, smIdx) => (
-                                    <div key={smIdx} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10.5px' }}>
-                                      <div style={{
-                                        width: '11px', height: '11px', borderRadius: '3px',
-                                        border: `1.2px solid ${sm.completed ? '#10B981' : '#cbd5e1'}`,
-                                        background: sm.completed ? '#10B981' : 'transparent',
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0
-                                      }}>
-                                        {sm.completed && <Check size={8} strokeWidth={4} />}
+                                  {subject.subMateri.map((sm, smIdx) => {
+                                    const origSub = mockDb.getCurriculum().find(c => c.id === subject.id);
+                                    const origSm = origSub?.subMateri?.find(s => s.name === sm.name);
+                                    const clickableUrl = origSm?.link && origSm.link.startsWith('http') ? origSm.link : (origSm?.ref && origSm.ref.startsWith('http') ? origSm.ref : null);
+                                    return (
+                                      <div key={smIdx} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10.5px' }}>
+                                        <div style={{
+                                          width: '11px', height: '11px', borderRadius: '3px',
+                                          border: `1.2px solid ${sm.completed ? '#10B981' : '#cbd5e1'}`,
+                                          background: sm.completed ? '#10B981' : 'transparent',
+                                          display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0
+                                        }}>
+                                          {sm.completed && <Check size={8} strokeWidth={4} />}
+                                        </div>
+                                        {clickableUrl ? (
+                                          <a
+                                            href={clickableUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            title={origSm?.ref || origSm?.link}
+                                            style={{
+                                              color: sm.completed ? '#2563eb' : '#3b82f6',
+                                              fontWeight: sm.completed ? 600 : 400,
+                                              overflow: 'hidden',
+                                              textOverflow: 'ellipsis',
+                                              whiteSpace: 'nowrap',
+                                              textDecoration: 'underline'
+                                            }}
+                                          >
+                                            {sm.name}
+                                          </a>
+                                        ) : (
+                                          <span style={{ color: sm.completed ? '#1e293b' : '#64748b', fontWeight: sm.completed ? 600 : 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={sm.name}>
+                                            {sm.name}
+                                          </span>
+                                        )}
                                       </div>
-                                      <span style={{ color: sm.completed ? '#1e293b' : '#64748b', fontWeight: sm.completed ? 600 : 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={sm.name}>
-                                        {sm.name}
-                                      </span>
-                                    </div>
-                                  ))}
+                                    );
+                                  })}
                                 </div>
                               </div>
                             ))}
