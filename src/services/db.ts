@@ -508,7 +508,8 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Pemrograman Smart trashbin', link: 'https://canva.link/d3fipufedbmgp85' },
       { name: 'K3 dalam bekerja', ref: 'PEDOMAN K3 LAB.docx', link: 'https://docs.google.com/presentation/d/1yuJzz-Hh4nJzL0BtJeKIWrrAOzg9V2pG/edit?usp=drive_link&ouid=104394771420958359917&rtpof=true&sd=true' },
       { name: 'Integrasi hardware dan program smart trashbin', link: 'https://canva.link/fz5kuw9d8j9zdja' },
-      { name: 'Chatgpt / Google Lens Sebagai pembantu pengenalan awal komponen' }
+      { name: 'Chatgpt / Google Lens Sebagai pembantu pengenalan awal komponen', link: 'https://canva.link/qjbfa25g12kg3wn' }
+    
     
     ],
     outputs: ['Video Demo', 'Flyer Proyek', 'Website Portofolio']
@@ -534,6 +535,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Teknik prompting lovable (chatgpt)' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' }
     
+    
     ],
     outputs: ['Aplikasi Web Controller', 'Video Demo']
   },
@@ -555,9 +557,10 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Faktor-faktor yang mempengaruhi pembuatan AI', link: 'Faktor pengaruh AI' },
       { name: 'Teachable machine', ref: 'Apa Itu Machine Learning?', link: 'https://canva.link/7l59t6qrbrpbqo4' },
       { name: 'Faktor yang mempengaruhi kualitas model AI pada teachable machine', link: 'https://canva.link/364c17kqf2sz7d4' },
-      { name: 'Integrasi', ref: 'Control Robot With Hand Gestures - CARDBOARD ROBOTS' },
+      { name: 'Integrasi tinybit Hand Gesture', ref: 'Control Robot With Hand Gestures - CARDBOARD ROBOTS' },
       { name: 'Teknik prompting lovable (chatgpt)', ref: 'membuat web dengan ai' },
-      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', ref: '6 Teknik Prompting ChatGPT Agar Hasilnya Setara Kerja Expert - Argia Academy' }
+      { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', ref: '6 Teknik Prompting ChatGPT Agar Hasilnya Setara Kerja Expert - Argia Academy', link: 'https://docs.google.com/presentation/d/1R06DaJtlH_sF1lY-kkjfk2QNPAVU_KR6/edit?slide=id.p1#slide=id.p1' }
+    
     
     ],
     outputs: ['Program Transmitter-Receiver', 'Video Demo']
@@ -582,6 +585,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Teknik prompting (chatgpt / deepseek / claude)', link: 'teknik prompting' },
       { name: 'Tes dengan track advance (chatgpt / deepseek / claude)', ref: 'track advance dengan ai', link: 'Track advance line follower' }
     
+    
     ],
     outputs: ['Robot Line Follower PID', 'Video Demo']
   },
@@ -604,6 +608,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Integrasi hardware dan program smart watering plant', link: 'https://docs.google.com/presentation/d/1LEB59CeHilt6IkwNsXnAz_4BvICL7Qe5/edit?usp=drive_link&ouid=112099463869605700691&rtpof=true&sd=true' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur monitoring', link: 'https://docs.google.com/presentation/d/18ljOfjQpPwaGOj94h3F_uX3ukSTFMLOr/edit?usp=drive_link&ouid=112099463869605700691&rtpof=true&sd=true' }
     
+    
     ],
     outputs: ['Hardware Penyiram Tanaman', 'Video Demo']
   },
@@ -623,8 +628,9 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Algoritma, konsep, dan komponen smart', link: 'modul smart parking' },
       { name: 'Pemrograman Smart parking', link: 'https://canva.link/85b8zcozo27u4ft' },
       { name: 'K3 dalam bekerja', link: 'https://drive.google.com/file/d/1hRZ1vqyA_ixJOPkkFh7Ab0oSh8rxUeX4/view?usp=sharing' },
-      { name: 'Integrasi hardware dan program smart parking' },
+      { name: 'Integrasi hardware dan program smart parking', link: 'https://canva.link/wn3pd9uh5musbho' },
       { name: 'Teachable machine', ref: 'Apa Itu Machine Learning?', link: 'https://canva.link/7l59t6qrbrpbqo4' }
+    
     
     ],
     outputs: ['Prototip Palang Parkir', 'Flyer Proyek']
@@ -649,6 +655,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app controller', ref: 'membuat web dengan ai', link: 'https://docs.google.com/presentation/d/14Bhzum4DBnZHz18ajL2bfeX5-bHvEnE6POe1nyWF3X8/edit?usp=sharing' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', ref: 'teknik prompting', link: 'https://docs.google.com/presentation/d/1ZNYB5FgyAvQO3Fle6-EWr96qrxjV9Q83oZ1Fi4m3Scw/edit?usp=sharing' },
       { name: 'Integrasi', link: 'https://docs.google.com/presentation/d/1W3atKC3J8z4SorKL120tXboWuhJY640XGllqSQZ032o/edit?usp=sharing' }
+    
     
     ],
     outputs: ['Aplikasi Web Controller Vercel', 'Video Demo']
@@ -676,6 +683,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app AI', link: 'https://docs.google.com/presentation/d/1S4Y2VZpv5CeRhebC5FWNjf4u_7CrzEZO/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'teknik prompting' }
     
+    
     ],
     outputs: ['Model Teachable Machine', 'Video Demo']
   },
@@ -701,6 +709,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Integrasi hardware dan program smart parking AI', link: 'https://docs.google.com/presentation/d/15VPEcRH8diHF0s5alSJUCNrXILxCIgkV/edit?usp=drive_link&ouid=113658299168731582914&rtpof=true&sd=true' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan smart parking', link: 'teknik prompting' }
     
+    
     ],
     outputs: ['Sistem Smart Parking AI', 'Video Demo']
   },
@@ -724,6 +733,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Teknik prompting (chatgpt / deepseek / claude)', link: 'https://docs.google.com/presentation/d/1RFv5K4sBEk0gfAQDoKi-bcr1LEh8h4SY_RmfFritbyk/edit?usp=sharing' },
       { name: 'Tes dengan track advance (chatgpt / deepseek / claude)', link: 'https://docs.google.com/presentation/d/1sKbtq9lkWCKKnSErwqWryT6qz6T-d1zOcc3WrLkIsZk/edit?usp=sharing' }
     
+    
     ],
     outputs: ['Robot Python Line Follower', 'Video Demo']
   },
@@ -745,6 +755,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Teknik prompting lovable (chatgpt) untuk pembuatan app controller', ref: 'membuat web dengan ai', link: 'https://docs.google.com/presentation/d/1VOnlUoV3BUoca-zuazToy2PJon0dviTl03dpXRUUEzc/edit?usp=sharing' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan fitur kontroller', link: 'https://docs.google.com/presentation/d/1GnXOJ8uIDFaqANCKRsm0T4jo2LmV-WcCzsdz8_qmVRM/edit?usp=sharing' },
       { name: 'Integrasi', link: 'https://docs.google.com/presentation/d/16zxsLnLDufAHGypJq406HjGbiFCAT9ZkY6P6ij_V10o/edit?usp=sharing' }
+    
     
     ],
     outputs: ['Robot Transporter dengan Capit', 'Video Demo']
@@ -774,6 +785,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'Integrasi hardware dan program smart home' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan smart parking' }
     
+    
     ],
     outputs: ['Prototype Smart Home', 'Video Demo']
   },
@@ -800,6 +812,7 @@ const INITIAL_CURRICULUM: CurriculumSubject[] = [
       { name: 'K3 dalam bekerja', link: 'Strategic_Safety_Ecosystem' },
       { name: 'Integrasi hardware dan program smart greenhouse' },
       { name: 'ChatGPT / Claude: brainstorming ide pengembangan smart greenhouse' }
+    
     
     ],
     outputs: ['Dashboard Web Monitoring', 'Video Demo']
@@ -914,7 +927,7 @@ export const mockDb = {
         const smartHome = parsed.find((c: any) => c.id === 'smart-home');
         // Check if curriculum needs sync with the Excel updates
         const firstSubject = parsed.find((c: any) => c.id === 'smart-trashbin');
-        const hasLatestLinks = firstSubject && firstSubject.subMateri && firstSubject.subMateri[3] && firstSubject.subMateri[3].link === 'https://canva.link/d3fipufedbmgp85';
+        const hasLatestLinks = firstSubject && firstSubject.subMateri && firstSubject.subMateri[6] && firstSubject.subMateri[6].link === 'https://canva.link/qjbfa25g12kg3wn';
 
         if (!smartWatering || !robotBt || !smartHome || 
             smartWatering.duration !== '3 Minggu' || 
