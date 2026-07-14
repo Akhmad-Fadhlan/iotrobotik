@@ -1769,6 +1769,8 @@ export default function CurriculumView() {
             imagePath = '/robot_transporter.png';
           } else if (sub.id === 'robot-hand-gesture') {
             imagePath = '/robot_hand_gestures.png';
+          } else if (sub.id === 'robot-bluetooth-controller') {
+            imagePath = '/robot_bluetooth_controller.png';
           } else if (sub.id === 'smart-parking') {
             imagePath = '/smart_parking.png';
           } else if (sub.id.includes('parking')) {
@@ -1887,7 +1889,8 @@ export default function CurriculumView() {
                       sub.id === 'tinybit-line' ? '/ketentuan_flyer_tinybit_lf.png' :
                       sub.id === 'robot-line-follower' ? '/ketentuan_flyer_robot_lf.png' :
                       sub.id === 'smart-parking' ? '/ketentuan_flyer_smart_parking.png' :
-                      sub.id === 'robot-hand-gesture' ? '/ketentuan_flyer_robot_hand_gestures.png' : null,
+                      sub.id === 'robot-hand-gesture' ? '/ketentuan_flyer_robot_hand_gestures.png' :
+                      sub.id === 'robot-bluetooth-controller' ? '/robot_bluetooth_controller.png' : null,
                     demoImage: 
                       sub.id === 'smart-trashbin' ? '/video_smart_trashbin.png' :
                       (sub.id === 'smart-watering' || sub.id === 'smart-watering-plant') ? '/video_smart_watering_plant.png' :
@@ -1895,7 +1898,8 @@ export default function CurriculumView() {
                       sub.id === 'tinybit-line' ? '/video_tybitlf.png' :
                       sub.id === 'robot-line-follower' ? '/video_robot_lf.png' :
                       sub.id === 'smart-parking' ? '/video_smart_parking.png' :
-                      sub.id === 'robot-hand-gesture' ? '/video_robot_hand_gestures.png' : null
+                      sub.id === 'robot-hand-gesture' ? '/video_robot_hand_gestures.png' :
+                      sub.id === 'robot-bluetooth-controller' ? '/video_robot_bluetooth_controller.png' : null
                   }
                 }
               ]
